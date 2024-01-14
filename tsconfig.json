@@ -4,7 +4,8 @@
         "target": "ESNext",
         "module": "NodeNext",
         "lib": ["ESNext"],
-        "removeComments": true
+        "removeComments": true,
+        "types": ["bun-types"]
     },
-    "include": ["index.ts"]
+    "include": ["generate-items-list.ts"]
 }
