@@ -4,9 +4,7 @@ import { join } from 'node:path';
 
 const rootSalesUrl = new URL('https://www.usmint.gov/about/production-sales-figures/cumulative-sales');
 
-const year = process.argv[2];
-if (year) await generateItemsList(year);
-else console.error('No year specified!');
+await generateItemsList(process.argv[2] || 'all');
 
 /**
  * Generates an item list for a given year, or all years.
@@ -29,11 +27,11 @@ async function generateItemsList(year: string) {
     const selectElement = processedRootSalesDirectory.querySelector(`#${year}weeks`);
     if (!selectElement) return console.error(`Could not find data for year ${year}!`);
 
-    const reportDirectory = join('saved-reports', year);
+    const reportDirectory = join('saved-reports', 'cumulative-sales', year);
 
     if (!existsSync(reportDirectory)) mkdirSync(reportDirectory, { recursive: true });
 
-    const itemsListFile = Bun.file('items-list.json');
+    const itemsListFile = Bun.file(join('lists', 'items-list.json'));
 
     const result: Record<string, { itemId: string; programName: string; totalSold: number; firstSeen: { year: string; week: string }; latestSale: { year: string; week: string } }> =
         (await itemsListFile.exists()) ? await itemsListFile.json() : {};
@@ -108,5 +106,5 @@ async function generateItemsList(year: string) {
         }
     }
 
-    return await Bun.write('items-list.json', JSON.stringify(result, null, 4) + '\n');
+    return await Bun.write(join('lists', 'items-list.json'), JSON.stringify(result, null, 4) + '\n');
 }

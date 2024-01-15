@@ -7,5 +7,5 @@
         "removeComments": true,
         "types": ["bun-types"]
     },
-    "include": ["generate-items-list.ts"]
+    "include": ["scripts/*.ts"]
 }

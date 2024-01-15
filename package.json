@@ -2,7 +2,7 @@
     "name": "usmint-sales-viewer",
     "type": "module",
     "scripts": {
-        "generate": "bun run generate-items-list.ts"
+        "cumulative-sales": "bun run scripts/generate-cumulative-sales-list.ts"
     },
     "prettier": "@eejit/prettier-config",
     "dependencies": {
