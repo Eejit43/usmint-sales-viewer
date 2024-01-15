@@ -4,12 +4,25 @@ import { join } from 'node:path';
 
 const rootSalesUrl = new URL('https://www.usmint.gov/about/production-sales-figures/cumulative-sales');
 
-const itemsListFile = Bun.file('items-list.json');
+const year = process.argv[2];
+if (year) await generateItemsList(year);
+else console.error('No year specified!');
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
-(async () => {
-    const year = process.argv[2];
-    if (!year) return console.error('No year specified!');
+/**
+ * Generates an item list for a given year, or all years.
+ * @param year The year to fetch data for, or "all".
+ */
+async function generateItemsList(year: string) {
+    if (year === 'all') {
+        const currentYear = new Date().getFullYear();
+        const startYear = 2015;
+
+        const years = Array.from({ length: currentYear - startYear + 1 }).map((value, index) => (startYear + index).toString());
+
+        for (const year of years) await generateItemsList(year);
+
+        return;
+    }
 
     const processedRootSalesDirectory = parse(await (await fetch(rootSalesUrl)).text());
 
@@ -20,9 +33,10 @@ const itemsListFile = Bun.file('items-list.json');
 
     if (!existsSync(reportDirectory)) mkdirSync(reportDirectory, { recursive: true });
 
-    const result: Record<string, { itemId: string; programName: string; totalSold: number; latestSale: { year: string; month: string | null; week: string } }> = (await itemsListFile.exists())
-        ? await itemsListFile.json()
-        : {};
+    const itemsListFile = Bun.file('items-list.json');
+
+    const result: Record<string, { itemId: string; programName: string; totalSold: number; firstSeen: { year: string; week: string }; latestSale: { year: string; week: string } }> =
+        (await itemsListFile.exists()) ? await itemsListFile.json() : {};
 
     const optionElements = selectElement.querySelectorAll('option');
 
@@ -81,16 +95,18 @@ const itemsListFile = Bun.file('items-list.json');
                 continue;
             }
 
-            const [programName, itemId, itemName, totalSold, latestSaleDate] = columns;
+            const [programName, itemId, itemName, totalSold] = columns;
 
-            result[itemName] = {
-                itemId,
-                programName: programName.replaceAll(/ {2,}/g, ' '),
-                totalSold: Number.parseInt(totalSold.replaceAll(',', '')),
-                latestSale: { year, month: latestSaleDate.match(/(\d{1,2})\//)?.[1] ?? null, week },
-            };
+            const programNameParsed = programName.replaceAll(/ {2,}/g, ' ');
+            const totalSoldParsed = Number.parseInt(totalSold.replaceAll(',', ''));
+            const latestSale = { year, week };
+
+            if (itemName in result) {
+                result[itemName].totalSold = totalSoldParsed;
+                result[itemName].latestSale = latestSale;
+            } else result[itemName] = { itemId, programName: programNameParsed, totalSold: totalSoldParsed, firstSeen: latestSale, latestSale };
         }
     }
 
-    Bun.write('items-list.json', JSON.stringify(result, null, 4) + '\n');
-})();
+    return await Bun.write('items-list.json', JSON.stringify(result, null, 4) + '\n');
+}
