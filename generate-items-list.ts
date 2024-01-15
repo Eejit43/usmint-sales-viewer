@@ -1,6 +1,8 @@
 import { parse } from 'node-html-parser';
+import { existsSync, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
 
-export const rootSalesDirectory = new URL('https://www.usmint.gov/about/production-sales-figures/cumulative-sales');
+const rootSalesUrl = new URL('https://www.usmint.gov/about/production-sales-figures/cumulative-sales');
 
 const itemsListFile = Bun.file('items-list.json');
 
@@ -9,10 +11,14 @@ const itemsListFile = Bun.file('items-list.json');
     const year = process.argv[2];
     if (!year) return console.error('No year specified!');
 
-    const processedRootSalesDirectory = parse(await (await fetch(rootSalesDirectory)).text());
+    const processedRootSalesDirectory = parse(await (await fetch(rootSalesUrl)).text());
 
     const selectElement = processedRootSalesDirectory.querySelector(`#${year}weeks`);
     if (!selectElement) return console.error(`Could not find data for year ${year}!`);
+
+    const reportDirectory = join('saved-reports', year);
+
+    if (!existsSync(reportDirectory)) mkdirSync(reportDirectory, { recursive: true });
 
     const result: Record<string, { itemId: string; programName: string; totalSold: number; latestSale: { year: string; month: string | null; week: string } }> = (await itemsListFile.exists())
         ? await itemsListFile.json()
@@ -28,28 +34,49 @@ const itemsListFile = Bun.file('items-list.json');
     for (const [index, [week, weekName]] of weeks.entries()) {
         console.log(`Processing week of ${weekName} (${week}) (${index + 1}/${weeks.length})`);
 
-        const dataUrl = new URL(rootSalesDirectory.toString());
-        dataUrl.searchParams.set('years', year);
-        dataUrl.searchParams.set(`${year}weeks`, week);
+        const savedReportFile = Bun.file(join(reportDirectory, `${week}.html`));
 
-        const processedData = parse(await (await fetch(dataUrl)).text()); // eslint-disable-line no-await-in-loop
+        let dataTable;
+        if (await savedReportFile.exists()) {
+            console.log('   Using saved report file');
+            dataTable = parse(await savedReportFile.text());
+        } else {
+            const dataUrl = new URL(rootSalesUrl.toString());
+            dataUrl.searchParams.set('years', year);
+            dataUrl.searchParams.set(`${year}weeks`, week);
 
-        const dataTable = processedData.querySelector('table');
+            const processedData = parse(await (await fetch(dataUrl)).text());
 
-        if (!dataTable) return console.error('Could not find data table, stopping process (are you being rate limited?)');
+            dataTable = processedData.querySelector('table');
 
-        const hasExtraColumn = dataTable.querySelectorAll('thead th')[1].text === 'Program Name';
-        if (hasExtraColumn) console.log('There is an extra "Program Name" column, the first will be ignored');
+            if (!dataTable) return console.error('Could not find data table, stopping process (are you being rate limited?)');
+
+            await Bun.write(savedReportFile, dataTable.toString());
+
+            await new Promise((resolve) => setTimeout(resolve, 250));
+        }
+
+        const headers = dataTable.querySelectorAll('thead th');
+
+        const hasExtraNameColumn = headers[1].text === 'Program Name';
+        if (hasExtraNameColumn) console.log('   There is an extra "Program Name" column, the first will be ignored');
+
+        let extraColumnsAmount = headers.length - 5;
+        if (hasExtraNameColumn) extraColumnsAmount--;
+
+        if (extraColumnsAmount > 0) console.log(`   There ${extraColumnsAmount === 1 ? `is ${extraColumnsAmount} extra column, it` : `are ${extraColumnsAmount} extra columns, they`} will be ignored`);
 
         const rows = dataTable.querySelectorAll('tbody tr');
 
         for (const [index, row] of rows.entries()) {
-            const columns = [...new Set(row.querySelectorAll('td').map((column) => column.text.trim()))];
+            let columns = row.querySelectorAll('td').map((column) => column.text.trim());
 
-            if (columns.length > 5 && hasExtraColumn) columns.shift();
+            if (hasExtraNameColumn) columns.shift();
+
+            columns = columns.slice(0, 5);
 
             if (columns.length !== 5) {
-                console.error(`Unexpected unique column count for row ${index + 1}/${rows.length} (${columns.length}), skipping row`);
+                console.error(`   Unexpected unique column count for row ${index + 1}/${rows.length} (${columns.length}), skipping row`);
 
                 continue;
             }
@@ -63,9 +90,7 @@ const itemsListFile = Bun.file('items-list.json');
                 latestSale: { year, month: latestSaleDate.match(/(\d{1,2})\//)?.[1] ?? null, week },
             };
         }
-
-        await new Promise((resolve) => setTimeout(resolve, 250)); // eslint-disable-line no-await-in-loop
     }
 
-    Bun.write('items-list.json', JSON.stringify(result, null, 2));
+    Bun.write('items-list.json', JSON.stringify(result, null, 4) + '\n');
 })();
