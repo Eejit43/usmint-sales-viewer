@@ -1,5 +1,5 @@
 import { parse } from 'node-html-parser';
-import { existsSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 
 const rootSalesUrl = new URL('https://www.usmint.gov/about/production-sales-figures/cumulative-sales');
@@ -11,7 +11,12 @@ await generateItemsList(process.argv[2] || 'all');
  * @param year The year to fetch data for, or "all".
  */
 async function generateItemsList(year: string) {
+    const listFile = join('lists', 'cumulative-sales.json');
+    const reportDirectory = join('saved-reports', 'cumulative-sales', year);
+
     if (year === 'all') {
+        if (existsSync(listFile)) rmSync(listFile);
+
         const currentYear = new Date().getFullYear();
         const startYear = 2015;
 
@@ -27,11 +32,9 @@ async function generateItemsList(year: string) {
     const selectElement = processedRootSalesDirectory.querySelector(`#${year}weeks`);
     if (!selectElement) return console.error(`Could not find data for year ${year}!`);
 
-    const reportDirectory = join('saved-reports', 'cumulative-sales', year);
-
     if (!existsSync(reportDirectory)) mkdirSync(reportDirectory, { recursive: true });
 
-    const itemsListFile = Bun.file(join('lists', 'items-list.json'));
+    const itemsListFile = Bun.file(listFile);
 
     const result: Record<string, { itemId: string; programName: string; totalSold: number; firstSeen: { year: string; week: string }; latestSale: { year: string; week: string } }> =
         (await itemsListFile.exists()) ? await itemsListFile.json() : {};
@@ -95,16 +98,16 @@ async function generateItemsList(year: string) {
 
             const [programName, itemId, itemName, totalSold] = columns;
 
-            const programNameParsed = programName.replaceAll(/ {2,}/g, ' ');
+            const itemNameParsed = itemName.replaceAll(/ {2,}/g, ' ');
             const totalSoldParsed = Number.parseInt(totalSold.replaceAll(',', ''));
             const latestSale = { year, week };
 
-            if (itemName in result) {
-                result[itemName].totalSold = totalSoldParsed;
-                result[itemName].latestSale = latestSale;
-            } else result[itemName] = { itemId, programName: programNameParsed, totalSold: totalSoldParsed, firstSeen: latestSale, latestSale };
+            if (itemNameParsed in result) {
+                result[itemNameParsed].totalSold = totalSoldParsed;
+                result[itemNameParsed].latestSale = latestSale;
+            } else result[itemNameParsed] = { itemId, programName, totalSold: totalSoldParsed, firstSeen: latestSale, latestSale };
         }
     }
 
-    return await Bun.write(join('lists', 'items-list.json'), JSON.stringify(result, null, 4) + '\n');
+    return await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');
 }
