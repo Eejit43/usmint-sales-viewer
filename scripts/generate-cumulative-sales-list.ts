@@ -2,17 +2,20 @@ import { parse } from 'node-html-parser';
 import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 
+export type ItemsList = Record<string, { itemId: string; programName: string; totalSold: number; firstSeen: { year: number; week: number }; latestSaleData: { year: number; week: number } }>;
+
 const rootSalesUrl = new URL('https://www.usmint.gov/about/production-sales-figures/cumulative-sales');
 
-await generateItemsList(process.argv[2] || 'all');
+const listFile = join('lists', 'cumulative-sales.json');
+
+await generateItemsList(process.argv[2] ? Number.parseInt(process.argv[2]) : 'all');
 
 /**
  * Generates an item list for a given year, or all years.
  * @param year The year to fetch data for, or "all".
  */
-async function generateItemsList(year: string) {
-    const listFile = join('lists', 'cumulative-sales.json');
-    const reportDirectory = join('saved-reports', 'cumulative-sales', year);
+async function generateItemsList(year: number | 'all') {
+    const reportDirectory = join('saved-reports', 'cumulative-sales', year.toString());
 
     if (year === 'all') {
         if (existsSync(listFile)) rmSync(listFile);
@@ -20,7 +23,7 @@ async function generateItemsList(year: string) {
         const currentYear = new Date().getFullYear();
         const startYear = 2015;
 
-        const years = Array.from({ length: currentYear - startYear + 1 }).map((value, index) => (startYear + index).toString());
+        const years = Array.from({ length: currentYear - startYear + 1 }).map((value, index) => startYear + index);
 
         for (const year of years) await generateItemsList(year);
 
@@ -36,13 +39,12 @@ async function generateItemsList(year: string) {
 
     const itemsListFile = Bun.file(listFile);
 
-    const result: Record<string, { itemId: string; programName: string; totalSold: number; firstSeen: { year: string; week: string }; latestSale: { year: string; week: string } }> =
-        (await itemsListFile.exists()) ? await itemsListFile.json() : {};
+    const result: ItemsList = (await itemsListFile.exists()) ? await itemsListFile.json() : {};
 
     const optionElements = selectElement.querySelectorAll('option');
 
     const weeks = optionElements
-        .map((option) => [option.getAttribute('value')!, option.text.trim()])
+        .map((option) => [Number.parseInt(option.getAttribute('value')!), option.text.trim()] as [number, string])
         .filter(([week]) => week)
         .reverse();
 
@@ -57,8 +59,8 @@ async function generateItemsList(year: string) {
             dataTable = parse(await savedReportFile.text());
         } else {
             const dataUrl = new URL(rootSalesUrl.toString());
-            dataUrl.searchParams.set('years', year);
-            dataUrl.searchParams.set(`${year}weeks`, week);
+            dataUrl.searchParams.set('years', year.toString());
+            dataUrl.searchParams.set(`${year}weeks`, week.toString());
 
             const processedData = parse(await (await fetch(dataUrl)).text());
 
@@ -100,12 +102,12 @@ async function generateItemsList(year: string) {
 
             const itemNameParsed = itemName.replaceAll(/ {2,}/g, ' ');
             const totalSoldParsed = Number.parseInt(totalSold.replaceAll(',', ''));
-            const latestSale = { year, week };
+            const latestSaleData = { year, week };
 
             if (itemNameParsed in result) {
                 result[itemNameParsed].totalSold = totalSoldParsed;
-                result[itemNameParsed].latestSale = latestSale;
-            } else result[itemNameParsed] = { itemId, programName, totalSold: totalSoldParsed, firstSeen: latestSale, latestSale };
+                result[itemNameParsed].latestSaleData = latestSaleData;
+            } else result[itemNameParsed] = { itemId, programName, totalSold: totalSoldParsed, firstSeen: latestSaleData, latestSaleData };
         }
     }
 

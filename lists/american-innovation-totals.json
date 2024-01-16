@@ -1,0 +1,222 @@
+{
+    "2018": {
+        "P": {
+            "total": 860175,
+            "soldOut": false
+        },
+        "D": {
+            "total": 933725,
+            "soldOut": false
+        }
+    },
+    "2019": {
+        "Delaware": {
+            "P": {
+                "total": 544575,
+                "soldOut": false
+            },
+            "D": {
+                "total": 543050,
+                "soldOut": false
+            }
+        },
+        "Pennsylvania": {
+            "P": {
+                "total": 619600,
+                "soldOut": false
+            },
+            "D": {
+                "total": 512300,
+                "soldOut": false
+            }
+        },
+        "New Jersey": {
+            "P": {
+                "total": 613925,
+                "soldOut": false
+            },
+            "D": {
+                "total": 553050,
+                "soldOut": false
+            }
+        },
+        "Georgia": {
+            "P": {
+                "total": 543225,
+                "soldOut": false
+            },
+            "D": {
+                "total": 515950,
+                "soldOut": false
+            }
+        }
+    },
+    "2020": {
+        "Connecticut": {
+            "P": {
+                "total": 436000,
+                "soldOut": true
+            },
+            "D": {
+                "total": 435325,
+                "soldOut": true
+            }
+        },
+        "Massachusetts": {
+            "P": {
+                "total": 436750,
+                "soldOut": true
+            },
+            "D": {
+                "total": 436425,
+                "soldOut": true
+            }
+        },
+        "Maryland": {
+            "P": {
+                "total": 434825,
+                "soldOut": true
+            },
+            "D": {
+                "total": 435475,
+                "soldOut": true
+            }
+        },
+        "South Carolina": {
+            "P": {
+                "total": 432850,
+                "soldOut": true
+            },
+            "D": {
+                "total": 397775,
+                "soldOut": true
+            }
+        }
+    },
+    "2021": {
+        "New Hampshire": {
+            "P": {
+                "total": 454325,
+                "soldOut": false
+            },
+            "D": {
+                "total": 454425,
+                "soldOut": false
+            }
+        },
+        "Virginia": {
+            "P": {
+                "total": 454975,
+                "soldOut": false
+            },
+            "D": {
+                "total": 453850,
+                "soldOut": false
+            }
+        },
+        "New York": {
+            "P": {
+                "total": 453750,
+                "soldOut": false
+            },
+            "D": {
+                "total": 453825,
+                "soldOut": false
+            }
+        },
+        "North Carolina": {
+            "P": {
+                "total": 454150,
+                "soldOut": false
+            },
+            "D": {
+                "total": 454450,
+                "soldOut": false
+            }
+        }
+    },
+    "2022": {
+        "Rhode Island": {
+            "P": {
+                "total": 454150,
+                "soldOut": false
+            },
+            "D": {
+                "total": 453775,
+                "soldOut": false
+            }
+        },
+        "Vermont": {
+            "P": {
+                "total": 454275,
+                "soldOut": false
+            },
+            "D": {
+                "total": 452875,
+                "soldOut": false
+            }
+        },
+        "Kentucky": {
+            "P": {
+                "total": 451900,
+                "soldOut": false
+            },
+            "D": {
+                "total": 452625,
+                "soldOut": false
+            }
+        },
+        "Tennessee": {
+            "P": {
+                "total": 453425,
+                "soldOut": false
+            },
+            "D": {
+                "total": 452800,
+                "soldOut": false
+            }
+        }
+    },
+    "2023": {
+        "Ohio": {
+            "P": {
+                "total": 496175,
+                "soldOut": false
+            },
+            "D": {
+                "total": 448025,
+                "soldOut": false
+            }
+        },
+        "Louisiana": {
+            "P": {
+                "total": 459225,
+                "soldOut": false
+            },
+            "D": {
+                "total": 424925,
+                "soldOut": false
+            }
+        },
+        "Indiana": {
+            "P": {
+                "total": 499850,
+                "soldOut": false
+            },
+            "D": {
+                "total": 451250,
+                "soldOut": false
+            }
+        },
+        "Mississippi": {
+            "P": {
+                "total": 390375,
+                "soldOut": false
+            },
+            "D": {
+                "total": 374800,
+                "soldOut": false
+            }
+        }
+    }
+}

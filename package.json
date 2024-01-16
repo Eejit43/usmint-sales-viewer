@@ -2,6 +2,7 @@
     "name": "usmint-sales-viewer",
     "type": "module",
     "scripts": {
+        "american-innovation-totals": "bun run scripts/generate-american-innovation-totals.ts",
         "cumulative-sales": "bun run scripts/generate-cumulative-sales-list.ts"
     },
     "prettier": "@eejit/prettier-config",
