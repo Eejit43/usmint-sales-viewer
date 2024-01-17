@@ -52,6 +52,12 @@ async function generateItemsList(year: number | 'all') {
     for (const [index, [week, weekName]] of weeks.entries()) {
         console.log(chalk.blue(`Processing week of ${chalk.yellow(weekName)} (${chalk.gray(week)}) (${chalk.gray(`${index + 1}/${weeks.length}`)})`));
 
+        if (week === 1310) {
+            console.log(chalk.red("   This week's data is ignored!"));
+
+            continue;
+        }
+
         const savedReportFile = Bun.file(join(reportDirectory, `${week}.html`));
 
         let dataTable;

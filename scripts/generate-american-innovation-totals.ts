@@ -110,7 +110,7 @@ if (await listFile.exists()) {
 
     let latestWeek = 0;
     const weeks = readdirSync(join('saved-reports', 'cumulative-sales', latestYear.toString()));
-    for (const week of weeks) if (latestWeek < Number.parseInt(week) && Number.parseInt(week) !== 1325) latestWeek = Number.parseInt(week);
+    for (const week of weeks) if (latestWeek < Number.parseInt(week) && Number.parseInt(week)) latestWeek = Number.parseInt(week);
 
     for (const [, data] of Object.entries(result))
         if ('latestSales' in Object.values(data)[0])

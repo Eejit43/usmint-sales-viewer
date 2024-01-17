@@ -1,52 +1,52 @@
 {
     "2018": {
         "P": {
-            "total": 860175,
+            "total": 860750,
             "soldOut": false
         },
         "D": {
-            "total": 933725,
+            "total": 934450,
             "soldOut": false
         }
     },
     "2019": {
         "Delaware": {
             "P": {
-                "total": 544575,
+                "total": 544750,
                 "soldOut": false
             },
             "D": {
-                "total": 543050,
+                "total": 543225,
                 "soldOut": false
             }
         },
         "Pennsylvania": {
             "P": {
-                "total": 619600,
+                "total": 620650,
                 "soldOut": false
             },
             "D": {
-                "total": 512300,
+                "total": 512925,
                 "soldOut": false
             }
         },
         "New Jersey": {
             "P": {
-                "total": 613925,
+                "total": 614125,
                 "soldOut": false
             },
             "D": {
-                "total": 553050,
+                "total": 553750,
                 "soldOut": false
             }
         },
         "Georgia": {
             "P": {
-                "total": 543225,
+                "total": 543800,
                 "soldOut": false
             },
             "D": {
-                "total": 515950,
+                "total": 516300,
                 "soldOut": false
             }
         }
@@ -172,7 +172,7 @@
                 "soldOut": false
             },
             "D": {
-                "total": 452800,
+                "total": 453200,
                 "soldOut": false
             }
         }
@@ -190,11 +190,11 @@
         },
         "Louisiana": {
             "P": {
-                "total": 459225,
+                "total": 461725,
                 "soldOut": false
             },
             "D": {
-                "total": 424925,
+                "total": 427125,
                 "soldOut": false
             }
         },
@@ -210,11 +210,11 @@
         },
         "Mississippi": {
             "P": {
-                "total": 390375,
+                "total": 393300,
                 "soldOut": false
             },
             "D": {
-                "total": 374800,
+                "total": 379500,
                 "soldOut": false
             }
         }
