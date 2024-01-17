@@ -1,0 +1,988 @@
+{
+    "50 State Quarters": {
+        "1999": {
+            "Delaware": {
+                "Denver": 401424000,
+                "Philadelphia": 373400000
+            },
+            "Pennsylvania": {
+                "Denver": 358332000,
+                "Philadelphia": 349000000
+            },
+            "New Jersey": {
+                "Denver": 299028000,
+                "Philadelphia": 363200000
+            },
+            "Georgia": {
+                "Denver": 488744000,
+                "Philadelphia": 451188000
+            },
+            "Connecticut": {
+                "Denver": 657880000,
+                "Philadelphia": 688744000
+            }
+        },
+        "2000": {
+            "Massachusetts": {
+                "Denver": 535184000,
+                "Philadelphia": 628600000
+            },
+            "Maryland": {
+                "Denver": 556532000,
+                "Philadelphia": 678200000
+            },
+            "South Carolina": {
+                "Denver": 566208000,
+                "Philadelphia": 742576000
+            },
+            "New Hampshire": {
+                "Denver": 495976000,
+                "Philadelphia": 673040000
+            },
+            "Virginia": {
+                "Denver": 651616000,
+                "Philadelphia": 943000000
+            }
+        },
+        "2001": {
+            "New York": {
+                "Denver": 619640000,
+                "Philadelphia": 655400000
+            },
+            "North Carolina": {
+                "Denver": 427876000,
+                "Philadelphia": 627600000
+            },
+            "Rhode Island": {
+                "Denver": 447100000,
+                "Philadelphia": 423000000
+            },
+            "Vermont": {
+                "Denver": 459404000,
+                "Philadelphia": 423400000
+            },
+            "Kentucky": {
+                "Denver": 370564000,
+                "Philadelphia": 353000000
+            }
+        },
+        "2002": {
+            "Tennessee": {
+                "Denver": 286468000,
+                "Philadelphia": 361600000
+            },
+            "Ohio": {
+                "Denver": 414832000,
+                "Philadelphia": 217200000
+            },
+            "Louisiana": {
+                "Denver": 402204000,
+                "Philadelphia": 362000000
+            },
+            "Indiana": {
+                "Denver": 327200000,
+                "Philadelphia": 362600000
+            },
+            "Mississippi": {
+                "Denver": 289600000,
+                "Philadelphia": 290000000
+            }
+        },
+        "2003": {
+            "Illinois": {
+                "Denver": 237400000,
+                "Philadelphia": 225800000
+            },
+            "Alabama": {
+                "Denver": 232400000,
+                "Philadelphia": 225000000
+            },
+            "Maine": {
+                "Denver": 231400000,
+                "Philadelphia": 217400000
+            },
+            "Missouri": {
+                "Denver": 228200000,
+                "Philadelphia": 225000000
+            },
+            "Arkansas": {
+                "Denver": 229800000,
+                "Philadelphia": 228000000
+            }
+        },
+        "2004": {
+            "Michigan": {
+                "Denver": 225800000,
+                "Philadelphia": 233800000
+            },
+            "Florida": {
+                "Denver": 241600000,
+                "Philadelphia": 240200000
+            },
+            "Texas": {
+                "Denver": 263000000,
+                "Philadelphia": 278800000
+            },
+            "Iowa": {
+                "Denver": 251400000,
+                "Philadelphia": 213800000
+            },
+            "Wisconsin": {
+                "Denver": 226800000,
+                "Philadelphia": 226400000
+            }
+        },
+        "2005": {
+            "California": {
+                "Denver": 263200000,
+                "Philadelphia": 257200000
+            },
+            "Minnesota": {
+                "Denver": 248400000,
+                "Philadelphia": 239600000
+            },
+            "Oregon": {
+                "Denver": 404000000,
+                "Philadelphia": 316200000
+            },
+            "Kansas": {
+                "Denver": 300000000,
+                "Philadelphia": 263400000
+            },
+            "West Virginia": {
+                "Denver": 356200000,
+                "Philadelphia": 365400000
+            }
+        },
+        "2006": {
+            "Nevada": {
+                "Denver": 312800000,
+                "Philadelphia": 277000000
+            },
+            "Nebraska": {
+                "Denver": 276400000,
+                "Philadelphia": 318000000
+            },
+            "Colorado": {
+                "Denver": 294200000,
+                "Philadelphia": 274800000
+            },
+            "North Dakota": {
+                "Denver": 359000000,
+                "Philadelphia": 305800000
+            },
+            "South Dakota": {
+                "Denver": 265800000,
+                "Philadelphia": 245000000
+            }
+        },
+        "2007": {
+            "Montana": {
+                "Denver": 256240000,
+                "Philadelphia": 257000000
+            },
+            "Washington": {
+                "Denver": 280000000,
+                "Philadelphia": 265200000
+            },
+            "Idaho": {
+                "Denver": 286800000,
+                "Philadelphia": 294600000
+            },
+            "Wyoming": {
+                "Denver": 320800000,
+                "Philadelphia": 243600000
+            },
+            "Utah": {
+                "Denver": 253200000,
+                "Philadelphia": 255000000
+            }
+        },
+        "2008": {
+            "Oklahoma": {
+                "Denver": 194600000,
+                "Philadelphia": 222000000
+            },
+            "New Mexico": {
+                "Denver": 244400000,
+                "Philadelphia": 244200000
+            },
+            "Arizona": {
+                "Denver": 265000000,
+                "Philadelphia": 244600000
+            },
+            "Alaska": {
+                "Denver": 254000000,
+                "Philadelphia": 251800000
+            },
+            "Hawaii": {
+                "Denver": 263600000,
+                "Philadelphia": 254000000
+            }
+        }
+    },
+    "America the Beautiful Quarters®": {
+        "2010": {
+            "Grand Canyon National Park": {
+                "Denver": 35400000,
+                "Philadelphia": 34800000
+            },
+            "Yosemite National Park": {
+                "Denver": 34800000,
+                "Philadelphia": 35200000
+            },
+            "Hot Springs National Park": {
+                "Denver": 34000000,
+                "Philadelphia": 35600000
+            },
+            "Mount Hood National Forest": {
+                "Denver": 34400000,
+                "Philadelphia": 34400000
+            },
+            "Yellowstone National Park": {
+                "Denver": 34800000,
+                "Philadelphia": 33600000
+            }
+        },
+        "2011": {
+            "Gettysburg National Military Park": {
+                "Denver": 30400000,
+                "Philadelphia": 30800000
+            },
+            "Glacier National Park": {
+                "Denver": 31200000,
+                "Philadelphia": 30400000
+            },
+            "Olympic National Park": {
+                "Denver": 30600000,
+                "Philadelphia": 30400000
+            },
+            "Vicksburg National Military Park": {
+                "Denver": 33400000,
+                "Philadelphia": 30800000
+            },
+            "Chickasaw National Recreation Area": {
+                "Denver": 69400000,
+                "Philadelphia": 73800000
+            }
+        },
+        "2012": {
+            "El Yunque National Forest": {
+                "Denver": 25000000,
+                "Philadelphia": 25800000
+            },
+            "Chaco Culture National Historical Park": {
+                "Denver": 22000000,
+                "Philadelphia": 22000000
+            },
+            "Acadia National Park": {
+                "Denver": 21606000,
+                "Philadelphia": 24800000
+            },
+            "Hawai'i Volcanoes National Park": {
+                "Denver": 78600000,
+                "Philadelphia": 46200000
+            },
+            "Denali National Park and Preserve": {
+                "Denver": 166600000,
+                "Philadelphia": 135400000
+            }
+        },
+        "2013": {
+            "Mount Rushmore National Memorial": {
+                "Denver": 272400000,
+                "Philadelphia": 231800000
+            },
+            "Fort McHenry National Monument and Historic Shrine": {
+                "Denver": 151400000,
+                "Philadelphia": 120000000
+            },
+            "Great Basin National Park": {
+                "Denver": 141400000,
+                "Philadelphia": 122400000
+            },
+            "Perry''s Victory and International Peace Memorial": {
+                "Denver": 131600000,
+                "Philadelphia": 107800000
+            },
+            "White Mountain National Forest": {
+                "Denver": 107600000,
+                "Philadelphia": 68800000
+            }
+        },
+        "2014": {
+            "Great Smoky Mountains National Park": {
+                "Denver": 99400000,
+                "Philadelphia": 73200000
+            },
+            "Shenandoah National Park": {
+                "Denver": 197800000,
+                "Philadelphia": 112800000
+            },
+            "Arches National Park": {
+                "Denver": 251400000,
+                "Philadelphia": 214200000
+            },
+            "Great Sand Dunes National Park": {
+                "Denver": 171800000,
+                "Philadelphia": 159600000
+            },
+            "Everglades National Park": {
+                "Denver": 142400000,
+                "Philadelphia": 157601200
+            }
+        },
+        "2015": {
+            "Homestead National Monument of America": {
+                "Denver": 248600000,
+                "Philadelphia": 214400000
+            },
+            "Kisatchie National Forest": {
+                "Denver": 379600000,
+                "Philadelphia": 397200000
+            },
+            "Blue Ridge Parkway": {
+                "Denver": 505200000,
+                "Philadelphia": 325616000
+            },
+            "Bombay Hook National Wildlife Refuge": {
+                "Denver": 206400000,
+                "Philadelphia": 275000000
+            },
+            "Saratoga National Historical Park": {
+                "Denver": 215800000,
+                "Philadelphia": 223000000
+            }
+        },
+        "2016": {
+            "Shawnee National Forest, IL": {
+                "Denver": 151800000,
+                "Philadelphia": 155600000
+            },
+            "Cumberland Gap National Historical Park, KY": {
+                "Denver": 223200000,
+                "Philadelphia": 215400000
+            },
+            "Harpers Ferry National Historical Park, WV": {
+                "Denver": 424000000,
+                "Philadelphia": 434630000
+            },
+            "Theodore Roosevelt National Park, ND": {
+                "Denver": 223200000,
+                "Philadelphia": 231600000
+            },
+            "Fort Moultrie (Fort Sumter National Monument), SC": {
+                "Denver": 142200000,
+                "Philadelphia": 154400000
+            }
+        },
+        "2017": {
+            "Effigy Mounds National Monument, IA": {
+                "Denver": 210800000,
+                "Philadelphia": 271200000
+            },
+            "Frederick Douglass National Historic Site, DC": {
+                "Denver": 185800000,
+                "Philadelphia": 184800000
+            },
+            "Ozark National Scenic Riverway, MO": {
+                "Denver": 200000000,
+                "Philadelphia": 203000000
+            },
+            "Ellis Island National Monument, NJ": {
+                "Denver": 254000000,
+                "Philadelphia": 234000000
+            },
+            "George Rogers Clark National Historical Park, IN": {
+                "Denver": 180,
+                "Philadelphia": 191
+            }
+        },
+        "2018": {
+            "Pictured Rocks National Lakeshore MI": {
+                "Denver": 182600000,
+                "Philadelphia": 186714000
+            },
+            "Apostle Islands National Lakeshore WI": {
+                "Denver": 216600000,
+                "Philadelphia": 223200000
+            },
+            "Voyageurs National Park MN": {
+                "Denver": 197800000,
+                "Philadelphia": 237400000
+            },
+            "Cumberland Island National Seashore GA": {
+                "Denver": 151600000,
+                "Philadelphia": 138000000
+            },
+            "Block Island National Wildlife Refuge RI": {
+                "Denver": 159600000,
+                "Philadelphia": 159600000
+            }
+        },
+        "2019": {
+            "Lowell National Historical Park MA": {
+                "Denver": 182200000,
+                "Philadelphia": 165800000
+            },
+            "American Memorial Park MP": {
+                "Denver": 182600000,
+                "Philadelphia": 142800000
+            },
+            "War in the Pacific National Historical Park GU": {
+                "Denver": 114400000,
+                "Philadelphia": 116600000
+            },
+            "San Antonio Missions National Historical Park TX": {
+                "Denver": 129400000,
+                "Philadelphia": 142800000
+            },
+            "Frank Church River of No Return Wilderness ID": {
+                "Denver": 251600000,
+                "Philadelphia": 223400000
+            }
+        },
+        "2020": {
+            "American Samoa National Historical Park AS": {
+                "Denver": 212200000,
+                "Philadelphia": 286000000
+            },
+            "Weir Farm National Historic Park CT": {
+                "Denver": 155000000,
+                "Philadelphia": 125600000
+            },
+            "Salt River Bay Historical Park Ecological Preserve VI": {
+                "Denver": 515000000,
+                "Philadelphia": 580200000
+            },
+            "March-Billings-Rockefeller National Historical Park VT": {
+                "Denver": 345800000,
+                "Philadelphia": 304600000
+            },
+            "Tallgrass Prairie National Preserve KS": {
+                "Denver": 142400000,
+                "Philadelphia": 101200000
+            }
+        },
+        "2021": {
+            "Tuskegee Airmen AL": {
+                "Denver": 304000000,
+                "Philadelphia": 160400000
+            }
+        }
+    },
+    "American Women Quarters": {
+        "2022": {
+            "Maya Angelou": {
+                "Denver": 258200000,
+                "Philadelphia": 237600000
+            },
+            "Dr Sally Ride": {
+                "Denver": 278000000,
+                "Philadelphia": 275200000
+            },
+            "Willma Mankiller": {
+                "Denver": 296800000,
+                "Philadelphia": 310000000
+            },
+            "Nina Otero Warren": {
+                "Denver": 219200000,
+                "Philadelphia": 225000000
+            },
+            "Anna May Wong": {
+                "Denver": 240,
+                "Philadelphia": 226
+            }
+        },
+        "2023": {
+            "Bessie Coleman": {
+                "Denver": 317200000,
+                "Philadelphia": 302000000
+            },
+            "Edith Kanaka'Ole": {
+                "Denver": 368600000,
+                "Philadelphia": 372800000
+            },
+            "Eleanor Roosevelt": {
+                "Denver": 271800000,
+                "Philadelphia": 284000000
+            },
+            "Joviat Idar": {
+                "Denver": 188000000,
+                "Philadelphia": 190600000
+            },
+            "Maria Tallchief": {
+                "Denver": 184800000,
+                "Philadelphia": 185800000
+            }
+        }
+    },
+    "Circulating Coins": {
+        "2011": {
+            "Denver": {
+                "1": 2536140000,
+                "5": 540240000,
+                "10": 754000000,
+                "25": 195000000,
+                "50": 1700000,
+                "N.A. $1": 48160000,
+                "Pres $1": 148960000
+            },
+            "Philadelphia": {
+                "1": 2402400000,
+                "5": 450000000,
+                "10": 748000000,
+                "25": 196200000,
+                "50": 1750000,
+                "N.A. $1": 29400000,
+                "Pres $1": 148400000
+            }
+        },
+        "2012": {
+            "Denver": {
+                "1": 2883200000,
+                "5": 558960000,
+                "10": 868000000,
+                "25": 313810000,
+                "50": 1700000,
+                "N.A. $1": 3080000,
+                "Pres $1": 16239999.999999998
+            },
+            "Philadelphia": {
+                "1": 3132000000,
+                "5": 464640000,
+                "10": 808000000,
+                "25": 254200000,
+                "50": 1800000,
+                "N.A. $1": 2800000,
+                "Pres $1": 27800000
+            }
+        },
+        "2013": {
+            "Philadelphia": {
+                "1": 3750400000,
+                "5": 607440000,
+                "10": 1086500000,
+                "25": 650800000,
+                "50": 5000000,
+                "N.A. $1": 1820000,
+                "Pres $1": 19450000
+            },
+            "Denver": {
+                "1": 3319600000,
+                "5": 615600000,
+                "10": 1025500000,
+                "25": 804400000,
+                "50": 4600000,
+                "N.A. $1": 1820000,
+                "Pres $1": 14010000
+            }
+        },
+        "2014": {
+            "Denver": {
+                "1": 4155600000.0000005,
+                "5": 570720000,
+                "10": 1177000000,
+                "25": 862800000,
+                "50": 2100000,
+                "N.A. $1": 2800000,
+                "Pres $1": 15260000
+            },
+            "Philadelphia": {
+                "1": 3990800000,
+                "5": 635520000,
+                "10": 1125500000,
+                "25": 717400000,
+                "50": 2500000,
+                "N.A. $1": 3080000,
+                "Pres $1": 19880000
+            }
+        },
+        "2015": {
+            "Denver": {
+                "1": 4674000000,
+                "5": 846720000,
+                "10": 1543500000,
+                "25": 1555600000,
+                "50": 2300000,
+                "N.A. $1": 2240000,
+                "Pres $1": 16530000.000000002
+            },
+            "Philadelphia": {
+                "1": 4691300000,
+                "5": 752880000,
+                "10": 1497510000,
+                "25": 1435220000,
+                "50": 2300000,
+                "N.A. $1": 2800000,
+                "Pres $1": 23800000
+            }
+        },
+        "2016": {
+            "Denver": {
+                "Cent": 4420400000,
+                "5 Cent": 759600000,
+                "10 Cent": 1437000000,
+                "25 Cent": 1164400000,
+                "50 Cent": 2100000,
+                "N.A. $1": 2100000,
+                "Pres. $1": 15260000
+            },
+            "Philadelphia": {
+                "Cent": 4698000000,
+                "5 Cent": 786960000,
+                "10 Cent": 1517000000,
+                "25 Cent": 1191630000,
+                "50 Cent": 2100000,
+                "N.A. $1": 2800000,
+                "Pres. $1": 18060000
+            }
+        },
+        "2017": {
+            "Denver": {
+                "Cent": 4272800000,
+                "5 Cent": 663120000,
+                "10 Cent": 1290500000,
+                "25 Cent": 1031400000.0000001,
+                "50 Cent": 2900000,
+                "N.A. $1": 1540000,
+                "Pres. $1": 0
+            },
+            "Philadelphia": {
+                "Cent": 4361220000,
+                "5 Cent": 710160000,
+                "10 Cent": 1437500000,
+                "25 Cent": 1084600000,
+                "50 Cent": 1800000,
+                "N.A. $1": 1820000,
+                "Pres. $1": 0
+            }
+        },
+        "2018": {
+            "Denver": {
+                "Cent": 3736400000,
+                "5 Cent": 626880000,
+                "10 Cent": 1006000000,
+                "25 Cent": 908200000,
+                "50 Cent": 6100000,
+                "N.A. $1": 1400000,
+                "Pres. $1": 0
+            },
+            "Philadelphia": {
+                "Cent": 4066800000,
+                "5 Cent": 629520000,
+                "10 Cent": 1193000000,
+                "25 Cent": 944914000,
+                "50 Cent": 4800000,
+                "N.A. $1": 1400000,
+                "Pres. $1": 0
+            }
+        },
+        "2019": {
+            "Denver": {
+                "Cent": 3497600000,
+                "5 Cent": 527039999.99999994,
+                "10 Cent": 1001500000,
+                "25 Cent": 860200000,
+                "50 Cent": 1700000,
+                "N.A. $1": 1540000,
+                "Pres. $1": 0
+            },
+            "Philadelphia": {
+                "Cent": 3542800000,
+                "5 Cent": 567854400,
+                "10 Cent": 1147500000,
+                "25 Cent": 791400000,
+                "50 Cent": 1700000,
+                "N.A. $1": 1400000,
+                "Pres. $1": 0
+            }
+        },
+        "2020": {
+            "Denver": {
+                "Cent": 4035600000,
+                "5 Cent": 837600000,
+                "10 Cent": 1445000000,
+                "25 Cent": 1370400000,
+                "50 Cent": 3400000,
+                "N.A. $1": 1260000,
+                "Pres. $1": 0
+            },
+            "Philadelphia": {
+                "Cent": 3560800000,
+                "5 Cent": 785500000,
+                "10 Cent": 1333500000,
+                "25 Cent": 1397600000,
+                "50 Cent": 2300000,
+                "N.A. $1": 1400000,
+                "Pres. $1": 0
+            }
+        },
+        "2021": {
+            "Denver": {
+                "Cent": 3982800000,
+                "5 Cent": 798000000,
+                "10 Cent": 1481000000,
+                "25 Cent": 1169400000,
+                "50 Cent": 7700000,
+                "N.A. $1": 1260000,
+                "Pres. $1": 0
+            },
+            "Philadelphia": {
+                "Cent": 3925820000,
+                "5 Cent": 772780000,
+                "10 Cent": 1349250000,
+                "25 Cent": 998800000,
+                "50 Cent": 5400000,
+                "N.A. $1": 1260000,
+                "Pres. $1": 0
+            }
+        },
+        "2022": {
+            "Denver": {
+                "Cent": 3230400000,
+                "5 Cent": 777600000,
+                "10 Cent": 1583000000,
+                "25 Cent": 1293000000,
+                "50 Cent": 4900000,
+                "N.A. $1": 980000,
+                "Pres. $1": 0
+            },
+            "Philadelphia": {
+                "Cent": 3129200000,
+                "5 Cent": 769920000,
+                "10 Cent": 1551000000,
+                "25 Cent": 1274600000,
+                "50 Cent": 4800000,
+                "N.A. $1": 980000,
+                "Pres. $1": 0
+            }
+        },
+        "2023": {
+            "Denver": {
+                "Cent": 2260800000,
+                "5 Cent": 734800000,
+                "10 Cent": 1295000000,
+                "25 Cent": 1330400000,
+                "50 Cent": 27800000,
+                "N.A. $1": 1120000,
+                "Pres. $1": 0
+            },
+            "Philadelphia": {
+                "Cent": 2262000000,
+                "5 Cent": 692600000,
+                "10 Cent": 1410500000,
+                "25 Cent": 1335200000,
+                "50 Cent": 30200000,
+                "N.A. $1": 1120000,
+                "Pres. $1": 0
+            }
+        }
+    },
+    "District of Columbia and US Territories Quarters": {
+        "2009": {
+            "District of Columbia": {
+                "Denver": 88800000,
+                "Philadelphia": 83600000
+            },
+            "Commonwealth of Puerto Rico": {
+                "Denver": 86000000,
+                "Philadelphia": 53200000
+            },
+            "Guam": {
+                "Denver": 42600000,
+                "Philadelphia": 45000000
+            },
+            "American Samoa": {
+                "Denver": 39600000,
+                "Philadelphia": 42600000
+            },
+            "U.S. Virgin Islands": {
+                "Denver": 41000000,
+                "Philadelphia": 41000000
+            },
+            "Northern Mariana Islands": {
+                "Denver": 37600000,
+                "Philadelphia": 35200000
+            }
+        }
+    },
+    "Presidential One Dollar": {
+        "2008": {
+            "Monroe": {
+                "Denver": 60230000,
+                "Philadelphia": 64260000
+            },
+            "Adams": {
+                "Denver": 57720000,
+                "Philadelphia": 57540000
+            },
+            "Jackson": {
+                "Denver": 61070000,
+                "Philadelphia": 61180000
+            },
+            "Van Buren": {
+                "Denver": 50960000,
+                "Philadelphia": 51520000
+            }
+        },
+        "2009": {
+            "Harrison": {
+                "Denver": 55160000,
+                "Philadelphia": 43260000
+            },
+            "Tyler": {
+                "Denver": 43540000,
+                "Philadelphia": 43540000
+            },
+            "Polk": {
+                "Denver": 41720000,
+                "Philadelphia": 46620000
+            },
+            "Taylor": {
+                "Denver": 36680000,
+                "Philadelphia": 41580000
+            }
+        },
+        "2010": {
+            "Fillmore": {
+                "Denver": 36960000,
+                "Philadelphia": 37520000
+            },
+            "Pierce": {
+                "Denver": 38360000,
+                "Philadelphia": 38220000
+            },
+            "Buchanan": {
+                "Denver": 36540000,
+                "Philadelphia": 36820000
+            },
+            "Lincoln": {
+                "Denver": 48020000,
+                "Philadelphia": 49000000
+            }
+        },
+        "2011": {
+            "Johnson": {
+                "Denver": 37100000,
+                "Philadelphia": 35560000
+            },
+            "Grant": {
+                "Denver": 37940000,
+                "Philadelphia": 38080000
+            },
+            "Hayes": {
+                "Denver": 36820000,
+                "Philadelphia": 37660000
+            },
+            "Garfield": {
+                "Denver": 37100000,
+                "Philadelphia": 37100000
+            }
+        },
+        "2012": {
+            "Arthur": {
+                "Denver": 4060000,
+                "Philadelphia": 6020000
+            },
+            "Cleveland": {
+                "Denver": 3920000,
+                "Philadelphia": 10680000
+            },
+            "Harrison": {
+                "Denver": 4200000,
+                "Philadelphia": 5640001
+            }
+        },
+        "2013": {
+            "McKinley": {
+                "Denver": 3365100,
+                "Philadelphia": 4760000
+            },
+            "Roosevelt": {
+                "Denver": 3920000,
+                "Philadelphia": 5310700
+            },
+            "Taft": {
+                "Denver": 3360000,
+                "Philadelphia": 4760000
+            },
+            "Wilson": {
+                "Denver": 3360000,
+                "Philadelphia": 4620000
+            }
+        },
+        "2014": {
+            "Harding": {
+                "Denver": 3780000,
+                "Philadelphia": 6160000
+            },
+            "Coolidge": {
+                "Denver": 3780000,
+                "Philadelphia": 4480000
+            },
+            "Hoover": {
+                "Denver": 3780000,
+                "Philadelphia": 4480000
+            },
+            "Roosevelt": {
+                "Denver": 3920000,
+                "Philadelphia": 4760000
+            }
+        },
+        "2015": {
+            "Truman": {
+                "Denver": 3500000,
+                "Philadelphia": 4900000
+            },
+            "Eisenhower": {
+                "Denver": 3645998,
+                "Philadelphia": 4900000
+            },
+            "Kennedy": {
+                "Denver": 5180000,
+                "Philadelphia": 6160000
+            },
+            "Johnson": {
+                "Denver": 4200000,
+                "Philadelphia": 7840000
+            }
+        },
+        "2016": {
+            "Richard Nixon": {
+                "Denver": 4340000,
+                "Philadelphia": 5460000
+            },
+            "Gerald Ford": {
+                "Denver": 5040000,
+                "Philadelphia": 5460000
+            },
+            "Ronald Reagan": {
+                "Denver": 5880000,
+                "Philadelphia": 7140000
+            }
+        }
+    },
+    "Westward Journey Nickel Series™": {
+        "2004": {
+            "Louisiana Purchase/Peace Medal": {
+                "Philadelphia": 361440000,
+                "Denver": 372000000
+            },
+            "Keelboat": {
+                "Philadelphia": 366720000,
+                "Denver": 344880000
+            }
+        },
+        "2005": {
+            "American Bison": {
+                "Philadelphia": 448320000,
+                "Denver": 487680000
+            },
+            "Ocean in view! O! The joy!": {
+                "Philadelphia": 394080000,
+                "Denver": 411120000
+            }
+        }
+    }
+}

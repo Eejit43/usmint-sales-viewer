@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { parse } from 'node-html-parser';
 import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
@@ -44,18 +45,18 @@ async function generateItemsList(year: number | 'all') {
     const optionElements = selectElement.querySelectorAll('option');
 
     const weeks = optionElements
-        .map((option) => [Number.parseInt(option.getAttribute('value')!), option.text.trim()] as [number, string])
+        .map((option) => [Number.parseInt(option.getAttribute('value')!), option.textContent.trim()] as [number, string])
         .filter(([week]) => week)
         .reverse();
 
     for (const [index, [week, weekName]] of weeks.entries()) {
-        console.log(`Processing week of ${weekName} (${week}) (${index + 1}/${weeks.length})`);
+        console.log(chalk.blue(`Processing week of ${chalk.yellow(weekName)} (${chalk.gray(week)}) (${chalk.gray(`${index + 1}/${weeks.length}`)})`));
 
         const savedReportFile = Bun.file(join(reportDirectory, `${week}.html`));
 
         let dataTable;
         if (await savedReportFile.exists()) {
-            console.log('   Using saved report file');
+            console.log(chalk.green('   Using saved report file'));
             dataTable = parse(await savedReportFile.text());
         } else {
             const dataUrl = new URL(rootSalesUrl.toString());
@@ -66,7 +67,7 @@ async function generateItemsList(year: number | 'all') {
 
             dataTable = processedData.querySelector('table');
 
-            if (!dataTable) return console.error('Could not find data table, stopping process (are you being rate limited?)');
+            if (!dataTable) return console.error('   Could not find data table, stopping process (are you being rate limited?)');
 
             await Bun.write(savedReportFile, dataTable.toString());
 
@@ -75,25 +76,26 @@ async function generateItemsList(year: number | 'all') {
 
         const headers = dataTable.querySelectorAll('thead th');
 
-        const hasExtraNameColumn = headers[1].text === 'Program Name';
-        if (hasExtraNameColumn) console.log('   There is an extra "Program Name" column, the first will be ignored');
+        const hasExtraNameColumn = headers[1].textContent === 'Program Name';
+        if (hasExtraNameColumn) console.log(chalk.yellow('   There is an extra "Program Name" column, the first will be ignored'));
 
         let extraColumnsAmount = headers.length - 5;
         if (hasExtraNameColumn) extraColumnsAmount--;
 
-        if (extraColumnsAmount > 0) console.log(`   There ${extraColumnsAmount === 1 ? `is ${extraColumnsAmount} extra column, it` : `are ${extraColumnsAmount} extra columns, they`} will be ignored`);
+        if (extraColumnsAmount > 0)
+            console.log(chalk.yellow(`   There ${extraColumnsAmount === 1 ? `is ${extraColumnsAmount} extra column, it` : `are ${extraColumnsAmount} extra columns, they`} will be ignored`));
 
         const rows = dataTable.querySelectorAll('tbody tr');
 
         for (const [index, row] of rows.entries()) {
-            let columns = row.querySelectorAll('td').map((column) => column.text.trim());
+            let columns = row.querySelectorAll('td').map((column) => column.textContent.trim());
 
             if (hasExtraNameColumn) columns.shift();
 
             columns = columns.slice(0, 5);
 
             if (columns.length !== 5) {
-                console.error(`   Unexpected unique column count for row ${index + 1}/${rows.length} (${columns.length}), skipping row`);
+                console.log(chalk.yellow(`   Unexpected column count for row ${index + 1}/${rows.length} (${columns.length}), skipping row`));
 
                 continue;
             }

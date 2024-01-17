@@ -2,11 +2,13 @@
     "name": "usmint-sales-viewer",
     "type": "module",
     "scripts": {
-        "american-innovation-totals": "bun run scripts/generate-american-innovation-totals.ts",
-        "cumulative-sales": "bun run scripts/generate-cumulative-sales-list.ts"
+        "generate-american-innovation-totals": "bun run scripts/generate-american-innovation-totals.ts",
+        "generate-circulating-coins-production-list": "bun run scripts/generate-circulating-coins-production-list.ts",
+        "generate-cumulative-sales-list": "bun run scripts/generate-cumulative-sales-list.ts"
     },
     "prettier": "@eejit/prettier-config",
     "dependencies": {
+        "chalk": "^5.3.0",
         "node-html-parser": "^6.1.12",
         "typescript": "^5.3.3"
     },
