@@ -43,7 +43,7 @@ for (const program of programs) {
 
         result[program][year] = {};
 
-        const savedReportFile = Bun.file(join(reportDirectory, `${yearId}.html`));
+        const savedReportFile = Bun.file(join(reportDirectory, `${yearId}.txt`));
 
         let dataTable;
         if (await savedReportFile.exists()) {

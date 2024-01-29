@@ -58,7 +58,7 @@ async function generateItemsList(year: number | 'all') {
             continue;
         }
 
-        const savedReportFile = Bun.file(join(reportDirectory, `${week}.html`));
+        const savedReportFile = Bun.file(join(reportDirectory, `${week}.txt`));
 
         let dataTable;
         if (await savedReportFile.exists()) {
