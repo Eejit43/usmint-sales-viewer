@@ -1,52 +1,52 @@
 {
     "2018": {
         "P": {
-            "total": 863075,
+            "total": 863750,
             "soldOut": false
         },
         "D": {
-            "total": 936400,
+            "total": 936750,
             "soldOut": false
         }
     },
     "2019": {
         "Delaware": {
             "P": {
-                "total": 546200,
+                "total": 546325,
                 "soldOut": false
             },
             "D": {
-                "total": 546500,
+                "total": 546725,
                 "soldOut": false
             }
         },
         "Pennsylvania": {
             "P": {
-                "total": 624400,
+                "total": 625500,
                 "soldOut": false
             },
             "D": {
-                "total": 516025,
+                "total": 516725,
                 "soldOut": false
             }
         },
         "New Jersey": {
             "P": {
-                "total": 616875,
+                "total": 617850,
                 "soldOut": false
             },
             "D": {
-                "total": 555775,
+                "total": 556325,
                 "soldOut": false
             }
         },
         "Georgia": {
             "P": {
-                "total": 546000,
+                "total": 546175,
                 "soldOut": false
             },
             "D": {
-                "total": 518700,
+                "total": 518825,
                 "soldOut": false
             }
         }
@@ -190,11 +190,11 @@
         },
         "Louisiana": {
             "P": {
-                "total": 465625,
+                "total": 466625,
                 "soldOut": false
             },
             "D": {
-                "total": 430825,
+                "total": 431025,
                 "soldOut": false
             }
         },
@@ -210,11 +210,11 @@
         },
         "Mississippi": {
             "P": {
-                "total": 401025,
+                "total": 402325,
                 "soldOut": false
             },
             "D": {
-                "total": 384200,
+                "total": 384900,
                 "soldOut": false
             }
         }
@@ -222,11 +222,11 @@
     "2024": {
         "Illinois": {
             "P": {
-                "total": 406975,
+                "total": 327125,
                 "soldOut": false
             },
             "D": {
-                "total": 383300,
+                "total": 311600,
                 "soldOut": false
             }
         }
