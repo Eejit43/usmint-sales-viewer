@@ -471,6 +471,30 @@
             }
         }
     },
+    "American Women Quarter Series": {
+        "2024": {
+            "Pauli Murray": {
+                "Denver": null,
+                "Philadelphia": null
+            },
+            "Patsy Mink": {
+                "Denver": null,
+                "Philadelphia": null
+            },
+            "Dr Mary Edwards Walker": {
+                "Denver": null,
+                "Philadelphia": null
+            },
+            "Celia Cruz": {
+                "Denver": null,
+                "Philadelphia": null
+            },
+            "Zikata-Sa": {
+                "Denver": null,
+                "Philadelphia": null
+            }
+        }
+    },
     "American Women Quarters": {
         "2022": {
             "Maya Angelou": {
@@ -774,6 +798,26 @@
                 "10 Cent": 1410500000,
                 "25 Cent": 1335200000,
                 "50 Cent": 30200000,
+                "N.A. $1": 1120000,
+                "Pres. $1": 0
+            }
+        },
+        "2024": {
+            "Denver": {
+                "Cent": 404800000,
+                "5 Cent": 29760000,
+                "10 Cent": 123000000,
+                "25 Cent": 150000000,
+                "50 Cent": 2900000,
+                "N.A. $1": 1120000,
+                "Pres. $1": 0
+            },
+            "Philadelphia": {
+                "Cent": 416400000,
+                "5 Cent": 31440000,
+                "10 Cent": 75500000,
+                "25 Cent": 162000000,
+                "50 Cent": 2800000,
                 "N.A. $1": 1120000,
                 "Pres. $1": 0
             }

@@ -1,0 +1,18 @@
+<table id="tablepress-1334" class="tablepress tablepress-id-1334">
+<thead>
+<tr class="row-1 odd">
+	<th class="column-1"></th><th class="column-2">Cent</th><th class="column-3">5 Cent</th><th class="column-4">10 Cent</th><th class="column-5">25 Cent </th><th class="column-6">50  Cent</th><th class="column-7">N.A. $1</th><th class="column-8">Pres. $1</th><th class="column-9">Total:</th>
+</tr>
+</thead>
+<tbody class="row-hover">
+<tr class="row-2 even">
+	<td class="column-1">Denver</td><td class="column-2">404.8 M</td><td class="column-3">29.76 M</td><td class="column-4">123.0 M</td><td class="column-5">150.0 M</td><td class="column-6">2.9 M</td><td class="column-7">1.12 M</td><td class="column-8">0.0 M</td><td class="column-9">711.58 M</td>
+</tr>
+<tr class="row-3 odd">
+	<td class="column-1">Philadelphia </td><td class="column-2">416.4 M</td><td class="column-3">31.44 M</td><td class="column-4">75.5 M</td><td class="column-5">162.0 M</td><td class="column-6">2.8 M</td><td class="column-7">1.12 M</td><td class="column-8">0.0 M</td><td class="column-9">689.26 M</td>
+</tr>
+<tr class="row-4 even">
+	<td class="column-1">Total:</td><td class="column-2">821.2 M</td><td class="column-3">61.2 M</td><td class="column-4">198.5 M</td><td class="column-5">312.0 M</td><td class="column-6">5.7 M</td><td class="column-7">2.24 M</td><td class="column-8">0.0 M</td><td class="column-9">1400.84 M</td>
+</tr>
+</tbody>
+</table>
