@@ -75,7 +75,7 @@ async function generateItemsList(year: number | 'all') {
 
             if (!dataTable) return console.error('   Could not find data table, stopping process (are you being rate limited?)');
 
-            const text = dataTable.outerHTML.replaceAll(/ ?(id|class)=".*?"/g, '').replaceAll(/\n\t?(?<!$)/g, '');
+            const text = dataTable.outerHTML.replaceAll(/ ?(id|class)=".*?"/g, '').replaceAll(/\n\t?/g, '') + '\n';
 
             await Bun.write(savedReportFile, text);
 

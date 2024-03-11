@@ -64,7 +64,7 @@ for (const program of programs) {
                 continue;
             }
 
-            const text = dataTable.outerHTML.replaceAll(/ ?(id|class)=".*?"/g, '').replaceAll(/\n\t?(?<!$)/g, '');
+            const text = dataTable.outerHTML.replaceAll(/ ?(id|class)=".*?"/g, '').replaceAll(/\n\t?/g, '') + '\n';
 
             await Bun.write(savedReportFile, text);
         }
