@@ -1,18 +1,1 @@
-<table id="tablepress-747" class="tablepress tablepress-id-747">
-<thead>
-<tr class="row-1 odd">
-	<th class="column-1">Design</th><th class="column-2">Philadelphia</th><th class="column-3">Denver</th><th class="column-4">Total</th>
-</tr>
-</thead>
-<tbody class="row-hover">
-<tr class="row-2 even">
-	<td class="column-1">American Bison</td><td class="column-2">448,320,000</td><td class="column-3">487,680,000</td><td class="column-4">936,000,000</td>
-</tr>
-<tr class="row-3 odd">
-	<td class="column-1">Ocean in view! O! The joy!</td><td class="column-2">394,080,000</td><td class="column-3">411,120,000</td><td class="column-4">805,200,000</td>
-</tr>
-<tr class="row-4 even">
-	<td class="column-1">Grand Total:</td><td class="column-2">842,400,000</td><td class="column-3">898,800,000</td><td class="column-4">1,741,200,000</td>
-</tr>
-</tbody>
-</table>
+<table><thead><tr><th>Design</th><th>Philadelphia</th><th>Denver</th><th>Total</th></tr></thead><tbody><tr><td>American Bison</td><td>448,320,000</td><td>487,680,000</td><td>936,000,000</td></tr><tr><td>Ocean in view! O! The joy!</td><td>394,080,000</td><td>411,120,000</td><td>805,200,000</td></tr><tr><td>Grand Total:</td><td>842,400,000</td><td>898,800,000</td><td>1,741,200,000</td></tr></tbody></table>

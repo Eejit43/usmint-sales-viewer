@@ -64,7 +64,9 @@ for (const program of programs) {
                 continue;
             }
 
-            await Bun.write(savedReportFile, dataTable.toString());
+            const text = dataTable.outerHTML.replaceAll(/ ?(id|class)=".*?"/g, '').replaceAll(/\n\t?(?<!$)/g, '');
+
+            await Bun.write(savedReportFile, text);
         }
 
         let headers = dataTable.querySelectorAll('thead th').map((element) => element.textContent.trim());

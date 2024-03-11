@@ -1,18 +1,1 @@
-<table id="tablepress-766" class="tablepress tablepress-id-766">
-<thead>
-<tr class="row-1 odd">
-	<th class="column-1">Column1</th><th class="column-2">1 </th><th class="column-3">5 </th><th class="column-4">10 </th><th class="column-5">25 </th><th class="column-6">50 </th><th class="column-7">N.A. $1</th><th class="column-8">Pres $1</th><th class="column-9">Total:</th>
-</tr>
-</thead>
-<tbody class="row-hover">
-<tr class="row-2 even">
-	<td class="column-1">Denver</td><td class="column-2">4155.60 M</td><td class="column-3">570.72 M</td><td class="column-4">1177.00 M</td><td class="column-5">862.80 M</td><td class="column-6"> 2.10 M</td><td class="column-7"> 2.80 M</td><td class="column-8">15.26 M</td><td class="column-9">6786.28 M</td>
-</tr>
-<tr class="row-3 odd">
-	<td class="column-1">Philadelphia</td><td class="column-2">3990.80 M</td><td class="column-3">635.52 M</td><td class="column-4">1125.50 M</td><td class="column-5">717.40 M</td><td class="column-6"> 2.50 M</td><td class="column-7"> 3.08 M</td><td class="column-8">19.88 M</td><td class="column-9">6494.68 M</td>
-</tr>
-<tr class="row-4 even">
-	<td class="column-1">Total:</td><td class="column-2">8146.40 M</td><td class="column-3">1206.24 M</td><td class="column-4">2302.50 M</td><td class="column-5">1580.20 M</td><td class="column-6"> 4.60 M</td><td class="column-7"> 5.88 M</td><td class="column-8">35.14 M</td><td class="column-9">13280.96 M</td>
-</tr>
-</tbody>
-</table>
+<table><thead><tr><th>Column1</th><th>1 </th><th>5 </th><th>10 </th><th>25 </th><th>50 </th><th>N.A. $1</th><th>Pres $1</th><th>Total:</th></tr></thead><tbody><tr><td>Denver</td><td>4155.60 M</td><td>570.72 M</td><td>1177.00 M</td><td>862.80 M</td><td> 2.10 M</td><td> 2.80 M</td><td>15.26 M</td><td>6786.28 M</td></tr><tr><td>Philadelphia</td><td>3990.80 M</td><td>635.52 M</td><td>1125.50 M</td><td>717.40 M</td><td> 2.50 M</td><td> 3.08 M</td><td>19.88 M</td><td>6494.68 M</td></tr><tr><td>Total:</td><td>8146.40 M</td><td>1206.24 M</td><td>2302.50 M</td><td>1580.20 M</td><td> 4.60 M</td><td> 5.88 M</td><td>35.14 M</td><td>13280.96 M</td></tr></tbody></table>

@@ -1,18 +1,1 @@
-<table id="tablepress-745" class="tablepress tablepress-id-745">
-<thead>
-<tr class="row-1 odd">
-	<th class="column-1">Design</th><th class="column-2">Philadelphia</th><th class="column-3">Denver</th><th class="column-4">Total</th>
-</tr>
-</thead>
-<tbody class="row-hover">
-<tr class="row-2 even">
-	<td class="column-1">Louisiana Purchase/Peace Medal</td><td class="column-2">361,440,000</td><td class="column-3">372,000,000</td><td class="column-4">733,440,000</td>
-</tr>
-<tr class="row-3 odd">
-	<td class="column-1">Keelboat</td><td class="column-2">366,720,000</td><td class="column-3">344,880,000</td><td class="column-4">711,600,000</td>
-</tr>
-<tr class="row-4 even">
-	<td class="column-1">Grand Total:</td><td class="column-2">728,160,000</td><td class="column-3">716,880,000</td><td class="column-4">1,445,040,000</td>
-</tr>
-</tbody>
-</table>
+<table><thead><tr><th>Design</th><th>Philadelphia</th><th>Denver</th><th>Total</th></tr></thead><tbody><tr><td>Louisiana Purchase/Peace Medal</td><td>361,440,000</td><td>372,000,000</td><td>733,440,000</td></tr><tr><td>Keelboat</td><td>366,720,000</td><td>344,880,000</td><td>711,600,000</td></tr><tr><td>Grand Total:</td><td>728,160,000</td><td>716,880,000</td><td>1,445,040,000</td></tr></tbody></table>
