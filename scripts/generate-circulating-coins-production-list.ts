@@ -3,7 +3,7 @@ import { parse } from 'node-html-parser';
 import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 
-const rootDataUrl = new URL('https://www.usmint.gov/about/production-sales-figures/circulating-coins-production');
+const rootDataUrl = 'https://www.usmint.gov/about/production-sales-figures/circulating-coins-production';
 
 const listFile = join('lists', 'circulating-coins-production.json');
 
@@ -43,18 +43,18 @@ for (const program of programs) {
 
         result[program][year] = {};
 
-        const savedReportFile = Bun.file(join(reportDirectory, `${yearId}.txt`));
+        const savedReportFile = Bun.file(join(reportDirectory, `${yearId}.html`));
 
         let dataTable;
         if (await savedReportFile.exists()) {
             console.log(chalk.green('      Using saved report file'));
             dataTable = parse(await savedReportFile.text());
         } else {
-            const dataUrl = new URL(rootDataUrl.toString());
+            const dataUrl = new URL(rootDataUrl);
             dataUrl.searchParams.set('program', program);
             dataUrl.searchParams.set(`${programShortName}years`, yearId.toString());
 
-            const processedData = parse(await (await fetch(dataUrl)).text());
+            const processedData = parse(await (await fetch(dataUrl.toString())).text());
 
             dataTable = processedData.querySelector('table');
 

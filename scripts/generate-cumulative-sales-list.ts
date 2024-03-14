@@ -5,7 +5,7 @@ import { join } from 'node:path';
 
 export type ItemsList = Record<string, { itemId: string; programName: string; totalSold: number; firstSeen: { year: number; week: number }; latestSaleData: { year: number; week: number } }>;
 
-const rootSalesUrl = new URL('https://www.usmint.gov/about/production-sales-figures/cumulative-sales');
+const rootSalesUrl = 'https://www.usmint.gov/about/production-sales-figures/cumulative-sales';
 
 const listFile = join('lists', 'cumulative-sales.json');
 
@@ -40,7 +40,7 @@ async function generateItemsList(year: number | 'all') {
 
     const itemsListFile = Bun.file(listFile);
 
-    const result: ItemsList = (await itemsListFile.exists()) ? await itemsListFile.json() : {};
+    const result = (await itemsListFile.exists()) ? ((await itemsListFile.json()) as ItemsList) : {};
 
     const optionElements = selectElement.querySelectorAll('option');
 
@@ -58,18 +58,18 @@ async function generateItemsList(year: number | 'all') {
             continue;
         }
 
-        const savedReportFile = Bun.file(join(reportDirectory, `${week}.txt`));
+        const savedReportFile = Bun.file(join(reportDirectory, `${week}.html`));
 
         let dataTable;
         if (await savedReportFile.exists()) {
             console.log(chalk.green('   Using saved report file'));
             dataTable = parse(await savedReportFile.text());
         } else {
-            const dataUrl = new URL(rootSalesUrl.toString());
+            const dataUrl = new URL(rootSalesUrl);
             dataUrl.searchParams.set('years', year.toString());
             dataUrl.searchParams.set(`${year}weeks`, week.toString());
 
-            const processedData = parse(await (await fetch(dataUrl)).text());
+            const processedData = parse(await (await fetch(dataUrl.toString())).text());
 
             dataTable = processedData.querySelector('table');
 
