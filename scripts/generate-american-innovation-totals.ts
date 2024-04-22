@@ -1,9 +1,9 @@
 import { existsSync, readdirSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
+import path from 'node:path';
 import { ItemsList } from './generate-cumulative-sales-list.js';
 
-const listFile = Bun.file(join('lists', 'cumulative-sales.json'));
-const totalsFile = join('lists', 'american-innovation-totals.json');
+const listFile = Bun.file(path.join('lists', 'cumulative-sales.json'));
+const totalsFile = path.join('lists', 'american-innovation-totals.json');
 
 const stateNames: Record<string, string> = {
     AL: 'Alabama',
@@ -105,11 +105,11 @@ if (await listFile.exists()) {
     }
 
     let latestYear = 0;
-    const years = readdirSync(join('saved-reports', 'cumulative-sales'));
+    const years = readdirSync(path.join('saved-reports', 'cumulative-sales'));
     for (const year of years) if (latestYear < Number.parseInt(year)) latestYear = Number.parseInt(year);
 
     let latestWeek = 0;
-    const weeks = readdirSync(join('saved-reports', 'cumulative-sales', latestYear.toString()));
+    const weeks = readdirSync(path.join('saved-reports', 'cumulative-sales', latestYear.toString()));
     for (const week of weeks) if (latestWeek < Number.parseInt(week) && Number.parseInt(week)) latestWeek = Number.parseInt(week);
 
     for (const [, data] of Object.entries(result))

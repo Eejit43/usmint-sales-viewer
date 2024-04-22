@@ -1,11 +1,11 @@
 import chalk from 'chalk';
 import { parse } from 'node-html-parser';
 import { existsSync, mkdirSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
+import path from 'node:path';
 
 const rootDataUrl = 'https://www.usmint.gov/about/production-sales-figures/circulating-coins-production';
 
-const listFile = join('lists', 'circulating-coins-production.json');
+const listFile = path.join('lists', 'circulating-coins-production.json');
 
 if (existsSync(listFile)) rmSync(listFile);
 
@@ -34,7 +34,7 @@ for (const program of programs) {
         .filter(([yearId]) => yearId)
         .reverse();
 
-    const reportDirectory = join('saved-reports', 'circulating-coins-production', program);
+    const reportDirectory = path.join('saved-reports', 'circulating-coins-production', program);
 
     if (!existsSync(reportDirectory)) mkdirSync(reportDirectory, { recursive: true });
 
@@ -43,7 +43,7 @@ for (const program of programs) {
 
         result[program][year] = {};
 
-        const savedReportFile = Bun.file(join(reportDirectory, `${yearId}.html`));
+        const savedReportFile = Bun.file(path.join(reportDirectory, `${yearId}.html`));
 
         let dataTable;
         if (await savedReportFile.exists()) {

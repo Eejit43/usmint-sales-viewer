@@ -1,13 +1,13 @@
 import chalk from 'chalk';
 import { parse } from 'node-html-parser';
 import { existsSync, mkdirSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
+import path from 'node:path';
 
 export type ItemsList = Record<string, { itemId: string; programName: string; totalSold: number; firstSeen: { year: number; week: number }; latestSaleData: { year: number; week: number } }>;
 
 const rootSalesUrl = 'https://www.usmint.gov/about/production-sales-figures/cumulative-sales';
 
-const listFile = join('lists', 'cumulative-sales.json');
+const listFile = path.join('lists', 'cumulative-sales.json');
 
 await generateItemsList(process.argv[2] ? Number.parseInt(process.argv[2]) : 'all');
 
@@ -16,7 +16,7 @@ await generateItemsList(process.argv[2] ? Number.parseInt(process.argv[2]) : 'al
  * @param year The year to fetch data for, or "all".
  */
 async function generateItemsList(year: number | 'all') {
-    const reportDirectory = join('saved-reports', 'cumulative-sales', year.toString());
+    const reportDirectory = path.join('saved-reports', 'cumulative-sales', year.toString());
 
     if (year === 'all') {
         if (existsSync(listFile)) rmSync(listFile);
@@ -58,7 +58,7 @@ async function generateItemsList(year: number | 'all') {
             continue;
         }
 
-        const savedReportFile = Bun.file(join(reportDirectory, `${week}.html`));
+        const savedReportFile = Bun.file(path.join(reportDirectory, `${week}.html`));
 
         let dataTable;
         if (await savedReportFile.exists()) {
