@@ -13,10 +13,10 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "@eejit/eslint-config-typescript": "^9.5.0",
+    "@eejit/eslint-config-typescript": "^9.6.0",
     "@eejit/prettier-config": "^2.2.3",
     "@tsconfig/recommended": "^1.0.6",
-    "bun-types": "^1.1.6"
+    "bun-types": "^1.1.7"
   },
   "packageManager": "pnpm@9.0.6"
 }
