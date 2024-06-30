@@ -1,52 +1,52 @@
 {
     "2018": {
         "P": {
-            "total": 865325,
+            "total": 866075,
             "soldOut": false
         },
         "D": {
-            "total": 938025,
+            "total": 938525,
             "soldOut": false
         }
     },
     "2019": {
         "Delaware": {
             "P": {
-                "total": 547200,
+                "total": 547975,
                 "soldOut": false
             },
             "D": {
-                "total": 547550,
+                "total": 547800,
                 "soldOut": false
             }
         },
         "Pennsylvania": {
             "P": {
-                "total": 628300,
+                "total": 630325,
                 "soldOut": false
             },
             "D": {
-                "total": 518125,
+                "total": 518900,
                 "soldOut": false
             }
         },
         "New Jersey": {
             "P": {
-                "total": 620700,
+                "total": 621650,
                 "soldOut": false
             },
             "D": {
-                "total": 558125,
+                "total": 559675,
                 "soldOut": false
             }
         },
         "Georgia": {
             "P": {
-                "total": 547400,
+                "total": 548200,
                 "soldOut": false
             },
             "D": {
-                "total": 520125,
+                "total": 530550,
                 "soldOut": false
             }
         }
@@ -162,13 +162,13 @@
                 "soldOut": false
             },
             "D": {
-                "total": 452725,
+                "total": 452775,
                 "soldOut": false
             }
         },
         "Tennessee": {
             "P": {
-                "total": 453425,
+                "total": 453450,
                 "soldOut": false
             },
             "D": {
@@ -180,7 +180,7 @@
     "2023": {
         "Ohio": {
             "P": {
-                "total": 496300,
+                "total": 496700,
                 "soldOut": false
             },
             "D": {
@@ -190,31 +190,31 @@
         },
         "Louisiana": {
             "P": {
-                "total": 467925,
+                "total": 486450,
                 "soldOut": false
             },
             "D": {
-                "total": 433225,
+                "total": 449650,
                 "soldOut": false
             }
         },
         "Indiana": {
             "P": {
-                "total": 500950,
+                "total": 501250,
                 "soldOut": false
             },
             "D": {
-                "total": 452575,
+                "total": 454050,
                 "soldOut": false
             }
         },
         "Mississippi": {
             "P": {
-                "total": 405150,
+                "total": 421875,
                 "soldOut": false
             },
             "D": {
-                "total": 387075,
+                "total": 400000,
                 "soldOut": false
             }
         }
@@ -222,11 +222,31 @@
     "2024": {
         "Illinois": {
             "P": {
-                "total": 340950,
+                "total": 386025,
                 "soldOut": false
             },
             "D": {
-                "total": 326075,
+                "total": 370775,
+                "soldOut": false
+            }
+        },
+        "Alabama": {
+            "P": {
+                "total": 524175,
+                "soldOut": false
+            },
+            "D": {
+                "total": 479525,
+                "soldOut": false
+            }
+        },
+        "Maine": {
+            "P": {
+                "total": 434475,
+                "soldOut": false
+            },
+            "D": {
+                "total": 350475,
                 "soldOut": false
             }
         }
