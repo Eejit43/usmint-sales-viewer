@@ -22,7 +22,7 @@
         },
         "Pennsylvania": {
             "P": {
-                "total": 630325,
+                "total": 630350,
                 "soldOut": false
             },
             "D": {
@@ -46,7 +46,7 @@
                 "soldOut": false
             },
             "D": {
-                "total": 537550,
+                "total": 543350,
                 "soldOut": false
             }
         }
@@ -172,7 +172,7 @@
                 "soldOut": false
             },
             "D": {
-                "total": 453800,
+                "total": 453850,
                 "soldOut": false
             }
         }
@@ -184,13 +184,13 @@
                 "soldOut": false
             },
             "D": {
-                "total": 448650,
+                "total": 448750,
                 "soldOut": false
             }
         },
         "Louisiana": {
             "P": {
-                "total": 496775,
+                "total": 496900,
                 "soldOut": false
             },
             "D": {
@@ -210,11 +210,11 @@
         },
         "Mississippi": {
             "P": {
-                "total": 426600,
+                "total": 427900,
                 "soldOut": false
             },
             "D": {
-                "total": 403575,
+                "total": 404675,
                 "soldOut": false
             }
         }
@@ -222,41 +222,41 @@
     "2024": {
         "Illinois": {
             "P": {
-                "total": 426625,
+                "total": 429525,
                 "soldOut": false
             },
             "D": {
-                "total": 410600,
+                "total": 412175,
                 "soldOut": false
             }
         },
         "Alabama": {
             "P": {
-                "total": 524400,
+                "total": 524500,
                 "soldOut": false
             },
             "D": {
-                "total": 480775,
+                "total": 480875,
                 "soldOut": false
             }
         },
         "Maine": {
             "P": {
-                "total": 455275,
+                "total": 462625,
                 "soldOut": false
             },
             "D": {
-                "total": 370625,
+                "total": 374975,
                 "soldOut": false
             }
         },
         "Missouri": {
             "P": {
-                "total": 448000,
+                "total": 457250,
                 "soldOut": false
             },
             "D": {
-                "total": 335500,
+                "total": 342400,
                 "soldOut": false
             }
         }
