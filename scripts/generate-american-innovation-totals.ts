@@ -80,10 +80,14 @@ if (await listFile.exists()) {
 
     const result: Record<string, Record<string, MintMarkIndexedTotals> | MintMarkIndexedTotals> = {};
 
-    const filteredItems = Object.entries(listFileContent).filter(([name, item]) => name.includes('AI $1') && item.programName === 'Rolls & Bags & Boxes');
+    const filteredItems = Object.entries(listFileContent).filter(
+        ([name, item]) => name.includes('AI $1') && item.programName === 'Rolls & Bags & Boxes',
+    );
 
     for (const [name, item] of filteredItems) {
-        const [, year, amount, stateAbbreviation, mintMark] = [...name.match(/(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG|)(?: - ([A-Z]{2}))? \((P|D)\)/)!];
+        const [, year, amount, stateAbbreviation, mintMark] = [
+            ...name.match(/(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG|)(?: - ([A-Z]{2}))? \((P|D)\)/)!,
+        ];
 
         if (!(year in result)) result[year] = {};
 
@@ -92,7 +96,8 @@ if (await listFile.exists()) {
 
             if (!(stateName in result[year])) result[year][stateName] = {};
 
-            if (!(mintMark in result[year][stateName])) (result[year][stateName] as MintMarkIndexedTotals)[mintMark] = { total: 0, soldOut: false, latestSales: [] };
+            if (!(mintMark in result[year][stateName]))
+                (result[year][stateName] as MintMarkIndexedTotals)[mintMark] = { total: 0, soldOut: false, latestSales: [] };
 
             (result[year][stateName] as MintMarkIndexedTotals)[mintMark].total += item.totalSold * Number.parseInt(amount);
             (result[year][stateName] as MintMarkIndexedTotals)[mintMark].latestSales!.push(item.latestSaleData.week);

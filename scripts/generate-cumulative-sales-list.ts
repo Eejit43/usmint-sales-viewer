@@ -3,7 +3,16 @@ import { parse } from 'node-html-parser';
 import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 
-export type ItemsList = Record<string, { itemId: string; programName: string; totalSold: number; firstSeen: { year: number; week: number }; latestSaleData: { year: number; week: number } }>;
+export type ItemsList = Record<
+    string,
+    {
+        itemId: string;
+        programName: string;
+        totalSold: number;
+        firstSeen: { year: number; week: number };
+        latestSaleData: { year: number; week: number };
+    }
+>;
 
 const rootSalesUrl = 'https://www.usmint.gov/about/production-sales-figures/cumulative-sales';
 
@@ -50,7 +59,11 @@ async function generateItemsList(year: number | 'all') {
         .reverse();
 
     for (const [index, [week, weekName]] of weeks.entries()) {
-        console.log(chalk.blue(`Processing week of ${chalk.yellow(weekName)} (${chalk.gray(week)}) (${chalk.gray(`${index + 1}/${weeks.length}`)})`));
+        console.log(
+            chalk.blue(
+                `Processing week of ${chalk.yellow(weekName)} (${chalk.gray(week)}) (${chalk.gray(`${index + 1}/${weeks.length}`)})`,
+            ),
+        );
 
         if (week === 1310) {
             console.log(chalk.red("   This week's data is ignored!"));
@@ -91,7 +104,11 @@ async function generateItemsList(year: number | 'all') {
         if (hasExtraNameColumn) extraColumnsAmount--;
 
         if (extraColumnsAmount > 0)
-            console.log(chalk.yellow(`   There ${extraColumnsAmount === 1 ? `is ${extraColumnsAmount} extra column, it` : `are ${extraColumnsAmount} extra columns, they`} will be ignored`));
+            console.log(
+                chalk.yellow(
+                    `   There ${extraColumnsAmount === 1 ? `is ${extraColumnsAmount} extra column, it` : `are ${extraColumnsAmount} extra columns, they`} will be ignored`,
+                ),
+            );
 
         const rows = dataTable.querySelectorAll('tbody tr');
 
@@ -103,7 +120,9 @@ async function generateItemsList(year: number | 'all') {
             columns = columns.slice(0, 5);
 
             if (columns.length !== 5) {
-                console.log(chalk.yellow(`   Unexpected column count for row ${index + 1}/${rows.length} (${columns.length}), skipping row`));
+                console.log(
+                    chalk.yellow(`   Unexpected column count for row ${index + 1}/${rows.length} (${columns.length}), skipping row`),
+                );
 
                 continue;
             }

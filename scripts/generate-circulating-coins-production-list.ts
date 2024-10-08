@@ -39,7 +39,11 @@ for (const program of programs) {
     if (!existsSync(reportDirectory)) mkdirSync(reportDirectory, { recursive: true });
 
     for (const [index, [yearId, year]] of years.entries()) {
-        console.log(chalk.blue(`   Processing year of ${chalk.yellow(year)} (${chalk.gray(yearId)}) (${chalk.gray(`${index + 1}/${years.length}`)})`));
+        console.log(
+            chalk.blue(
+                `   Processing year of ${chalk.yellow(year)} (${chalk.gray(yearId)}) (${chalk.gray(`${index + 1}/${years.length}`)})`,
+            ),
+        );
 
         result[program][year] = {};
 
