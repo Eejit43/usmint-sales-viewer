@@ -1,6 +1,6 @@
 import { existsSync, readdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
-import { ItemsList } from './generate-cumulative-sales-list.js';
+import type { ItemsList } from './generate-cumulative-sales-list.js';
 
 const listFile = Bun.file(path.join('lists', 'cumulative-sales.json'));
 const totalsFile = path.join('lists', 'american-innovation-totals.json');
@@ -86,7 +86,7 @@ if (await listFile.exists()) {
 
     for (const [name, item] of filteredItems) {
         const [, year, amount, stateAbbreviation, mintMark] = [
-            ...name.match(/(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG|)(?: - ([A-Z]{2}))? \((P|D)\)/)!,
+            .../(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG|)(?: - ([A-Z]{2}))? \((P|D)\)/.exec(name)!,
         ];
 
         if (!(year in result)) result[year] = {};
