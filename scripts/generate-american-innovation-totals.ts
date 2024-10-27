@@ -76,6 +76,7 @@ if (await listFile.exists()) {
         soldOut: boolean;
         latestSales?: number[];
     }
+
     type MintMarkIndexedTotals = Record<string, TotalInfo>;
 
     const result: Record<string, Record<string, MintMarkIndexedTotals> | MintMarkIndexedTotals> = {};
@@ -127,9 +128,9 @@ if (await listFile.exists()) {
         else
             for (const [, stateData] of Object.entries(data))
                 for (const [, saleInfo] of Object.entries(stateData as MintMarkIndexedTotals)) {
-                    if ((saleInfo as TotalInfo).latestSales!.every((week) => week < latestWeek)) (saleInfo as TotalInfo).soldOut = true;
+                    if (saleInfo.latestSales!.every((week) => week < latestWeek)) saleInfo.soldOut = true;
 
-                    delete (saleInfo as TotalInfo).latestSales;
+                    delete saleInfo.latestSales;
                 }
 
     Bun.write(totalsFile, JSON.stringify(result, null, 4) + '\n');
