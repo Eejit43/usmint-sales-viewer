@@ -398,7 +398,28 @@
                 "Denver": 180800000
             }
         },
-        "2018": null,
+        "2018": {
+            "Pictured Rocks National Lakeshore MI": {
+                "Philadelphia": 186714000,
+                "Denver": 182600000
+            },
+            "Apostle Islands National Lakeshore WI": {
+                "Philadelphia": 223200000,
+                "Denver": 216600000
+            },
+            "Voyageurs National Park MN": {
+                "Philadelphia": 237400000,
+                "Denver": 197800000
+            },
+            "Cumberland Island National Seashore GA": {
+                "Philadelphia": 138000000,
+                "Denver": 151600000
+            },
+            "Block Island National Wildlife Refuge RI": {
+                "Philadelphia": 159600000,
+                "Denver": 159600000
+            }
+        },
         "2019": {
             "Lowell National Historical Park MA": {
                 "Philadelphia": 165800000,
@@ -661,7 +682,26 @@
                 "Presidential Dollar": 0
             }
         },
-        "2018": null,
+        "2018": {
+            "Philadelphia": {
+                "Penny": 4066800000,
+                "Nickel": 629520000,
+                "Dime": 1193000000,
+                "Quarter": 944914000,
+                "Half Dollar": 4800000,
+                "Native American Dollar": 1400000,
+                "Presidential Dollar": 0
+            },
+            "Denver": {
+                "Penny": 3736400000,
+                "Nickel": 626880000,
+                "Dime": 1006000000,
+                "Quarter": 908200000,
+                "Half Dollar": 6100000,
+                "Native American Dollar": 1400000,
+                "Presidential Dollar": 0
+            }
+        },
         "2019": {
             "Philadelphia": {
                 "Penny": 3542800000,
@@ -722,7 +762,26 @@
                 "Presidential Dollar": 0
             }
         },
-        "2022": null,
+        "2022": {
+            "Philadelphia": {
+                "Penny": 3129200000,
+                "Nickel": 769920000,
+                "Dime": 1551000000,
+                "Quarter": 1274600000,
+                "Half Dollar": 4800000,
+                "Native American Dollar": 980000,
+                "Presidential Dollar": 0
+            },
+            "Denver": {
+                "Penny": 3230400000,
+                "Nickel": 777600000,
+                "Dime": 1583000000,
+                "Quarter": 1293000000,
+                "Half Dollar": 4900000,
+                "Native American Dollar": 980000,
+                "Presidential Dollar": 0
+            }
+        },
         "2023": {
             "Philadelphia": {
                 "Penny": 2262000000,
