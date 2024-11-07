@@ -1,103 +1,175 @@
 import chalk from 'chalk';
-import { parse } from 'node-html-parser';
-import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 
-const rootDataUrl = 'https://www.usmint.gov/about/production-sales-figures/circulating-coins-production';
+const mints = ['Philadelphia', 'Denver'] as const;
 
-const listFile = path.join('lists', 'circulating-coins-production.json');
+const denominations: Record<string, string> = {
+    '1': 'Penny',
+    '5': 'Nickel',
+    '10': 'Dime',
+    '25': 'Quarter',
+    '50': 'Half Dollar',
+    'N.A. $1': 'Native American Dollar', // eslint-disable-line @typescript-eslint/naming-convention
+    'Pres. $1': 'Presidential Dollar', // eslint-disable-line @typescript-eslint/naming-convention
+};
 
-if (existsSync(listFile)) rmSync(listFile);
+const programs = {
+    '50SQ': { name: '50 State Quarters', years: [] }, // eslint-disable-line @typescript-eslint/naming-convention
+    'ATBQ': { name: 'America the Beautiful Quarters', years: [] },
+    // 'AWQS': { name: 'American Women Quarters Series', years: [] },
+    // 'AWQ': { name: 'America Women Quarters', years: [] },
+    'CIRC': { name: 'Circulating Coins', years: [] },
+    'DCTERR': { name: 'District of Columbia and US Territories Quarters', years: [] },
+    'PRESDOLLAR': { name: 'Presidential One Dollar', years: [] },
+    'WJNS': { name: 'Westward Journey Nickel Series', years: [] },
+} as Record<string, { name: string; years: string[] }>;
 
-const processedRootData = parse(await (await fetch(rootDataUrl)).text());
+const csvDataUrl = 'https://www.usmint.gov/content/dam/usmint/csv_data.1.json';
 
-const programSelectElement = processedRootData.querySelector('#program')!;
+const processedCsvData = JSON.parse(await (await fetch(csvDataUrl)).text()) as Record<string, unknown>;
 
-const programs = programSelectElement
-    .querySelectorAll('option')
-    .map((element) => element.getAttribute('value')!)
-    .filter(Boolean);
+for (const csvFileName of Object.keys(processedCsvData)) {
+    if (!csvFileName.includes('-CIRC-')) continue;
 
-const result: Record<string, Record<string, Record<string, Record<string, number>>>> = {};
+    const { program, year } = /\d+?-CIRC-(?<program>\w+)-(?<year>\d{4}).csv/.exec(csvFileName)!.groups as { program: string; year: string };
 
-for (const program of programs) {
-    console.log(chalk.blue(`Procressing the ${chalk.yellow(program)} program`));
+    programs[program].years.push(year);
+}
 
-    result[program] = {};
+for (const value of Object.values(programs)) value.years.sort();
 
-    const programShortName = program.replaceAll(' ', '');
-    const yearSelectElement = processedRootData.getElementById(`${programShortName}years`)!; // eslint-disable-line unicorn/prefer-query-selector
+const result: Record<string, Record<string, Record<string, Record<string, number> | null> | null> | null> = {};
 
-    const years = yearSelectElement
-        .querySelectorAll('option')
-        .map((option) => [option.getAttribute('value')!, option.textContent])
-        .filter(([yearId]) => yearId)
-        .reverse();
+/**
+ * Formats a coin denomination to a standardized name.
+ * @param denomination The denomination to format.
+ */
+function formatDenomination(denomination: string) {
+    denomination = denomination.replace('Cent', '').replace('Pres ', 'Pres. ').trim();
 
-    const reportDirectory = path.join('saved-reports', 'circulating-coins-production', program);
+    if (denomination === '') denomination = '1';
 
-    if (!existsSync(reportDirectory)) mkdirSync(reportDirectory, { recursive: true });
+    return denominations[denomination];
+}
 
-    for (const [index, [yearId, year]] of years.entries()) {
-        console.log(
-            chalk.blue(
-                `   Processing year of ${chalk.yellow(year)} (${chalk.gray(yearId)}) (${chalk.gray(`${index + 1}/${years.length}`)})`,
-            ),
-        );
+/**
+ * Parses a string value representing a coin's mintage into a number.
+ * @param mintage The string value to parse.
+ */
+function parseMintage(mintage: string) {
+    mintage = mintage.replace(/ ?M/, '').replaceAll('Ω', '');
 
-        result[program][year] = {};
+    let parsedMintage = Number.parseFloat(mintage);
 
-        const savedReportFile = Bun.file(path.join(reportDirectory, `${yearId}.html`));
+    if (parsedMintage < 10_000) parsedMintage *= 1_000_000;
 
-        let dataTable;
+    return Math.round(parsedMintage);
+}
+
+for (const [programId, { name: programName, years: programYears }] of Object.entries(programs)) {
+    console.log(chalk.blue(`Procressing the ${chalk.yellow(programName)} program`));
+
+    result[programName] = {};
+
+    const reportDirectory = path.join('saved-reports', 'circulating-coins-production', programName);
+
+    for (const [yearIndex, year] of programYears.entries()) {
+        console.log(chalk.blue(`   Processing year of ${chalk.yellow(year)} (${chalk.gray(`${yearIndex + 1}/${programYears.length}`)})`));
+
+        result[programName][year] = {};
+
+        const savedReportFile = Bun.file(path.join(reportDirectory, `${year}.json`));
+
+        /* eslint-disable @typescript-eslint/naming-convention */
+        type ProductionData =
+            | {
+                  'Design'?: string;
+                  'President'?: string;
+                  'AWQ Quarter'?: string;
+                  'Denver': string;
+                  'Philadelphia': string;
+                  'Total': string;
+              }[]
+            | { ''?: string; 'Denomination/ Mint'?: string }[];
+        /* eslint-enable @typescript-eslint/naming-convention */
+
+        let productionData: ProductionData;
         if (await savedReportFile.exists()) {
             console.log(chalk.green('      Using saved report file'));
-            dataTable = parse(await savedReportFile.text());
+            productionData = JSON.parse(await savedReportFile.text()) as ProductionData;
         } else {
-            const dataUrl = new URL(rootDataUrl);
-            dataUrl.searchParams.set('program', program);
-            dataUrl.searchParams.set(`${programShortName}years`, yearId.toString());
+            const dataUrl = new URL('https://www.usmint.gov/bin/usmint/psd');
+            dataUrl.searchParams.set('path', '/content/dam/usmint/csv_data');
+            dataUrl.searchParams.set('program', programId);
+            dataUrl.searchParams.set('year', year);
 
-            const processedData = parse(await (await fetch(dataUrl.toString())).text());
+            const processedData = JSON.parse(await (await fetch(dataUrl.toString())).text()) as ProductionData;
 
-            dataTable = processedData.querySelector('table');
+            productionData = processedData;
 
-            if (!dataTable) {
-                console.error('      Could not find data table!');
-
-                continue;
-            }
-
-            const text = dataTable.outerHTML.replaceAll(/ ?(id|class)=".*?"/g, '').replaceAll(/\n\t?/g, '') + '\n';
-
-            await Bun.write(savedReportFile, text);
+            await Bun.write(savedReportFile, JSON.stringify(processedData));
         }
 
-        let headers = dataTable.querySelectorAll('thead th').map((element) => element.textContent.trim());
-        headers = headers.slice(1, -1);
+        for (const [designIndex, designData] of productionData.entries())
+            if ('Design' in designData || 'President' in designData || 'AWQ Quarter' in designData) {
+                if (
+                    designData.Design === 'Total' ||
+                    designData.Design === '' ||
+                    designData.Design === 'Grand Total:' ||
+                    designData.President === 'Total' ||
+                    designData.President === year
+                )
+                    continue;
 
-        const rows = dataTable.querySelectorAll('tbody tr');
+                const normalizedDesign =
+                    'President' in designData
+                        ? designData.President!
+                        : (designData.Design?.replaceAll('Ω', ',') ?? designData['AWQ Quarter']!);
 
-        for (const row of rows) {
-            let columns = row.querySelectorAll('td').map((element) => element.textContent.trim());
+                result[programName][year][normalizedDesign] = {};
 
-            if (['', year, 'Total', 'Total:', 'Grand Total:'].includes(columns[0])) continue;
+                for (const mint of mints)
+                    if (designData[mint]) result[programName][year][normalizedDesign][mint] = parseMintage(designData[mint]);
 
-            const columnName = columns[0];
+                if (Object.keys(result[programName][year][normalizedDesign]).length === 0)
+                    result[programName][year][normalizedDesign] = null;
+            } else if ('' in designData || 'Denomination/ Mint' in designData) {
+                const mint = designData['']! ?? designData['Denomination/ Mint']!;
 
-            result[program][year][columnName] = {};
+                if (!mints.includes(mint as (typeof mints)[number])) continue;
 
-            columns = columns.slice(1, -1);
+                const denominationSales = Object.entries(designData)
+                    .filter(([key]) => !['', 'Denomination/ Mint', 'Total:'].includes(key))
+                    .map(([denomination, mintage]) => [formatDenomination(denomination), parseMintage(mintage)]);
 
-            for (const [index, column] of columns.entries()) {
-                const value = column.replaceAll(',', '');
+                result[programName][year][mint] = Object.fromEntries(denominationSales) as Record<string, number>;
 
-                const parsedValue = value.endsWith('M') ? Number.parseFloat(value.replace(/ ?M/, '')) * 1_000_000 : Number.parseInt(value);
+                if (designIndex !== 0)
+                    result[programName][year] = {
+                        Philadelphia: result[programName][year].Philadelphia, // eslint-disable-line @typescript-eslint/naming-convention
+                        Denver: result[programName][year].Denver, // eslint-disable-line @typescript-eslint/naming-convention
+                    };
+            } else
+                console.log(
+                    chalk.red(
+                        `      Unknown and unparsable data structure at index ${chalk.gray(`${designIndex}/${productionData.length - 1}`)}`,
+                    ),
+                );
 
-                result[program][year][columnName][headers[index].replaceAll(/\s{2,}/g, ' ')] = parsedValue;
-            }
-        }
+        if (
+            Object.keys(result[programName][year]).length === 0 ||
+            Object.values(result[programName][year]).every((mintageData) => mintageData === null)
+        )
+            result[programName][year] = null;
+    }
+
+    if (Object.keys(result[programName]).length === 0) {
+        console.log(chalk.red('   No data found'));
+
+        result[programName] = null;
     }
 }
+
+const listFile = path.join('lists', 'circulating-coins-production.json');
 
 await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');
