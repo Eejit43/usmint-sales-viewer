@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import path from 'node:path';
 
-export type ItemsList = Record<string, { id: string; program: string; sales: number; firstSeen: string; latestData: string }>;
+export type ItemsList = Record<string, { name: string; program: string; sales: number; firstSeen: string; latestData: string }>;
 
 const csvDataUrl = 'https://www.usmint.gov/content/dam/usmint/csv_data.1.json';
 
@@ -103,12 +103,12 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
 
         if (!parsedName) continue;
 
-        if (parsedName in result) {
-            result[parsedName].sales = parsedSales;
-            result[parsedName].latestData = latestData;
+        if (id in result) {
+            result[id].sales = parsedSales;
+            result[id].latestData = latestData;
         } else
-            result[parsedName] = {
-                id,
+            result[id] = {
+                name: parsedName,
                 program: parsedProgram,
                 sales: parsedSales,
                 firstSeen: latestData,

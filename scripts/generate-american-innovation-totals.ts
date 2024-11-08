@@ -81,13 +81,13 @@ if (await salesFile.exists()) {
 
     const result: Record<string, Record<string, MintMarkIndexedTotals> | MintMarkIndexedTotals> = {};
 
-    const filteredItems = Object.entries(listFileContent).filter(
-        ([name, item]) => name.includes('AI $1') && item.program === 'Rolls & Bags & Boxes',
+    const filteredItems = Object.values(listFileContent).filter(
+        ({ name, program }) => name.includes('AI $1') && program === 'Rolls & Bags & Boxes',
     );
 
-    for (const [name, item] of filteredItems) {
+    for (const item of filteredItems) {
         const [, year, amount, stateAbbreviation, mintMark] = [
-            .../(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG|)(?: - ([A-Z]{2}))? \((P|D)\)/.exec(name)!,
+            .../(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG|)(?: - ([A-Z]{2}))? \((P|D)\)/.exec(item.name)!,
         ];
 
         const mint = mints[mintMark];
