@@ -1,144 +1,122 @@
 import chalk from 'chalk';
-import { parse } from 'node-html-parser';
-import { existsSync, mkdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 
-export type ItemsList = Record<
-    string,
-    {
-        itemId: string;
-        programName: string;
-        totalSold: number;
-        firstSeen: { year: number; week: number };
-        latestSaleData: { year: number; week: number };
-    }
->;
+export type ItemsList = Record<string, { id: string; program: string; sales: number; firstSeen: string; latestData: string }>;
 
-const rootSalesUrl = 'https://www.usmint.gov/about/production-sales-figures/cumulative-sales';
+const csvDataUrl = 'https://www.usmint.gov/content/dam/usmint/csv_data.1.json';
+
+const processedCsvData = JSON.parse(await (await fetch(csvDataUrl)).text()) as Record<string, unknown>;
+
+const datesSet = new Set<string>();
+
+const dates = Object.keys(processedCsvData)
+    .filter((fileName) => fileName.includes('CUM'))
+    .map((fileName) => {
+        const { date, year, month, day } = /(\d+?-)?CUM.*-(?<date>(?<year>\d{4})-(?<month>\d{1,2})([\d.-])(?<day>\d{1,2})).csv$/.exec(
+            fileName,
+        )!.groups as {
+            date: string;
+            year: string;
+            month: string;
+            day: string;
+        };
+
+        return { date: new Date(Number.parseInt(year), Number.parseInt(month) - 1, Number.parseInt(day)), id: date };
+    })
+    .filter(({ id }) => !datesSet.has(id) && datesSet.add(id))
+    .sort((a, b) => a.date.getTime() - b.date.getTime());
+
+const reportDirectory = path.join('saved-reports', 'cumulative-sales');
+
+const result: ItemsList = {};
+
+const ignoredDates = new Set(['2017-11020', '2020-03.01', '2020-03.08', '2020-3-15', '2020-05-3']);
+
+for (const [index, { date, id: dateId }] of dates.entries()) {
+    if (ignoredDates.has(dateId)) continue;
+
+    console.log(
+        chalk.blue(
+            `Processing week of ${chalk.yellow(
+                date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }),
+            )} (${chalk.gray(dateId)}) (${chalk.gray(`${index + 1}/${dates.length}`)})`,
+        ),
+    );
+
+    const savedReportFile = Bun.file(
+        path.join(reportDirectory, date.getFullYear().toString(), (date.getMonth() + 1).toString(), date.getDate().toString() + '.json'),
+    );
+
+    /* eslint-disable @typescript-eslint/naming-convention */
+    type SalesData =
+        | {
+              'Program Name': string;
+              'Item': string;
+              'Item Description': string;
+              'Adj. Net Demand'?: string;
+              'Adj Net Demand'?: string;
+              'Date Sales Report is Valid': string;
+          }[]
+        | {
+              'Program': string;
+              'Program Item': string;
+              'Product': string;
+              'Sales to Date': string;
+              'Sales Reporting Date': string;
+          }[];
+    /* eslint-enable @typescript-eslint/naming-convention */
+
+    let salesData: SalesData;
+    if (await savedReportFile.exists()) {
+        console.log(chalk.green('   Using saved report file'));
+        salesData = JSON.parse(await savedReportFile.text()) as SalesData;
+    } else {
+        const dataUrl = new URL('https://www.usmint.gov/bin/usmint/psd');
+        dataUrl.searchParams.set('path', '/content/dam/usmint/csv_data');
+        dataUrl.searchParams.set('date', dateId);
+
+        const processedData = JSON.parse(await (await fetch(dataUrl.toString())).text()) as SalesData;
+
+        salesData = processedData;
+
+        await Bun.write(savedReportFile, JSON.stringify(processedData));
+    }
+
+    for (const item of salesData) {
+        let id, name, sales, program;
+        if ('Item Description' in item) {
+            id = item.Item;
+            name = item['Item Description'];
+            sales = item['Adj. Net Demand'] ?? item['Adj Net Demand']!;
+            program = item['Program Name'];
+        } else {
+            id = item['Program Item'];
+            name = item.Product;
+            sales = item['Sales to Date'];
+            program = item.Program;
+        }
+
+        const parsedName = name.replaceAll(/ {2,}/g, ' ').replaceAll('&amp;', '&');
+        const parsedSales = Number.parseInt(sales.replaceAll('Ω', ''));
+        const parsedProgram = program.replaceAll('&amp;', '&');
+        const latestData = date.toLocaleDateString();
+
+        if (!parsedName) continue;
+
+        if (parsedName in result) {
+            result[parsedName].sales = parsedSales;
+            result[parsedName].latestData = latestData;
+        } else
+            result[parsedName] = {
+                id,
+                program: parsedProgram,
+                sales: parsedSales,
+                firstSeen: latestData,
+                latestData,
+            };
+    }
+}
 
 const listFile = path.join('lists', 'cumulative-sales.json');
 
-await generateItemsList(process.argv[2] ? Number.parseInt(process.argv[2]) : 'all');
-
-/**
- * Generates an item list for a given year, or all years.
- * @param year The year to fetch data for, or "all".
- */
-async function generateItemsList(year: number | 'all') {
-    const reportDirectory = path.join('saved-reports', 'cumulative-sales', year.toString());
-
-    if (year === 'all') {
-        if (existsSync(listFile)) rmSync(listFile);
-
-        const currentYear = new Date().getFullYear();
-        const startYear = 2015;
-
-        const years = Array.from({ length: currentYear - startYear + 1 }).map((value, index) => startYear + index);
-
-        for (const year of years) await generateItemsList(year);
-
-        return;
-    }
-
-    const processedRootSalesDirectory = parse(await (await fetch(rootSalesUrl)).text());
-
-    const selectElement = processedRootSalesDirectory.querySelector(`#${year}weeks`);
-    if (!selectElement) return console.error(`Could not find data for year ${year}!`);
-
-    if (!existsSync(reportDirectory)) mkdirSync(reportDirectory, { recursive: true });
-
-    const itemsListFile = Bun.file(listFile);
-
-    const result = (await itemsListFile.exists()) ? ((await itemsListFile.json()) as ItemsList) : {};
-
-    const optionElements = selectElement.querySelectorAll('option');
-
-    const weeks = optionElements
-        .map((option) => [Number.parseInt(option.getAttribute('value')!), option.textContent.trim()] as [number, string])
-        .filter(([week]) => week)
-        .reverse();
-
-    for (const [index, [week, weekName]] of weeks.entries()) {
-        console.log(
-            chalk.blue(
-                `Processing week of ${chalk.yellow(weekName)} (${chalk.gray(week)}) (${chalk.gray(`${index + 1}/${weeks.length}`)})`,
-            ),
-        );
-
-        if (week === 1310) {
-            console.log(chalk.red("   This week's data is ignored!"));
-
-            continue;
-        }
-
-        const savedReportFile = Bun.file(path.join(reportDirectory, `${week}.html`));
-
-        let dataTable;
-        if (await savedReportFile.exists()) {
-            console.log(chalk.green('   Using saved report file'));
-            dataTable = parse(await savedReportFile.text());
-        } else {
-            const dataUrl = new URL(rootSalesUrl);
-            dataUrl.searchParams.set('years', year.toString());
-            dataUrl.searchParams.set(`${year}weeks`, week.toString());
-
-            const processedData = parse(await (await fetch(dataUrl.toString())).text());
-
-            dataTable = processedData.querySelector('table');
-
-            if (!dataTable) return console.error('   Could not find data table, stopping process (are you being rate limited?)');
-
-            const text = dataTable.outerHTML.replaceAll(/ ?(id|class)=".*?"/g, '').replaceAll(/\n\t?/g, '') + '\n';
-
-            await Bun.write(savedReportFile, text);
-
-            await new Promise((resolve) => setTimeout(resolve, 250));
-        }
-
-        const headers = dataTable.querySelectorAll('thead th');
-
-        const hasExtraNameColumn = headers[1].textContent === 'Program Name';
-        if (hasExtraNameColumn) console.log(chalk.yellow('   There is an extra "Program Name" column, the first will be ignored'));
-
-        let extraColumnsAmount = headers.length - 5;
-        if (hasExtraNameColumn) extraColumnsAmount--;
-
-        if (extraColumnsAmount > 0)
-            console.log(
-                chalk.yellow(
-                    `   There ${extraColumnsAmount === 1 ? `is ${extraColumnsAmount} extra column, it` : `are ${extraColumnsAmount} extra columns, they`} will be ignored`,
-                ),
-            );
-
-        const rows = dataTable.querySelectorAll('tbody tr');
-
-        for (const [index, row] of rows.entries()) {
-            let columns = row.querySelectorAll('td').map((column) => column.textContent.trim());
-
-            if (hasExtraNameColumn) columns.shift();
-
-            columns = columns.slice(0, 5);
-
-            if (columns.length !== 5) {
-                console.log(
-                    chalk.yellow(`   Unexpected column count for row ${index + 1}/${rows.length} (${columns.length}), skipping row`),
-                );
-
-                continue;
-            }
-
-            const [programName, itemId, itemName, totalSold] = columns;
-
-            const itemNameParsed = itemName.replaceAll(/ {2,}/g, ' ');
-            const totalSoldParsed = Number.parseInt(totalSold.replaceAll(',', ''));
-            const latestSaleData = { year, week };
-
-            if (itemNameParsed in result) {
-                result[itemNameParsed].totalSold = totalSoldParsed;
-                result[itemNameParsed].latestSaleData = latestSaleData;
-            } else result[itemNameParsed] = { itemId, programName, totalSold: totalSoldParsed, firstSeen: latestSaleData, latestSaleData };
-        }
-    }
-
-    return await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');
-}
+await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');

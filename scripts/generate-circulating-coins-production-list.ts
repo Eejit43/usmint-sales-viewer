@@ -28,10 +28,10 @@ const csvDataUrl = 'https://www.usmint.gov/content/dam/usmint/csv_data.1.json';
 
 const processedCsvData = JSON.parse(await (await fetch(csvDataUrl)).text()) as Record<string, unknown>;
 
-for (const csvFileName of Object.keys(processedCsvData)) {
-    if (!csvFileName.includes('-CIRC-')) continue;
+for (const fileName of Object.keys(processedCsvData)) {
+    if (!fileName.includes('-CIRC-')) continue;
 
-    const { program, year } = /\d+?-CIRC-(?<program>\w+)-(?<year>\d{4}).csv/.exec(csvFileName)!.groups as { program: string; year: string };
+    const { program, year } = /\d+?-CIRC-(?<program>\w+)-(?<year>\d{4}).csv/.exec(fileName)!.groups as { program: string; year: string };
 
     programs[program].years.push(year);
 }

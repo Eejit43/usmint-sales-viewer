@@ -1,11 +1,10 @@
-import { existsSync, readdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import type { ItemsList } from './generate-cumulative-sales-list.js';
 
-const listFile = Bun.file(path.join('lists', 'cumulative-sales.json'));
+const salesFile = Bun.file(path.join('lists', 'cumulative-sales.json'));
 const totalsFile = path.join('lists', 'american-innovation-totals.json');
 
-const stateNames: Record<string, string> = {
+const stateTerritoryNames: Record<string, string> = {
     AL: 'Alabama',
     AK: 'Alaska',
     AS: 'American Samoa',
@@ -28,7 +27,6 @@ const stateNames: Record<string, string> = {
     KY: 'Kentucky',
     LA: 'Louisiana',
     ME: 'Maine',
-    MH: 'Marshall Islands',
     MD: 'Maryland',
     MA: 'Massachusetts',
     MI: 'Michigan',
@@ -48,7 +46,6 @@ const stateNames: Record<string, string> = {
     OH: 'Ohio',
     OK: 'Oklahoma',
     OR: 'Oregon',
-    PW: 'Palau',
     PA: 'Pennsylvania',
     PR: 'Puerto Rico',
     RI: 'Rhode Island',
@@ -66,15 +63,18 @@ const stateNames: Record<string, string> = {
     WY: 'Wyoming',
 };
 
-if (await listFile.exists()) {
-    const listFileContent = (await listFile.json()) as ItemsList;
+const mints: Record<string, string> = {
+    P: 'Philadelphia',
+    D: 'Denver',
+};
 
-    if (existsSync(totalsFile)) rmSync(totalsFile);
+if (await salesFile.exists()) {
+    const listFileContent = (await salesFile.json()) as ItemsList;
 
     interface TotalInfo {
         total: number;
         soldOut: boolean;
-        latestSales?: number[];
+        latestSales?: string[];
     }
 
     type MintMarkIndexedTotals = Record<string, TotalInfo>;
@@ -82,7 +82,7 @@ if (await listFile.exists()) {
     const result: Record<string, Record<string, MintMarkIndexedTotals> | MintMarkIndexedTotals> = {};
 
     const filteredItems = Object.entries(listFileContent).filter(
-        ([name, item]) => name.includes('AI $1') && item.programName === 'Rolls & Bags & Boxes',
+        ([name, item]) => name.includes('AI $1') && item.program === 'Rolls & Bags & Boxes',
     );
 
     for (const [name, item] of filteredItems) {
@@ -90,45 +90,41 @@ if (await listFile.exists()) {
             .../(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG|)(?: - ([A-Z]{2}))? \((P|D)\)/.exec(name)!,
         ];
 
+        const mint = mints[mintMark];
+
         if (!(year in result)) result[year] = {};
 
         if (stateAbbreviation) {
-            const stateName = stateNames[stateAbbreviation] ?? stateAbbreviation;
+            const stateName = stateTerritoryNames[stateAbbreviation] ?? stateAbbreviation;
 
             if (!(stateName in result[year])) result[year][stateName] = {};
 
-            if (!(mintMark in result[year][stateName]))
-                (result[year][stateName] as MintMarkIndexedTotals)[mintMark] = { total: 0, soldOut: false, latestSales: [] };
+            if (!(mint in result[year][stateName]))
+                (result[year][stateName] as MintMarkIndexedTotals)[mint] = { total: 0, soldOut: false, latestSales: [] };
 
-            (result[year][stateName] as MintMarkIndexedTotals)[mintMark].total += item.totalSold * Number.parseInt(amount);
-            (result[year][stateName] as MintMarkIndexedTotals)[mintMark].latestSales!.push(item.latestSaleData.week);
+            (result[year][stateName] as MintMarkIndexedTotals)[mint].total += item.sales * Number.parseInt(amount);
+            (result[year][stateName] as MintMarkIndexedTotals)[mint].latestSales!.push(item.latestData);
         } else {
-            if (!(mintMark in result[year])) result[year][mintMark] = { total: 0, soldOut: false, latestSales: [] };
+            if (!(mint in result[year])) result[year][mint] = { total: 0, soldOut: false, latestSales: [] };
 
-            (result[year] as MintMarkIndexedTotals)[mintMark].total += item.totalSold * Number.parseInt(amount);
-            (result[year] as MintMarkIndexedTotals)[mintMark].latestSales!.push(item.latestSaleData.week);
+            (result[year] as MintMarkIndexedTotals)[mint].total += item.sales * Number.parseInt(amount);
+            (result[year] as MintMarkIndexedTotals)[mint].latestSales!.push(item.latestData);
         }
     }
 
-    let latestYear = 0;
-    const years = readdirSync(path.join('saved-reports', 'cumulative-sales'));
-    for (const year of years) if (latestYear < Number.parseInt(year)) latestYear = Number.parseInt(year);
+    const lastSaleDataDate = Object.values(listFileContent).at(-1)!.latestData;
 
-    let latestWeek = 0;
-    const weeks = readdirSync(path.join('saved-reports', 'cumulative-sales', latestYear.toString()));
-    for (const week of weeks) if (latestWeek < Number.parseInt(week) && Number.parseInt(week)) latestWeek = Number.parseInt(week);
-
-    for (const [, data] of Object.entries(result))
+    for (const data of Object.values(result))
         if ('latestSales' in Object.values(data)[0])
             for (const [, saleInfo] of Object.entries(data)) {
-                if ((saleInfo as TotalInfo).latestSales!.every((week) => week < latestWeek)) (saleInfo as TotalInfo).soldOut = true;
+                if ((saleInfo as TotalInfo).latestSales!.every((week) => week !== lastSaleDataDate)) (saleInfo as TotalInfo).soldOut = true;
 
                 delete (saleInfo as TotalInfo).latestSales;
             }
         else
             for (const [, stateData] of Object.entries(data))
                 for (const [, saleInfo] of Object.entries(stateData as MintMarkIndexedTotals)) {
-                    if (saleInfo.latestSales!.every((week) => week < latestWeek)) saleInfo.soldOut = true;
+                    if (saleInfo.latestSales!.every((week) => week !== lastSaleDataDate)) saleInfo.soldOut = true;
 
                     delete saleInfo.latestSales;
                 }
