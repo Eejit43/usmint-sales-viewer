@@ -96,7 +96,11 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
             program = item.Program;
         }
 
-        const parsedName = name.replaceAll(/ {2,}/g, ' ').replaceAll('&amp;', '&');
+        const parsedName = name
+            .replaceAll('&amp;', '&')
+            .replaceAll('–', '-')
+            .replaceAll(/[^\w $&()+./Š-]/g, '')
+            .replaceAll(/ {2,}/g, ' ');
         const parsedSales = Number.parseInt(sales.replaceAll('Ω', ''));
         const parsedProgram = program.replaceAll('&amp;', '&');
         const latestData = date.toLocaleDateString();
