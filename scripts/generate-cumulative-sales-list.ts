@@ -3,9 +3,13 @@ import path from 'node:path';
 
 export type ItemsList = Record<string, { name: string; program: string; sales: number; firstSeen: string; latestData: string }>;
 
-const csvDataUrl = 'https://www.usmint.gov/content/dam/usmint/csv_data.1.json';
+const tokenResponse = await fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
 
-const processedCsvData = JSON.parse(await (await fetch(csvDataUrl)).text()) as Record<string, unknown>;
+const cookies = tokenResponse.headers.getSetCookie();
+
+const processedCsvData = (await (
+    await fetch('https://www.usmint.gov/content/dam/usmint/csv_data.1.json', { headers: { cookie: cookies } })
+).json()) as Record<string, unknown>;
 
 const datesSet = new Set<string>();
 
@@ -50,7 +54,9 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
     /* eslint-disable @typescript-eslint/naming-convention */
     type SalesData =
         | {
-              'Program Name': string;
+              'Program Name'?: string;
+              ''?: string; // Program Name error value
+              '﻿Program Name'?: string; // Program Name error value
               'Item': string;
               'Item Description': string;
               'Adj. Net Demand'?: string;
@@ -88,7 +94,7 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
             id = item.Item;
             name = item['Item Description'];
             sales = item['Adj. Net Demand'] ?? item['Adj Net Demand']!;
-            program = item['Program Name'];
+            program = item['Program Name'] ?? item[''] ?? item['﻿Program Name']!;
         } else {
             id = item['Program Item'];
             name = item.Product;

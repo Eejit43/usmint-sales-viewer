@@ -541,6 +541,34 @@
             }
         }
     },
+    "American Women Quarters": {
+        "2024": {
+            "Pauli Murray": {
+                "Philadelphia": 168400000,
+                "Denver": 185800000
+            },
+            "Patsy Mink": {
+                "Philadelphia": 210200000,
+                "Denver": 187200000
+            },
+            "Dr Mary Edwars Walker": {
+                "Philadelphia": 141200000,
+                "Denver": 159400000
+            },
+            "Celia Cruz": {
+                "Philadelphia": 149600000,
+                "Denver": 156200000
+            },
+            "Zikata-Sa": {
+                "Philadelphia": 152600000,
+                "Denver": 152400000
+            },
+            "Total": {
+                "Philadelphia": 822000000,
+                "Denver": 841000000
+            }
+        }
+    },
     "Circulating Coins": {
         "2011": {
             "Philadelphia": {

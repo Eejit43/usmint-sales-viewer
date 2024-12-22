@@ -13,20 +13,25 @@ const denominations: Record<string, string> = {
     'Pres. $1': 'Presidential Dollar', // eslint-disable-line @typescript-eslint/naming-convention
 };
 
-const programs = {
+const programs: Record<string, { name: string; years: string[] }> = {
     '50SQ': { name: '50 State Quarters', years: [] }, // eslint-disable-line @typescript-eslint/naming-convention
     'ATBQ': { name: 'America the Beautiful Quarters', years: [] },
-    // 'AWQS': { name: 'American Women Quarters Series', years: [] },
-    // 'AWQ': { name: 'America Women Quarters', years: [] },
+    'AWQS': { name: 'American Women Quarters', years: [] },
     'CIRC': { name: 'Circulating Coins', years: [] },
     'DCTERR': { name: 'District of Columbia and US Territories Quarters', years: [] },
     'PRESDOLLAR': { name: 'Presidential One Dollar', years: [] },
     'WJNS': { name: 'Westward Journey Nickel Series', years: [] },
-} as Record<string, { name: string; years: string[] }>;
+};
 
-const csvDataUrl = 'https://www.usmint.gov/content/dam/usmint/csv_data.1.json';
+const programNameOverrides: Record<string, string> = { AWQ: 'AWQS' };
 
-const processedCsvData = JSON.parse(await (await fetch(csvDataUrl)).text()) as Record<string, unknown>;
+const tokenResponse = await fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
+
+const cookies = tokenResponse.headers.getSetCookie();
+
+const processedCsvData = (await (
+    await fetch('https://www.usmint.gov/content/dam/usmint/csv_data.1.json', { headers: { cookie: cookies } })
+).json()) as Record<string, unknown>;
 
 for (const fileName of Object.keys(processedCsvData)) {
     if (!fileName.includes('-CIRC-')) continue;
@@ -100,7 +105,7 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
         } else {
             const dataUrl = new URL('https://www.usmint.gov/bin/usmint/psd');
             dataUrl.searchParams.set('path', '/content/dam/usmint/csv_data');
-            dataUrl.searchParams.set('program', programId);
+            dataUrl.searchParams.set('program', programNameOverrides[programId] ?? programId);
             dataUrl.searchParams.set('year', year);
 
             const processedData = JSON.parse(await (await fetch(dataUrl.toString())).text()) as ProductionData;
