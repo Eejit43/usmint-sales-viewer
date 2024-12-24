@@ -1,17 +1,12 @@
 // @ts-check
 
 import sharedConfig from '@eejit/eslint-config-typescript';
+import typescriptEslint from 'typescript-eslint';
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-    ...sharedConfig,
-    {
-        languageOptions: {
-            parserOptions: { project: ['./tsconfig.json'] },
-        },
-        rules: {
-            'no-await-in-loop': 'off',
-            'no-console': 'off',
-        },
+export default typescriptEslint.config(sharedConfig, {
+    languageOptions: { parserOptions: { project: ['./tsconfig.json'] } },
+    rules: {
+        'no-await-in-loop': 'off',
+        'no-console': 'off',
     },
-];
+});
