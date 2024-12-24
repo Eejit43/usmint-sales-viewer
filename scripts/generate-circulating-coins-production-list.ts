@@ -139,7 +139,7 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
                 if (Object.keys(result[programName][year][normalizedDesign]).length === 0)
                     result[programName][year][normalizedDesign] = null;
             } else if ('' in designData || 'Denomination/ Mint' in designData) {
-                const mint = designData['']! ?? designData['Denomination/ Mint']!;
+                const mint = designData[''] ?? designData['Denomination/ Mint']!;
 
                 if (!mints.includes(mint as (typeof mints)[number])) continue;
 

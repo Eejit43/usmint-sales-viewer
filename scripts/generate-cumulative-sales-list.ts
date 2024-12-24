@@ -11,7 +11,7 @@ const processedCsvData = (await (
     await fetch('https://www.usmint.gov/content/dam/usmint/csv_data.1.json', { headers: { cookie: cookies } })
 ).json()) as Record<string, unknown>;
 
-const datesSet = new Set<string>();
+const processedDates = new Set<string>();
 
 const dates = Object.keys(processedCsvData)
     .filter((fileName) => fileName.includes('CUM'))
@@ -27,7 +27,13 @@ const dates = Object.keys(processedCsvData)
 
         return { date: new Date(Number.parseInt(year), Number.parseInt(month) - 1, Number.parseInt(day)), id: date };
     })
-    .filter(({ id }) => !datesSet.has(id) && datesSet.add(id))
+    .filter(({ id }) => {
+        if (processedDates.has(id)) return false;
+
+        processedDates.add(id);
+
+        return true;
+    })
     .sort((a, b) => a.date.getTime() - b.date.getTime());
 
 const reportDirectory = path.join('saved-reports', 'cumulative-sales');

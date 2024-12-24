@@ -129,5 +129,5 @@ if (await salesFile.exists()) {
                     delete saleInfo.latestSales;
                 }
 
-    Bun.write(totalsFile, JSON.stringify(result, null, 4) + '\n');
+    void Bun.write(totalsFile, JSON.stringify(result, null, 4) + '\n');
 } else console.error('Cumulative sales data does not exist, generate that first!');
