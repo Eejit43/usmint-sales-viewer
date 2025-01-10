@@ -13,6 +13,18 @@ const denominations: Record<string, string> = {
     'Pres. $1': 'Presidential Dollar', // eslint-disable-line @typescript-eslint/naming-convention
 };
 
+const alternativeDenominationNames: Record<string, string> = {
+    /* eslint-disable @typescript-eslint/naming-convention */
+    'Lincoln': '1',
+    'Jefferson': '5',
+    'Roosevelt': '10',
+    'Quarter': '25',
+    'Kennedy': '50',
+    'Native American': 'N.A. $1',
+    'Presidential': 'Pres. $1',
+    /* eslint-enable @typescript-eslint/naming-convention */
+};
+
 const programs: Record<string, { name: string; years: string[] }> = {
     '50SQ': { name: '50 State Quarters', years: [] }, // eslint-disable-line @typescript-eslint/naming-convention
     'ATBQ': { name: 'America the Beautiful Quarters', years: [] },
@@ -95,6 +107,7 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
                   'Philadelphia': string;
                   'Total': string;
               }[]
+            | { Denomination: string; Denver: string; Philadelphia: string; Total: string }[]
             | { ''?: string; 'Denomination/ Mint'?: string }[];
         /* eslint-enable @typescript-eslint/naming-convention */
 
@@ -140,6 +153,21 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
 
                 if (Object.keys(result[programName][year][normalizedDesign]).length === 0)
                     result[programName][year][normalizedDesign] = null;
+            } else if ('Denomination' in designData) {
+                if (designData.Denomination === 'Total') continue;
+
+                let parsedDenomination = designData.Denomination;
+
+                for (const [name, value] of Object.entries(alternativeDenominationNames))
+                    if (designData.Denomination.includes(name)) parsedDenomination = formatDenomination(value);
+
+                if (!(year in result[programName])) result[programName][year] = {};
+
+                for (const mint of mints) {
+                    if (!(mint in result[programName][year])) result[programName][year][mint] = {};
+
+                    result[programName][year][mint]![parsedDenomination] = parseMintage(designData[mint]);
+                }
             } else if ('' in designData || 'Denomination/ Mint' in designData) {
                 const mint = designData[''] ?? designData['Denomination/ Mint']!;
 

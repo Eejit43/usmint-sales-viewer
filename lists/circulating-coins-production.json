@@ -523,35 +523,25 @@
                 "Philadelphia": 210200000,
                 "Denver": 187200000
             },
-            "Dr Mary Edwars Walker": {
+            "Dr. Mary Edwards Walker": {
                 "Philadelphia": 141200000,
                 "Denver": 159400000
             },
-            "Celia Cruz": {
-                "Philadelphia": 149600000,
-                "Denver": 156200000
-            },
-            "Zikala-Ša": {
-                "Philadelphia": 2600000,
-                "Denver": 2400000
-            },
-            "Total": {
-                "Philadelphia": 672000000,
-                "Denver": 691000000
-            }
+            "Celia Cruz": null,
+            "Zikata-Sa": null
         }
     },
     "American Women Quarters": {
         "2024": {
-            "Pauli Murray": {
+            "Rev. Dr. Pauli Murray": {
                 "Philadelphia": 168400000,
                 "Denver": 185800000
             },
-            "Patsy Mink": {
+            "Patsy Takemoto Mink": {
                 "Philadelphia": 210200000,
                 "Denver": 187200000
             },
-            "Dr Mary Edwars Walker": {
+            "Dr. Mary Edwards Walker": {
                 "Philadelphia": 141200000,
                 "Denver": 159400000
             },
@@ -559,13 +549,13 @@
                 "Philadelphia": 149600000,
                 "Denver": 156200000
             },
-            "Zikata-Sa": {
+            "Zitkala-Sa": {
                 "Philadelphia": 152600000,
-                "Denver": 152400000
+                "Denver": 170200000
             },
             "Total": {
                 "Philadelphia": 822000000,
-                "Denver": 841000000
+                "Denver": 858800000
             }
         }
     },
@@ -832,20 +822,20 @@
         },
         "2024": {
             "Philadelphia": {
-                "Penny": 734800000,
-                "Nickel": 36720000,
-                "Dime": 92500000,
-                "Quarter": 525000000,
-                "Half Dollar": 9900000,
+                "Penny": 1712000000,
+                "Nickel": 79920000,
+                "Dime": 307000000,
+                "Quarter": 822000000,
+                "Half Dollar": 15700000,
                 "Native American Dollar": 1120000,
                 "Presidential Dollar": 0
             },
             "Denver": {
-                "Penny": 780400000,
+                "Penny": 1513200000,
                 "Nickel": 32880000,
-                "Dime": 138000000,
-                "Quarter": 537200000,
-                "Half Dollar": 11600000,
+                "Dime": 248000000,
+                "Quarter": 858800000,
+                "Half Dollar": 21900000,
                 "Native American Dollar": 1120000,
                 "Presidential Dollar": 0
             }
