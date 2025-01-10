@@ -108,7 +108,9 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
             dataUrl.searchParams.set('program', programNameOverrides[programId] ?? programId);
             dataUrl.searchParams.set('year', year);
 
-            const processedData = JSON.parse(await (await fetch(dataUrl.toString())).text()) as ProductionData;
+            const processedData = JSON.parse(
+                await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).text(),
+            ) as ProductionData;
 
             productionData = processedData;
 

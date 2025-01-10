@@ -87,7 +87,7 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
         dataUrl.searchParams.set('path', '/content/dam/usmint/csv_data');
         dataUrl.searchParams.set('date', dateId);
 
-        const processedData = JSON.parse(await (await fetch(dataUrl.toString())).text()) as SalesData;
+        const processedData = JSON.parse(await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).text()) as SalesData;
 
         salesData = processedData;
 
