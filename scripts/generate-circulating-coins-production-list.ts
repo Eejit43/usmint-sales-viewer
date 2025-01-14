@@ -114,16 +114,14 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
         let productionData: ProductionData;
         if (await savedReportFile.exists()) {
             console.log(chalk.green('      Using saved report file'));
-            productionData = JSON.parse(await savedReportFile.text()) as ProductionData;
+            productionData = (await savedReportFile.json()) as ProductionData;
         } else {
             const dataUrl = new URL('https://www.usmint.gov/bin/usmint/psd');
             dataUrl.searchParams.set('path', '/content/dam/usmint/csv_data');
             dataUrl.searchParams.set('program', programNameOverrides[programId] ?? programId);
             dataUrl.searchParams.set('year', year);
 
-            const processedData = JSON.parse(
-                await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).text(),
-            ) as ProductionData;
+            const processedData = (await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).json()) as ProductionData;
 
             productionData = processedData;
 

@@ -42,6 +42,22 @@ const result: ItemsList = {};
 
 const ignoredDates = new Set(['2017-11020', '2020-03.01', '2020-03.08', '2020-3-15', '2020-05-3']);
 
+while (true) {
+    const lastDate = dates.at(-1)!;
+
+    const newDate = new Date(lastDate.date.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+
+    if (newDate.getTime() >= currentDate.getTime()) break;
+
+    dates.push({
+        date: newDate,
+        id: `${newDate.getFullYear()}-${(newDate.getMonth() + 1).toString().padStart(2, '0')}-${newDate.getDate().toString().padStart(2, '0')}`,
+    });
+}
+
 for (const [index, { date, id: dateId }] of dates.entries()) {
     if (ignoredDates.has(dateId)) continue;
 
@@ -81,17 +97,20 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
     let salesData: SalesData;
     if (await savedReportFile.exists()) {
         console.log(chalk.green('   Using saved report file'));
-        salesData = JSON.parse(await savedReportFile.text()) as SalesData;
+        salesData = (await savedReportFile.json()) as SalesData;
     } else {
         const dataUrl = new URL('https://www.usmint.gov/bin/usmint/psd');
         dataUrl.searchParams.set('path', '/content/dam/usmint/csv_data');
         dataUrl.searchParams.set('date', dateId);
 
-        const processedData = JSON.parse(await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).text()) as SalesData;
+        try {
+            salesData = (await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).json()) as SalesData;
+        } catch {
+            console.log(chalk.red('   Failed to fetch data, skipping'));
+            continue;
+        }
 
-        salesData = processedData;
-
-        await Bun.write(savedReportFile, JSON.stringify(processedData));
+        await Bun.write(savedReportFile, JSON.stringify(salesData));
     }
 
     for (const item of salesData) {
