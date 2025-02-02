@@ -827,8 +827,7 @@
                 "Dime": 307000000,
                 "Quarter": 822000000,
                 "Half Dollar": 15700000,
-                "Native American Dollar": 1120000,
-                "Presidential Dollar": 0
+                "Native American Dollar": 1120000
             },
             "Denver": {
                 "Penny": 1513200000,
@@ -836,8 +835,7 @@
                 "Dime": 248000000,
                 "Quarter": 858800000,
                 "Half Dollar": 21900000,
-                "Native American Dollar": 1120000,
-                "Presidential Dollar": 0
+                "Native American Dollar": 1120000
             }
         }
     },
