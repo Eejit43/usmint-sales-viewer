@@ -552,10 +552,28 @@
             "Zitkala-Sa": {
                 "Philadelphia": 152600000,
                 "Denver": 170200000
+            }
+        },
+        "2025": {
+            "Ida B. Wells": {
+                "Philadelphia": 86400000,
+                "Denver": 82000000
             },
-            "Total": {
-                "Philadelphia": 822000000,
-                "Denver": 858800000
+            "Juliette Gordon Low": {
+                "Philadelphia": 2200000,
+                "Denver": 2200000
+            },
+            "Dr. Vera Rubin": {
+                "Philadelphia": 0,
+                "Denver": 0
+            },
+            "Stacey Park Milbern": {
+                "Philadelphia": 0,
+                "Denver": 0
+            },
+            "Althea Gibson": {
+                "Philadelphia": 0,
+                "Denver": 0
             }
         }
     },
@@ -835,6 +853,24 @@
                 "Dime": 248000000,
                 "Quarter": 858800000,
                 "Half Dollar": 21900000,
+                "Native American Dollar": 1120000
+            }
+        },
+        "2025": {
+            "Philadelphia": {
+                "Penny": 160000000,
+                "Nickel": 38400000,
+                "Dime": 56000000,
+                "Quarter": 88600000,
+                "Half Dollar": 5800000,
+                "Native American Dollar": 1260000
+            },
+            "Denver": {
+                "Penny": 82400000,
+                "Nickel": 43680000,
+                "Dime": 68500000,
+                "Quarter": 84200000,
+                "Half Dollar": 3600000,
                 "Native American Dollar": 1120000
             }
         }

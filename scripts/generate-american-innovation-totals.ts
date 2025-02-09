@@ -85,7 +85,19 @@ if (await salesFile.exists()) {
         ({ name, program }) => name.includes('AI $1') && program === 'Rolls & Bags & Boxes',
     );
 
+    let latestSaleDataDateString = Object.values(listFileContent).at(-1)!.latestData;
+    let latestSaleDataDate = new Date(latestSaleDataDateString);
+
     for (const item of filteredItems) {
+        const { latestData } = item;
+
+        const latestDataDate = new Date(latestData);
+
+        if (latestDataDate > latestSaleDataDate) {
+            latestSaleDataDate = latestDataDate;
+            latestSaleDataDateString = latestData;
+        }
+
         const [, year, amount, stateAbbreviation, mintMark] = [
             .../(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG|)(?: - ([A-Z]{2}))? \((P|D)\)/.exec(item.name)!,
         ];
@@ -112,19 +124,18 @@ if (await salesFile.exists()) {
         }
     }
 
-    const lastSaleDataDate = Object.values(listFileContent).at(-1)!.latestData;
-
     for (const data of Object.values(result))
         if ('latestSales' in Object.values(data)[0])
             for (const [, saleInfo] of Object.entries(data)) {
-                if ((saleInfo as TotalInfo).latestSales!.every((week) => week !== lastSaleDataDate)) (saleInfo as TotalInfo).soldOut = true;
+                if ((saleInfo as TotalInfo).latestSales!.every((week) => week !== latestSaleDataDateString))
+                    (saleInfo as TotalInfo).soldOut = true;
 
                 delete (saleInfo as TotalInfo).latestSales;
             }
         else
             for (const [, stateData] of Object.entries(data))
                 for (const [, saleInfo] of Object.entries(stateData as MintMarkIndexedTotals)) {
-                    if (saleInfo.latestSales!.every((week) => week !== lastSaleDataDate)) saleInfo.soldOut = true;
+                    if (saleInfo.latestSales!.every((week) => week !== latestSaleDataDateString)) saleInfo.soldOut = true;
 
                     delete saleInfo.latestSales;
                 }

@@ -112,7 +112,7 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
         /* eslint-enable @typescript-eslint/naming-convention */
 
         let productionData: ProductionData;
-        if (await savedReportFile.exists()) {
+        if (Number.parseInt(year) < new Date().getFullYear() && (await savedReportFile.exists())) {
             console.log(chalk.green('      Using saved report file'));
             productionData = (await savedReportFile.json()) as ProductionData;
         } else {
@@ -135,7 +135,8 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
                     designData.Design === '' ||
                     designData.Design === 'Grand Total:' ||
                     designData.President === 'Total' ||
-                    designData.President === year
+                    designData.President === year ||
+                    designData['AWQ Quarter'] === 'Total'
                 )
                     continue;
 
