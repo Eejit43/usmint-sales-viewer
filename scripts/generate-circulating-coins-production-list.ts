@@ -46,9 +46,9 @@ const processedCsvData = (await (
 ).json()) as Record<string, unknown>;
 
 for (const fileName of Object.keys(processedCsvData)) {
-    if (!fileName.includes('-CIRC-')) continue;
+    if (!fileName.startsWith('CIRC-')) continue;
 
-    const { program, year } = /\d+?-CIRC-(?<program>\w+)-(?<year>\d{4}).csv/.exec(fileName)!.groups as { program: string; year: string };
+    const { program, year } = /CIRC-(?<program>\w+)-(?<year>\d{4}).csv/.exec(fileName)!.groups as { program: string; year: string };
 
     programs[program].years.push(year);
 }

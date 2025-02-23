@@ -16,9 +16,8 @@ const processedDates = new Set<string>();
 const dates = Object.keys(processedCsvData)
     .filter((fileName) => fileName.includes('CUM'))
     .map((fileName) => {
-        const { date, year, month, day } = /(\d+?-)?CUM.*-(?<date>(?<year>\d{4})-(?<month>\d{1,2})([\d.-])(?<day>\d{1,2})).csv$/.exec(
-            fileName,
-        )!.groups as {
+        const { date, year, month, day } = /CUM-(?<date>(?<year>\d{4})-(?<month>\d{1,2})([\d.-])(?<day>\d{1,2})).csv$/.exec(fileName)!
+            .groups as {
             date: string;
             year: string;
             month: string;
@@ -40,7 +39,29 @@ const reportDirectory = path.join('saved-reports', 'cumulative-sales');
 
 const result: ItemsList = {};
 
-const ignoredDates = new Set(['2017-11020', '2020-03.01', '2020-03.08', '2020-3-15', '2020-05-3']);
+const ignoredDates = new Set([
+    // Invalid dates
+    '2017-11020',
+    '2020-03.01',
+    '2020-03.08',
+    '2020-3-15',
+    '2020-05-3',
+    // Dates with invalid data
+    '2015-05-04',
+    '2018-01-07',
+    '2018-01-14',
+    '2018-01-21',
+    '2018-01-28',
+    '2018-02-04',
+    '2018-02-11',
+    '2018-02-18',
+    '2018-02-25',
+    '2018-03-04',
+    '2018-03-11',
+    '2018-03-18',
+    '2018-03-25',
+    '2020-06-19',
+]);
 
 while (true) {
     const lastDate = dates.at(-1)!;

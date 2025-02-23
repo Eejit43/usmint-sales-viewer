@@ -469,66 +469,6 @@
                 "Philadelphia": 160400000,
                 "Denver": 304000000
             }
-        },
-        "2022": {
-            "Maya Angelou": {
-                "Philadelphia": 237600000,
-                "Denver": 258200000
-            },
-            "Dr Sally Ride": {
-                "Philadelphia": 275200000,
-                "Denver": 278000000
-            },
-            "Willma Mankiller": {
-                "Philadelphia": 310000000,
-                "Denver": 296800000
-            },
-            "Nina Otero Warren": {
-                "Philadelphia": 225000000,
-                "Denver": 219200000
-            },
-            "Anna May Wong": {
-                "Philadelphia": 226800000,
-                "Denver": 240800000
-            }
-        },
-        "2023": {
-            "Bessie Coleman": {
-                "Philadelphia": 302000000,
-                "Denver": 317200000
-            },
-            "Edith Kanaka'Ole": {
-                "Philadelphia": 372800000,
-                "Denver": 368600000
-            },
-            "Eleanor Roosevelt": {
-                "Philadelphia": 284000000,
-                "Denver": 271800000
-            },
-            "Jovita Idar": {
-                "Philadelphia": 190600000,
-                "Denver": 188000000
-            },
-            "Maria Tallchief": {
-                "Philadelphia": 185800000,
-                "Denver": 184800000
-            }
-        },
-        "2024": {
-            "Pauli Murray": {
-                "Philadelphia": 168400000,
-                "Denver": 185800000
-            },
-            "Patsy Mink": {
-                "Philadelphia": 210200000,
-                "Denver": 187200000
-            },
-            "Dr. Mary Edwards Walker": {
-                "Philadelphia": 141200000,
-                "Denver": 159400000
-            },
-            "Celia Cruz": null,
-            "Zikata-Sa": null
         }
     },
     "American Women Quarters": {
@@ -563,18 +503,9 @@
                 "Philadelphia": 2200000,
                 "Denver": 2200000
             },
-            "Dr. Vera Rubin": {
-                "Philadelphia": 0,
-                "Denver": 0
-            },
-            "Stacey Park Milbern": {
-                "Philadelphia": 0,
-                "Denver": 0
-            },
-            "Althea Gibson": {
-                "Philadelphia": 0,
-                "Denver": 0
-            }
+            "Dr. Vera Rubin": null,
+            "Stacey Park Milbern": null,
+            "Althea Gibson": null
         }
     },
     "Circulating Coins": {
