@@ -472,6 +472,50 @@
         }
     },
     "American Women Quarters": {
+        "2022": {
+            "2022 Adelina Otero-Warren": {
+                "Philadelphia": 225000000,
+                "Denver": 219200000
+            },
+            "2022 Anna May Wong": {
+                "Philadelphia": 226800000,
+                "Denver": 240800000
+            },
+            "2022 Dr Sally Ride": {
+                "Philadelphia": 275200000,
+                "Denver": 278000000
+            },
+            "2022 May Angelou": {
+                "Philadelphia": 237600000,
+                "Denver": 258200000
+            },
+            "2022 Wilma Mankiller": {
+                "Philadelphia": 310000000,
+                "Denver": 297400000
+            }
+        },
+        "2023": {
+            "2023 Bessie Coleman": {
+                "Philadelphia": 302000000,
+                "Denver": 317200000
+            },
+            "2023 Edith KanakaOle": {
+                "Philadelphia": 372800000,
+                "Denver": 368600000
+            },
+            "2023 Eleanor Roosevelt": {
+                "Philadelphia": 284000000,
+                "Denver": 271800000
+            },
+            "2023 Jovita Idar": {
+                "Philadelphia": 190600000,
+                "Denver": 188000000
+            },
+            "2023 Maria Tallchief": {
+                "Philadelphia": 185800000,
+                "Denver": 184800000
+            }
+        },
         "2024": {
             "Rev. Dr. Pauli Murray": {
                 "Philadelphia": 168400000,
@@ -496,16 +540,25 @@
         },
         "2025": {
             "Ida B. Wells": {
-                "Philadelphia": 86400000,
-                "Denver": 82000000
+                "Philadelphia": 106350000,
+                "Denver": 97300000
             },
             "Juliette Gordon Low": {
                 "Philadelphia": 2200000,
                 "Denver": 2200000
             },
-            "Dr. Vera Rubin": null,
-            "Stacey Park Milbern": null,
-            "Althea Gibson": null
+            "Althea Gibson": {
+                "Philadelphia": 0,
+                "Denver": 0
+            },
+            "Stacey Park Milbern": {
+                "Philadelphia": 0,
+                "Denver": 0
+            },
+            "Dr. Vera Rubin": {
+                "Philadelphia": 0,
+                "Denver": 0
+            }
         }
     },
     "Circulating Coins": {
@@ -789,19 +842,19 @@
         },
         "2025": {
             "Philadelphia": {
-                "Penny": 160000000,
-                "Nickel": 38400000,
-                "Dime": 56000000,
-                "Quarter": 88600000,
+                "Penny": 350000000,
+                "Nickel": 84000000,
+                "Dime": 113000000,
+                "Quarter": 108550000,
                 "Half Dollar": 5800000,
-                "Native American Dollar": 1260000
+                "Native American Dollar": 1960000
             },
             "Denver": {
-                "Penny": 82400000,
-                "Nickel": 43680000,
-                "Dime": 68500000,
-                "Quarter": 84200000,
-                "Half Dollar": 3600000,
+                "Penny": 245400000,
+                "Nickel": 72240000,
+                "Dime": 128000000,
+                "Quarter": 99500000,
+                "Half Dollar": 5600000,
                 "Native American Dollar": 1120000
             }
         }
