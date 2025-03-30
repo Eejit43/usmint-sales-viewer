@@ -15,6 +15,6 @@
         "@eejit/eslint-config-typescript": "^14.1.0",
         "@eejit/prettier-config": "^3.4.0",
         "@tsconfig/recommended": "^1.0.8",
-        "bun-types": "^1.2.5"
+        "bun-types": "latest"
     }
 }
