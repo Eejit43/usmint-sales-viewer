@@ -541,11 +541,11 @@
         "2025": {
             "Ida B. Wells": {
                 "Philadelphia": 106350000,
-                "Denver": 97300000
+                "Denver": 99500000
             },
             "Juliette Gordon Low": {
-                "Philadelphia": 2200000,
-                "Denver": 2200000
+                "Philadelphia": 82200000,
+                "Denver": 86200000
             },
             "Althea Gibson": {
                 "Philadelphia": 0,
@@ -842,20 +842,20 @@
         },
         "2025": {
             "Philadelphia": {
-                "Penny": 350000000,
-                "Nickel": 84000000,
-                "Dime": 113000000,
-                "Quarter": 108550000,
-                "Half Dollar": 5800000,
-                "Native American Dollar": 1960000
+                "Penny": 510000000,
+                "Nickel": 118600000,
+                "Dime": 137000000,
+                "Quarter": 188550000,
+                "Half Dollar": 8200000,
+                "Native American Dollar": 2660000
             },
             "Denver": {
-                "Penny": 245400000,
-                "Nickel": 72240000,
-                "Dime": 128000000,
-                "Quarter": 99500000,
+                "Penny": 413400000,
+                "Nickel": 112560000,
+                "Dime": 201500000,
+                "Quarter": 185700000,
                 "Half Dollar": 5600000,
-                "Native American Dollar": 1120000
+                "Native American Dollar": 1820000
             }
         }
     },
