@@ -136,14 +136,15 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
                     designData.Design === 'Grand Total:' ||
                     designData.President === 'Total' ||
                     designData.President === year ||
-                    designData['AWQ Quarter'] === 'Total'
+                    designData['AWQ Quarter'] === 'Total' ||
+                    designData['AWQ Quarter'] === ''
                 )
                     continue;
 
                 const normalizedDesign =
                     'President' in designData
                         ? designData.President!
-                        : (designData.Design?.replaceAll('Ω', ',') ?? designData['AWQ Quarter']!);
+                        : (designData.Design?.replaceAll('Ω', ',') ?? designData['AWQ Quarter']!.replace(/^\d{4} /, ''));
 
                 result[programName][year][normalizedDesign] = {};
 
@@ -153,7 +154,7 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
                 if (Object.keys(result[programName][year][normalizedDesign]).length === 0)
                     result[programName][year][normalizedDesign] = null;
             } else if ('Denomination' in designData) {
-                if (designData.Denomination === 'Total') continue;
+                if (designData.Denomination === 'Total' || designData.Denomination === '') continue;
 
                 let parsedDenomination = designData.Denomination;
 

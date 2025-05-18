@@ -355,45 +355,45 @@
             }
         },
         "2016": {
-            "Shawnee National Forest, IL": {
+            "Shawnee National Forest (IL)": {
                 "Philadelphia": 155600000,
                 "Denver": 151800000
             },
-            "Cumberland Gap National Historical Park, KY": {
+            "Cumberland Gap National Historical Park (KY)": {
                 "Philadelphia": 215400000,
                 "Denver": 223200000
             },
-            "Harpers Ferry National Historical Park, WV": {
+            "Harpers Ferry National Historical Park (WV)": {
                 "Philadelphia": 434630000,
                 "Denver": 424000000
             },
-            "Theodore Roosevelt National Park, ND": {
+            "Theodore Roosevelt National Park (ND)": {
                 "Philadelphia": 231600000,
                 "Denver": 223200000
             },
-            "Fort Moultrie (Fort Sumter National Monument), SC": {
+            "Fort Moultrie (Fort Sumter National Monument) (SC)": {
                 "Philadelphia": 154400000,
                 "Denver": 142200000
             }
         },
         "2017": {
-            "Effigy Mounds National Monument, IA": {
+            "Effigy Mounds National Monument (IA)": {
                 "Philadelphia": 271200000,
                 "Denver": 210800000
             },
-            "Frederick Douglass National Historic Site, DC": {
+            "Frederick Douglass National Historic Site (DC)": {
                 "Philadelphia": 184800000,
                 "Denver": 185800000
             },
-            "Ozark National Scenic Riverway, MO": {
+            "Ozark National Scenic Riverway (MO)": {
                 "Philadelphia": 203000000,
                 "Denver": 200000000
             },
-            "Ellis Island National Monument, NJ": {
+            "Ellis Island National Monument (NJ)": {
                 "Philadelphia": 234000000,
                 "Denver": 254000000
             },
-            "George Rogers Clark National Historical Park, IN": {
+            "George Rogers Clark National Historical Park (IN)": {
                 "Philadelphia": 191600000,
                 "Denver": 180800000
             }
@@ -473,65 +473,65 @@
     },
     "American Women Quarters": {
         "2022": {
-            "2022 Adelina Otero-Warren": {
+            "Adelina Otero-Warren": {
                 "Philadelphia": 225000000,
                 "Denver": 219200000
             },
-            "2022 Anna May Wong": {
+            "Anna May Wong": {
                 "Philadelphia": 226800000,
                 "Denver": 240800000
             },
-            "2022 Dr Sally Ride": {
+            "Dr Sally Ride": {
                 "Philadelphia": 275200000,
                 "Denver": 278000000
             },
-            "2022 May Angelou": {
+            "May Angelou": {
                 "Philadelphia": 237600000,
                 "Denver": 258200000
             },
-            "2022 Wilma Mankiller": {
+            "Wilma Mankiller": {
                 "Philadelphia": 310000000,
                 "Denver": 297400000
             }
         },
         "2023": {
-            "2023 Bessie Coleman": {
+            "Bessie Coleman": {
                 "Philadelphia": 302000000,
                 "Denver": 317200000
             },
-            "2023 Edith KanakaOle": {
+            "Edith KanakaOle": {
                 "Philadelphia": 372800000,
                 "Denver": 368600000
             },
-            "2023 Eleanor Roosevelt": {
+            "Eleanor Roosevelt": {
                 "Philadelphia": 284000000,
                 "Denver": 271800000
             },
-            "2023 Jovita Idar": {
+            "Jovita Idar": {
                 "Philadelphia": 190600000,
                 "Denver": 188000000
             },
-            "2023 Maria Tallchief": {
+            "Maria Tallchief": {
                 "Philadelphia": 185800000,
                 "Denver": 184800000
             }
         },
         "2024": {
-            "Rev. Dr. Pauli Murray": {
-                "Philadelphia": 168400000,
-                "Denver": 185800000
-            },
-            "Patsy Takemoto Mink": {
-                "Philadelphia": 210200000,
-                "Denver": 187200000
-            },
-            "Dr. Mary Edwards Walker": {
-                "Philadelphia": 141200000,
-                "Denver": 159400000
-            },
             "Celia Cruz": {
                 "Philadelphia": 149600000,
                 "Denver": 156200000
+            },
+            "Dr Mary Edwards Walker": {
+                "Philadelphia": 141200000,
+                "Denver": 159400000
+            },
+            "Patsy Mink": {
+                "Philadelphia": 210200000,
+                "Denver": 187200000
+            },
+            "Pauli Murray": {
+                "Philadelphia": 168400000,
+                "Denver": 185800000
             },
             "Zitkala-Sa": {
                 "Philadelphia": 152600000,
@@ -544,18 +544,18 @@
                 "Denver": 99500000
             },
             "Juliette Gordon Low": {
-                "Philadelphia": 82200000,
-                "Denver": 86200000
+                "Philadelphia": 196600000,
+                "Denver": 130200000
             },
-            "Althea Gibson": {
-                "Philadelphia": 0,
+            "Dr. Vera Rubin": {
+                "Philadelphia": 2200000,
                 "Denver": 0
             },
             "Stacey Park Milbern": {
                 "Philadelphia": 0,
                 "Denver": 0
             },
-            "Dr. Vera Rubin": {
+            "Althea Gibson": {
                 "Philadelphia": 0,
                 "Denver": 0
             }
@@ -824,38 +824,40 @@
         },
         "2024": {
             "Philadelphia": {
-                "Penny": 1712000000,
-                "Nickel": 79920000,
-                "Dime": 307000000,
-                "Quarter": 822000000,
-                "Half Dollar": 15700000,
-                "Native American Dollar": 1120000
+                "Penny": 734800000,
+                "Nickel": 36720000,
+                "Dime": 92500000,
+                "Quarter": 525000000,
+                "Half Dollar": 9900000,
+                "Native American Dollar": 1120000,
+                "Presidential Dollar": 0
             },
             "Denver": {
-                "Penny": 1513200000,
+                "Penny": 780400000,
                 "Nickel": 32880000,
-                "Dime": 248000000,
-                "Quarter": 858800000,
-                "Half Dollar": 21900000,
-                "Native American Dollar": 1120000
+                "Dime": 138000000,
+                "Quarter": 537200000,
+                "Half Dollar": 11600000,
+                "Native American Dollar": 1120000,
+                "Presidential Dollar": 0
             }
         },
         "2025": {
             "Philadelphia": {
-                "Penny": 510000000,
-                "Nickel": 118600000,
-                "Dime": 137000000,
-                "Quarter": 188550000,
+                "Penny": 572400000,
+                "Nickel": 166120000,
+                "Dime": 192000000,
+                "Quarter": 302950000,
                 "Half Dollar": 8200000,
-                "Native American Dollar": 2660000
+                "Native American Dollar": 3360000
             },
             "Denver": {
-                "Penny": 413400000,
-                "Nickel": 112560000,
-                "Dime": 201500000,
-                "Quarter": 185700000,
+                "Penny": 488200000,
+                "Nickel": 160080000,
+                "Dime": 333500000,
+                "Quarter": 229700000,
                 "Half Dollar": 5600000,
-                "Native American Dollar": 1820000
+                "Native American Dollar": 2240000
             }
         }
     },
