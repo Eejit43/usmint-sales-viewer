@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import path from 'node:path';
 import type { ItemsList } from './generate-cumulative-sales-list.js';
 
@@ -140,5 +141,7 @@ if (await salesFile.exists()) {
                     delete saleInfo.latestSales;
                 }
 
-    void Bun.write(totalsFile, JSON.stringify(result, null, 4) + '\n');
+    await Bun.write(totalsFile, JSON.stringify(result, null, 4) + '\n');
+
+    console.log(chalk.green('Successfully updated American Innovation Dollar totals!'));
 } else console.error('Cumulative sales data does not exist, generate that first!');

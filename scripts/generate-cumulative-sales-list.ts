@@ -14,7 +14,7 @@ const processedCsvData = (await (
 const processedDates = new Set<string>();
 
 const dates = Object.keys(processedCsvData)
-    .filter((fileName) => fileName.includes('CUM'))
+    .filter((fileName) => fileName.startsWith('CUM-'))
     .map((fileName) => {
         const { date, year, month, day } = /CUM-(?<date>(?<year>\d{4})-(?<month>\d{1,2})([\d.-])(?<day>\d{1,2})).csv$/.exec(fileName)!
             .groups as {
@@ -39,14 +39,7 @@ const reportDirectory = path.join('saved-reports', 'cumulative-sales');
 
 const result: ItemsList = {};
 
-const ignoredDates = new Set([
-    // Invalid dates
-    '2017-11020',
-    '2020-03.01',
-    '2020-03.08',
-    '2020-3-15',
-    '2020-05-3',
-    // Dates with invalid data
+const datesWithInvalidData = new Set([
     '2015-05-04',
     '2018-01-07',
     '2018-01-14',
@@ -79,8 +72,21 @@ while (true) {
     });
 }
 
+const ignoredDatesWithInvalidFormat: string[] = [];
+const ignoredDatesWithInvalidData: string[] = [];
+
 for (const [index, { date, id: dateId }] of dates.entries()) {
-    if (ignoredDates.has(dateId)) continue;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateId)) {
+        ignoredDatesWithInvalidFormat.push(dateId);
+
+        continue;
+    }
+
+    if (datesWithInvalidData.has(dateId)) {
+        ignoredDatesWithInvalidData.push(dateId);
+
+        continue;
+    }
 
     console.log(
         chalk.blue(
@@ -176,3 +182,24 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
 const listFile = path.join('lists', 'cumulative-sales.json');
 
 await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');
+
+console.log(chalk.green('\nSuccessfully updated cumulative sales data!'));
+
+if (ignoredDatesWithInvalidFormat.length > 1) {
+    console.log(chalk.yellow(`   The following ${ignoredDatesWithInvalidFormat.length} dates were ignored as they had an invalid format:`));
+    console.log(chalk.gray(`      ${ignoredDatesWithInvalidFormat.join(', ')}`));
+}
+
+if (ignoredDatesWithInvalidData.length > 1) {
+    console.log(chalk.yellow(`   The following ${ignoredDatesWithInvalidData.length} dates were ignored as they had invalid data:`));
+    console.log(chalk.gray(`      ${ignoredDatesWithInvalidData.join(', ')}`));
+}
+
+if (ignoredDatesWithInvalidData.length !== datesWithInvalidData.size) {
+    console.log(
+        chalk.yellow(
+            `   ${datesWithInvalidData.size} dates were marked as having invalid data in the config file, but only ${ignoredDatesWithInvalidData.length} of these dates were found. The following marked dates do not have data:`,
+        ),
+    );
+    console.log(chalk.gray(`      ${[...datesWithInvalidData].filter((date) => !ignoredDatesWithInvalidData.includes(date)).join(', ')}`));
+}

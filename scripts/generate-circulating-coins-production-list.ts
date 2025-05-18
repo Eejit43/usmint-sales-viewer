@@ -208,3 +208,5 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
 const listFile = path.join('lists', 'circulating-coins-production.json');
 
 await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');
+
+console.log(chalk.green('\nSuccessfully updated circulating coins production data!'));
