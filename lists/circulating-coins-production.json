@@ -540,20 +540,20 @@
         },
         "2025": {
             "Ida B. Wells": {
-                "Philadelphia": 106350000,
-                "Denver": 99500000
+                "Philadelphia": 166200000,
+                "Denver": 143200000
             },
             "Juliette Gordon Low": {
-                "Philadelphia": 196600000,
+                "Philadelphia": 200400000,
                 "Denver": 130200000
             },
             "Dr. Vera Rubin": {
-                "Philadelphia": 2200000,
-                "Denver": 0
+                "Philadelphia": 27800000,
+                "Denver": 25000000
             },
             "Stacey Park Milbern": {
-                "Philadelphia": 0,
-                "Denver": 0
+                "Philadelphia": 2400000,
+                "Denver": 2200000
             },
             "Althea Gibson": {
                 "Philadelphia": 0,
@@ -844,20 +844,20 @@
         },
         "2025": {
             "Philadelphia": {
-                "Penny": 572400000,
-                "Nickel": 166120000,
-                "Dime": 192000000,
-                "Quarter": 302950000,
+                "Penny": 639600000,
+                "Nickel": 246720000,
+                "Dime": 297000000,
+                "Quarter": 396800000,
                 "Half Dollar": 8200000,
-                "Native American Dollar": 3360000
+                "Native American Dollar": 1260000
             },
             "Denver": {
-                "Penny": 488200000,
-                "Nickel": 160080000,
-                "Dime": 333500000,
-                "Quarter": 229700000,
+                "Penny": 626000000,
+                "Nickel": 205680000,
+                "Dime": 390500000,
+                "Quarter": 300600000,
                 "Half Dollar": 5600000,
-                "Native American Dollar": 2240000
+                "Native American Dollar": 1120000
             }
         }
     },
