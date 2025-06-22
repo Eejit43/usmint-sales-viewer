@@ -8,13 +8,12 @@
     },
     "prettier": "@eejit/prettier-config",
     "dependencies": {
-        "chalk": "^5.4.1",
-        "typescript": "^5.8.3"
+        "chalk": "^5.4.1"
     },
     "devDependencies": {
         "@eejit/eslint-config-typescript": "^14.4.0",
         "@eejit/prettier-config": "^3.4.0",
-        "@tsconfig/recommended": "^1.0.8",
-        "bun-types": "latest"
+        "bun-types": "latest",
+        "typescript": "^5.8.3"
     }
 }
