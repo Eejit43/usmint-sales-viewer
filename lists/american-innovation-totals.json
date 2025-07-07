@@ -46,7 +46,7 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 570250,
+                "total": 571750,
                 "soldOut": false
             }
         }
@@ -152,7 +152,7 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 453275,
+                "total": 453375,
                 "soldOut": false
             }
         },
@@ -184,7 +184,7 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 449250,
+                "total": 450650,
                 "soldOut": false
             }
         },
@@ -204,17 +204,17 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 454750,
+                "total": 454950,
                 "soldOut": false
             }
         },
         "Mississippi": {
             "Philadelphia": {
-                "total": 453125,
+                "total": 453525,
                 "soldOut": false
             },
             "Denver": {
-                "total": 423100,
+                "total": 423675,
                 "soldOut": false
             }
         }
@@ -222,11 +222,11 @@
     "2024": {
         "Illinois": {
             "Philadelphia": {
-                "total": 472800,
+                "total": 474875,
                 "soldOut": false
             },
             "Denver": {
-                "total": 440900,
+                "total": 441800,
                 "soldOut": false
             }
         },
@@ -242,21 +242,21 @@
         },
         "Maine": {
             "Philadelphia": {
-                "total": 496525,
+                "total": 497225,
                 "soldOut": false
             },
             "Denver": {
-                "total": 407425,
+                "total": 408525,
                 "soldOut": false
             }
         },
         "Missouri": {
             "Philadelphia": {
-                "total": 514650,
+                "total": 515650,
                 "soldOut": false
             },
             "Denver": {
-                "total": 410775,
+                "total": 413150,
                 "soldOut": false
             }
         }
@@ -264,31 +264,31 @@
     "2025": {
         "Arkansas": {
             "Philadelphia": {
-                "total": 473100,
+                "total": 477000,
                 "soldOut": false
             },
             "Denver": {
-                "total": 355275,
+                "total": 358625,
                 "soldOut": false
             }
         },
         "Michigan": {
             "Philadelphia": {
-                "total": 521875,
+                "total": 527950,
                 "soldOut": false
             },
             "Denver": {
-                "total": 411475,
+                "total": 417050,
                 "soldOut": false
             }
         },
         "Florida": {
             "Philadelphia": {
-                "total": 588425,
+                "total": 590075,
                 "soldOut": false
             },
             "Denver": {
-                "total": 488125,
+                "total": 507800,
                 "soldOut": false
             }
         }
