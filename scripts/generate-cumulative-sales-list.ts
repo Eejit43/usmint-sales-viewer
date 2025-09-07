@@ -33,7 +33,7 @@ const dates = Object.keys(processedCsvData)
 
         return true;
     })
-    .sort((a, b) => a.date.getTime() - b.date.getTime());
+    .sort((a, b) => a.date.getTime() - b.date.getTime()); // eslint-disable-line unicorn/no-array-sort
 
 const reportDirectory = path.join('saved-reports', 'cumulative-sales');
 
