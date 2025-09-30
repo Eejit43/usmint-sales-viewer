@@ -8928,42 +8928,49 @@
         "name": "2025 AM LIBERTY 24K GOLD 1 OZ",
         "program": "Precious Metal Products",
         "sales": 11063,
-        "firstSeen": "8/11/2025",
+        "firstSeen": "8/10/2025",
         "latestData": "9/28/2025"
     },
     "25DB": {
         "name": "2025 AM LIBERTY SILVER MEDAL 1 OZ",
         "program": "Precious Metal Products",
         "sales": 29932,
-        "firstSeen": "8/11/2025",
+        "firstSeen": "8/10/2025",
+        "latestData": "9/28/2025"
+    },
+    "25EALE": {
+        "name": "2025 AM EAGLE SILVER PROOF 1 OZ - LASER ENGRAVED",
+        "program": "Precious Metal Products",
+        "sales": 99235,
+        "firstSeen": "8/10/2025",
         "latestData": "9/28/2025"
     },
     "25WBG": {
         "name": "2025 AWQ QTR 100-COIN BAG - STACEY PARK MILBERN (P)",
         "program": "Rolls & Bags & Boxes",
         "sales": 1286,
-        "firstSeen": "8/11/2025",
+        "firstSeen": "8/10/2025",
         "latestData": "9/28/2025"
     },
     "25WBH": {
         "name": "2025 AWQ QTR 100-COIN BAG - STACEY PARK MILBERN (D)",
         "program": "Rolls & Bags & Boxes",
         "sales": 860,
-        "firstSeen": "8/11/2025",
+        "firstSeen": "8/10/2025",
         "latestData": "9/28/2025"
     },
     "25WRG": {
         "name": "2025 AWQ QTR 2-ROLL SET - STACEY PARK MILBERN (P&D)",
         "program": "Rolls & Bags & Boxes",
         "sales": 1953,
-        "firstSeen": "8/11/2025",
+        "firstSeen": "8/10/2025",
         "latestData": "9/28/2025"
     },
     "25WRH": {
         "name": "2025 AWQ QTR 3-ROLL SET - STACEY PARK MILBERN (P&D&S)",
         "program": "Rolls & Bags & Boxes",
         "sales": 8862,
-        "firstSeen": "8/11/2025",
+        "firstSeen": "8/10/2025",
         "latestData": "9/28/2025"
     },
     "25EK": {
@@ -9013,13 +9020,6 @@
         "program": "Special Collectibles",
         "sales": 681,
         "firstSeen": "8/24/2025",
-        "latestData": "9/28/2025"
-    },
-    "25EALE": {
-        "name": "2025 AM EAGLE SILVER PROOF 1 OZ - LASER ENGRAVED",
-        "program": "Precious Metal Products",
-        "sales": 99235,
-        "firstSeen": "9/1/2025",
         "latestData": "9/28/2025"
     },
     "25XF": {

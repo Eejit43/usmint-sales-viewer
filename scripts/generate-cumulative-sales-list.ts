@@ -103,8 +103,9 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
         continue;
     }
 
-    // Decrement dates greater than or equal to September 7th, 2025, increment August 31st, 2025
-    if (date >= new Date(2025, 8, 7)) date.setDate(date.getDate() - 1);
+    // Decrement dates greater than or equal to September 7th, 2025, decrement August 11th, 2025, increment August 31st, 2025
+    if (date >= new Date(2025, 8, 7) || (date.getFullYear() === 2025 && date.getMonth() === 7 && date.getDate() === 11))
+        date.setDate(date.getDate() - 1);
     else if (date.getFullYear() === 2025 && date.getMonth() === 7 && date.getDate() === 31) date.setDate(date.getDate() + 1);
 
     console.log(
