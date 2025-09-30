@@ -3,6 +3,21 @@ import path from 'node:path';
 
 export type ItemsList = Record<string, { name: string; program: string; sales: number; firstSeen: string; latestData: string }>;
 
+const MONTH_NAMES = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+];
+
 const tokenResponse = await fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
 
 const cookies = tokenResponse.headers.getSetCookie();
@@ -88,6 +103,10 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
         continue;
     }
 
+    // Decrement dates greater than or equal to September 7th, 2025, increment August 31st, 2025
+    if (date >= new Date(2025, 8, 7)) date.setDate(date.getDate() - 1);
+    else if (date.getFullYear() === 2025 && date.getMonth() === 7 && date.getDate() === 31) date.setDate(date.getDate() + 1);
+
     console.log(
         chalk.blue(
             `Processing week of ${chalk.yellow(
@@ -127,8 +146,11 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
         salesData = (await savedReportFile.json()) as SalesData;
     } else {
         const dataUrl = new URL('https://www.usmint.gov/bin/usmint/psd');
-        dataUrl.searchParams.set('path', '/content/dam/usmint/csv_data');
-        dataUrl.searchParams.set('date', dateId);
+        dataUrl.searchParams.set('path', `/content/dam/usmint/new_csv_data/CUM/${date.getFullYear()}/${MONTH_NAMES[date.getMonth()]}`);
+        dataUrl.searchParams.set(
+            'date',
+            `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`,
+        );
 
         try {
             salesData = (await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).json()) as SalesData;
