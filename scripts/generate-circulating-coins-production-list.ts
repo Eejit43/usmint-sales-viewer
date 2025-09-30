@@ -117,9 +117,10 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
             productionData = (await savedReportFile.json()) as ProductionData;
         } else {
             const dataUrl = new URL('https://www.usmint.gov/bin/usmint/psd');
-            dataUrl.searchParams.set('path', '/content/dam/usmint/csv_data');
-            dataUrl.searchParams.set('program', programNameOverrides[programId] ?? programId);
-            dataUrl.searchParams.set('year', year);
+            dataUrl.searchParams.set(
+                'path',
+                `/content/dam/usmint/new_csv_data/CIRC/${programNameOverrides[programId] ?? programId}/${year}`,
+            );
 
             const processedData = (await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).json()) as ProductionData;
 

@@ -552,8 +552,8 @@
                 "Denver": 63000000
             },
             "Stacey Park Milbern": {
-                "Philadelphia": 72800000,
-                "Denver": 41800000
+                "Philadelphia": 94800000,
+                "Denver": 59400000
             },
             "Althea Gibson": {
                 "Philadelphia": 2400000,
@@ -845,17 +845,17 @@
         "2025": {
             "Philadelphia": {
                 "Penny": 655200000,
-                "Nickel": 319680000,
-                "Dime": 413000000,
-                "Quarter": 495200000,
+                "Nickel": 408560000,
+                "Dime": 451500000,
+                "Quarter": 517200000,
                 "Half Dollar": 8200000,
                 "Native American Dollar": 1260000
             },
             "Denver": {
                 "Penny": 645200000,
-                "Nickel": 280560000,
-                "Dime": 529000000,
-                "Quarter": 380400000,
+                "Nickel": 292080000,
+                "Dime": 543500000,
+                "Quarter": 398000000,
                 "Half Dollar": 8800000,
                 "Native American Dollar": 1120000
             }
