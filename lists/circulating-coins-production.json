@@ -824,22 +824,20 @@
         },
         "2024": {
             "Philadelphia": {
-                "Penny": 734800000,
-                "Nickel": 36720000,
-                "Dime": 92500000,
-                "Quarter": 525000000,
-                "Half Dollar": 9900000,
-                "Native American Dollar": 1120000,
-                "Presidential Dollar": 0
+                "Penny": 1712000000,
+                "Nickel": 79920000,
+                "Dime": 307000000,
+                "Quarter": 822000000,
+                "Half Dollar": 15700000,
+                "Native American Dollar": 1120000
             },
             "Denver": {
-                "Penny": 780400000,
+                "Penny": 1513200000,
                 "Nickel": 32880000,
-                "Dime": 138000000,
-                "Quarter": 537200000,
-                "Half Dollar": 11600000,
-                "Native American Dollar": 1120000,
-                "Presidential Dollar": 0
+                "Dime": 248000000,
+                "Quarter": 858800000,
+                "Half Dollar": 21900000,
+                "Native American Dollar": 1120000
             }
         },
         "2025": {
