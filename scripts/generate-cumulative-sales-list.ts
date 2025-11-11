@@ -3,118 +3,53 @@ import path from 'node:path';
 
 export type ItemsList = Record<string, { name: string; program: string; sales: number; firstSeen: string; latestData: string }>;
 
-const MONTH_NAMES = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-];
-
 const tokenResponse = await fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
 
 const cookies = tokenResponse.headers.getSetCookie();
 
-const processedCsvData = (await (
-    await fetch('https://www.usmint.gov/content/dam/usmint/csv_data.1.json', { headers: { cookie: cookies } })
-).json()) as Record<string, unknown>;
+const htmlContent = await (
+    await fetch('https://www.usmint.gov/about/production-sales-figures/cumulative-sales', { headers: { cookie: cookies } })
+).text();
 
-const processedDates = new Set<string>();
+const yearData = (await JSON.parse(
+    /data-tabletype="cumulative" data-dropdownitems="(.*?)"/.exec(htmlContent)![1].replaceAll('&#34;', '"'),
+)) as Record<string, Record<string, string[]>>;
 
-const dates = Object.keys(processedCsvData)
-    .filter((fileName) => fileName.startsWith('CUM-'))
-    .map((fileName) => {
-        const { date, year, month, day } = /CUM-(?<date>(?<year>\d{4})-(?<month>\d{1,2})([\d.-])(?<day>\d{1,2})).csv$/.exec(fileName)!
-            .groups as {
-            date: string;
-            year: string;
-            month: string;
-            day: string;
-        };
-
-        return { date: new Date(Number.parseInt(year), Number.parseInt(month) - 1, Number.parseInt(day)), id: date };
-    })
-    .filter(({ id }) => {
-        if (processedDates.has(id)) return false;
-
-        processedDates.add(id);
-
-        return true;
-    })
+const dates = Object.entries(yearData)
+    .map(([year, monthData]) =>
+        Object.entries(monthData).map(([monthName, dates]) =>
+            dates.map((date) => ({ monthName, date: new Date(`${monthName} ${date}, ${year}`) })),
+        ),
+    )
+    .flat(/* Depth is always 2 */ 2)
     .sort((a, b) => a.date.getTime() - b.date.getTime()); // eslint-disable-line unicorn/no-array-sort
 
 const reportDirectory = path.join('saved-reports', 'cumulative-sales');
 
 const result: ItemsList = {};
 
-const datesWithInvalidData = new Set([
-    '2015-05-04',
-    '2018-01-07',
-    '2018-01-14',
-    '2018-01-21',
-    '2018-01-28',
-    '2018-02-04',
-    '2018-02-11',
-    '2018-02-18',
-    '2018-02-25',
-    '2018-03-04',
-    '2018-03-11',
-    '2018-03-18',
-    '2018-03-25',
-    '2020-06-19',
-]);
+const knownDatesWithInvalidData: { dateString: string; date: Date }[] = [];
+const ignoredDatesWithInvalidData: { marked: string; actual: string; date: Date }[] = [];
 
-while (true) {
-    const lastDate = dates.at(-1)!;
-
-    const newDate = new Date(lastDate.date.getTime() + 7 * 24 * 60 * 60 * 1000);
-
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0);
-
-    if (newDate.getTime() >= currentDate.getTime()) break;
-
-    dates.push({
-        date: newDate,
-        id: `${newDate.getFullYear()}-${(newDate.getMonth() + 1).toString().padStart(2, '0')}-${newDate.getDate().toString().padStart(2, '0')}`,
-    });
+const cachedInvalidDatesLocation = path.join(reportDirectory, 'ignored-dates-with-invalid-data.json');
+if (await Bun.file(cachedInvalidDatesLocation).exists()) {
+    const cachedInvalidDates = (await Bun.file(cachedInvalidDatesLocation).json()) as string[];
+    knownDatesWithInvalidData.push(...cachedInvalidDates.map((dateString) => ({ dateString, date: new Date(dateString) })));
 }
 
-const ignoredDatesWithInvalidFormat: string[] = [];
-const ignoredDatesWithInvalidData: string[] = [];
-
-for (const [index, { date, id: dateId }] of dates.entries()) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateId)) {
-        ignoredDatesWithInvalidFormat.push(dateId);
-
-        continue;
-    }
-
-    if (datesWithInvalidData.has(dateId)) {
-        ignoredDatesWithInvalidData.push(dateId);
-
-        continue;
-    }
-
-    // Decrement dates greater than or equal to September 7th, 2025, decrement August 11th, 2025, increment August 31st, 2025
-    if (date >= new Date(2025, 8, 7) || (date.getFullYear() === 2025 && date.getMonth() === 7 && date.getDate() === 11))
-        date.setDate(date.getDate() - 1);
-    else if (date.getFullYear() === 2025 && date.getMonth() === 7 && date.getDate() === 31) date.setDate(date.getDate() + 1);
-
+for (const [index, { monthName, date }] of dates.entries()) {
     console.log(
         chalk.blue(
             `Processing week of ${chalk.yellow(
                 date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }),
-            )} (${chalk.gray(dateId)}) (${chalk.gray(`${index + 1}/${dates.length}`)})`,
+            )} (${chalk.gray(`${index + 1}/${dates.length}`)})`,
         ),
     );
+
+    if (knownDatesWithInvalidData.some((knownDate) => knownDate.date.getTime() === date.getTime())) {
+        console.log(chalk.gray('   Skipping known invalid data date'));
+        continue;
+    }
 
     const savedReportFile = Bun.file(
         path.join(reportDirectory, date.getFullYear().toString(), (date.getMonth() + 1).toString(), date.getDate().toString() + '.json'),
@@ -146,8 +81,11 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
         console.log(chalk.green('   Using saved report file'));
         salesData = (await savedReportFile.json()) as SalesData;
     } else {
-        const dataUrl = new URL('https://www.usmint.gov/bin/usmint/psd');
-        dataUrl.searchParams.set('path', `/content/dam/usmint/new_csv_data/CUM/${date.getFullYear()}/${MONTH_NAMES[date.getMonth()]}`);
+        const dataUrl = new URL(
+            'https://www.usmint.gov/content/usmint/us/en/about/production-sales-figures/cumulative-sales/jcr:content/root/container/productionsalesdata.dropdowns.json',
+        );
+        dataUrl.searchParams.set('firstDropdown', date.getFullYear().toString());
+        dataUrl.searchParams.set('secondDropdown', monthName);
         dataUrl.searchParams.set(
             'date',
             `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`,
@@ -158,6 +96,34 @@ for (const [index, { date, id: dateId }] of dates.entries()) {
         } catch {
             console.log(chalk.red('   Failed to fetch data, skipping'));
             continue;
+        }
+
+        // Skip data if it is more than a day off from the marked date
+        const reportDateString =
+            'Date Sales Report is Valid' in salesData[0]
+                ? salesData[0]['Date Sales Report is Valid']
+                : 'Sales Reporting Date' in salesData[0]
+                  ? salesData[0]['Sales Reporting Date']
+                  : null;
+
+        if (reportDateString) {
+            const reportDate = new Date(reportDateString);
+            const timeDifference = Math.abs(reportDate.getTime() - date.getTime());
+            const dayDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+
+            if (dayDifference > 1) {
+                console.log(
+                    chalk.red(
+                        `   Report date (${reportDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}) differs from expected date by more than 1 day, skipping save`,
+                    ),
+                );
+                ignoredDatesWithInvalidData.push({
+                    marked: date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }),
+                    actual: reportDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }),
+                    date,
+                });
+                continue;
+            }
         }
 
         await Bun.write(savedReportFile, JSON.stringify(salesData));
@@ -208,21 +174,20 @@ await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');
 
 console.log(chalk.green('\nSuccessfully updated cumulative sales data!'));
 
-if (ignoredDatesWithInvalidFormat.length > 1) {
-    console.log(chalk.yellow(`   The following ${ignoredDatesWithInvalidFormat.length} dates were ignored as they had an invalid format:`));
-    console.log(chalk.gray(`      ${ignoredDatesWithInvalidFormat.join(', ')}`));
+if (knownDatesWithInvalidData.length > 1) {
+    console.log(chalk.yellow(`   The following ${knownDatesWithInvalidData.length} dates were previously marked as having invalid data:`));
+    console.log(chalk.gray(`      ${knownDatesWithInvalidData.map((date) => date.dateString).join(', ')}`));
 }
 
 if (ignoredDatesWithInvalidData.length > 1) {
-    console.log(chalk.yellow(`   The following ${ignoredDatesWithInvalidData.length} dates were ignored as they had invalid data:`));
-    console.log(chalk.gray(`      ${ignoredDatesWithInvalidData.join(', ')}`));
-}
-
-if (ignoredDatesWithInvalidData.length !== datesWithInvalidData.size) {
     console.log(
-        chalk.yellow(
-            `   ${datesWithInvalidData.size} dates were marked as having invalid data in the config file, but only ${ignoredDatesWithInvalidData.length} of these dates were found. The following marked dates do not have data:`,
-        ),
+        chalk.yellow(`   The following ${ignoredDatesWithInvalidData.length} dates were detected as having invalid data and were ignored:`),
     );
-    console.log(chalk.gray(`      ${[...datesWithInvalidData].filter((date) => !ignoredDatesWithInvalidData.includes(date)).join(', ')}`));
+    console.log(chalk.gray(`      ${ignoredDatesWithInvalidData.map((date) => `${date.marked} (actual: ${date.actual})`).join(', ')}`));
+
+    const newDates = [...knownDatesWithInvalidData, ...ignoredDatesWithInvalidData]
+        .sort((a, b) => a.date.getTime() - b.date.getTime()) // eslint-disable-line unicorn/no-array-sort
+        .map((entry) => ('dateString' in entry ? entry.dateString : entry.marked));
+
+    await Bun.write(cachedInvalidDatesLocation, JSON.stringify(newDates, null, 4) + '\n');
 }
