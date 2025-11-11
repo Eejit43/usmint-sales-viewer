@@ -556,8 +556,8 @@
                 "Denver": 59400000
             },
             "Althea Gibson": {
-                "Philadelphia": 2400000,
-                "Denver": 2200000
+                "Philadelphia": 101200000,
+                "Denver": 71600000
             }
         }
     },
@@ -843,19 +843,19 @@
         "2025": {
             "Philadelphia": {
                 "Penny": 655200000,
-                "Nickel": 408560000,
-                "Dime": 451500000,
-                "Quarter": 517200000,
-                "Half Dollar": 8200000,
-                "Native American Dollar": 1260000
+                "Nickel": 507200000,
+                "Dime": 564000000,
+                "Quarter": 616000000,
+                "Half Dollar": 11200000,
+                "Native American Dollar": 1960000
             },
             "Denver": {
                 "Penny": 645200000,
-                "Nickel": 292080000,
-                "Dime": 543500000,
-                "Quarter": 398000000,
-                "Half Dollar": 8800000,
-                "Native American Dollar": 1120000
+                "Nickel": 370320000,
+                "Dime": 685500000,
+                "Quarter": 467400000,
+                "Half Dollar": 12000000,
+                "Native American Dollar": 1820000
             }
         }
     },

@@ -25,35 +25,23 @@ const alternativeDenominationNames: Record<string, string> = {
     /* eslint-enable @typescript-eslint/naming-convention */
 };
 
-const programs: Record<string, { name: string; years: string[] }> = {
-    '50SQ': { name: '50 State Quarters', years: [] }, // eslint-disable-line @typescript-eslint/naming-convention
-    'ATBQ': { name: 'America the Beautiful Quarters', years: [] },
-    'AWQS': { name: 'American Women Quarters', years: [] },
-    'CIRC': { name: 'Circulating Coins', years: [] },
-    'DCTERR': { name: 'District of Columbia and US Territories Quarters', years: [] },
-    'PRESDOLLAR': { name: 'Presidential One Dollar', years: [] },
-    'WJNS': { name: 'Westward Journey Nickel Series', years: [] },
-};
-
-const programNameOverrides: Record<string, string> = { AWQ: 'AWQS' };
-
 const tokenResponse = await fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
 
 const cookies = tokenResponse.headers.getSetCookie();
 
-const processedCsvData = (await (
-    await fetch('https://www.usmint.gov/content/dam/usmint/csv_data.1.json', { headers: { cookie: cookies } })
-).json()) as Record<string, unknown>;
+const htmlContent = await (
+    await fetch('https://www.usmint.gov/about/production-sales-figures/circulating-coins-production', { headers: { cookie: cookies } })
+).text();
 
-for (const fileName of Object.keys(processedCsvData)) {
-    if (!fileName.startsWith('CIRC-')) continue;
+const programData = (await JSON.parse(
+    /data-tabletype="circulating" data-dropdownitems="(.*?)"/.exec(htmlContent)![1].replaceAll('&#34;', '"'),
+)) as Record<string, string[]>;
 
-    const { program, year } = /CIRC-(?<program>\w+)-(?<year>\d{4}).csv/.exec(fileName)!.groups as { program: string; year: string };
-
-    programs[program].years.push(year);
-}
-
-for (const value of Object.values(programs)) value.years.sort();
+const programs = Object.entries(programData).map(([program, years]) => ({
+    id: program.split('|')[1],
+    name: program.split('|')[0],
+    years: years.map((year) => Number.parseInt(year)).sort((a, b) => a - b), // eslint-disable-line unicorn/no-array-sort
+}));
 
 const result: Record<string, Record<string, Record<string, Record<string, number> | null> | null> | null> = {};
 
@@ -83,7 +71,7 @@ function parseMintage(mintage: string) {
     return Math.round(parsedMintage);
 }
 
-for (const [programId, { name: programName, years: programYears }] of Object.entries(programs)) {
+for (const { id: programId, name: programName, years: programYears } of programs) {
     console.log(chalk.blue(`Procressing the ${chalk.yellow(programName)} program`));
 
     result[programName] = {};
@@ -112,15 +100,15 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
         /* eslint-enable @typescript-eslint/naming-convention */
 
         let productionData: ProductionData;
-        if (Number.parseInt(year) < new Date().getFullYear() && (await savedReportFile.exists())) {
+        if (year < new Date().getFullYear() && (await savedReportFile.exists())) {
             console.log(chalk.green('      Using saved report file'));
             productionData = (await savedReportFile.json()) as ProductionData;
         } else {
-            const dataUrl = new URL('https://www.usmint.gov/bin/usmint/psd');
-            dataUrl.searchParams.set(
-                'path',
-                `/content/dam/usmint/new_csv_data/CIRC/${programNameOverrides[programId] ?? programId}/${year}`,
+            const dataUrl = new URL(
+                'https://www.usmint.gov/content/usmint/us/en/about/production-sales-figures/circulating-coins-production/jcr:content/root/container/productionsalesdata.dropdowns.json',
             );
+            dataUrl.searchParams.set('firstDropdown', programId);
+            dataUrl.searchParams.set('secondDropdown', year.toString());
 
             const processedData = (await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).json()) as ProductionData;
 
@@ -136,7 +124,7 @@ for (const [programId, { name: programName, years: programYears }] of Object.ent
                     designData.Design === '' ||
                     designData.Design === 'Grand Total:' ||
                     designData.President === 'Total' ||
-                    designData.President === year ||
+                    designData.President === year.toString() ||
                     designData['AWQ Quarter'] === 'Total' ||
                     designData['AWQ Quarter'] === ''
                 )
