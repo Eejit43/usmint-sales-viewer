@@ -210,11 +210,11 @@
         },
         "Mississippi": {
             "Philadelphia": {
-                "total": 460825,
+                "total": 462725,
                 "soldOut": false
             },
             "Denver": {
-                "total": 435700,
+                "total": 437100,
                 "soldOut": false
             }
         }
@@ -222,11 +222,11 @@
     "2024": {
         "Illinois": {
             "Philadelphia": {
-                "total": 490575,
+                "total": 492675,
                 "soldOut": false
             },
             "Denver": {
-                "total": 453700,
+                "total": 455800,
                 "soldOut": false
             }
         },
@@ -242,11 +242,11 @@
         },
         "Maine": {
             "Philadelphia": {
-                "total": 508025,
+                "total": 509725,
                 "soldOut": false
             },
             "Denver": {
-                "total": 417100,
+                "total": 418300,
                 "soldOut": false
             }
         },
@@ -256,7 +256,7 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 440975,
+                "total": 444375,
                 "soldOut": false
             }
         }
@@ -264,11 +264,11 @@
     "2025": {
         "Arkansas": {
             "Philadelphia": {
-                "total": 514850,
+                "total": 518250,
                 "soldOut": false
             },
             "Denver": {
-                "total": 392075,
+                "total": 396500,
                 "soldOut": false
             }
         },
@@ -278,7 +278,7 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 533075,
+                "total": 540375,
                 "soldOut": false
             }
         },
@@ -298,7 +298,7 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 545475,
+                "total": 545600,
                 "soldOut": false
             }
         }
