@@ -91,6 +91,7 @@ for (const { id: programId, name: programName, years: programYears } of programs
                   'Design'?: string;
                   'President'?: string;
                   'AWQ Quarter'?: string;
+                  'Semiquincentennial Quarter'?: string;
                   'Denver': string;
                   'Philadelphia': string;
                   'Total': string;
@@ -118,7 +119,12 @@ for (const { id: programId, name: programName, years: programYears } of programs
         }
 
         for (const [designIndex, designData] of productionData.entries())
-            if ('Design' in designData || 'President' in designData || 'AWQ Quarter' in designData) {
+            if (
+                'Design' in designData ||
+                'President' in designData ||
+                'AWQ Quarter' in designData ||
+                'Semiquincentennial Quarter' in designData
+            ) {
                 if (
                     designData.Design === 'Total' ||
                     designData.Design === '' ||
@@ -126,14 +132,17 @@ for (const { id: programId, name: programName, years: programYears } of programs
                     designData.President === 'Total' ||
                     designData.President === year.toString() ||
                     designData['AWQ Quarter'] === 'Total' ||
-                    designData['AWQ Quarter'] === ''
+                    designData['AWQ Quarter'] === '' ||
+                    designData['Semiquincentennial Quarter'] === 'Total'
                 )
                     continue;
 
                 const normalizedDesign =
                     'President' in designData
                         ? designData.President!
-                        : (designData.Design?.replaceAll('Ω', ',') ?? designData['AWQ Quarter']!.replace(/^\d{4} /, ''));
+                        : (designData.Design?.replaceAll('Ω', ',') ??
+                          designData['AWQ Quarter']?.replace(/^\d{4} /, '') ??
+                          designData['Semiquincentennial Quarter']!);
 
                 result[programName][year][normalizedDesign] = {};
 

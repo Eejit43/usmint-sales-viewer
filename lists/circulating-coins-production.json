@@ -1064,5 +1064,17 @@
                 "Denver": 411120000
             }
         }
+    },
+    "Semiquincentennial (2026) Circulating Coins": {
+        "2025": {
+            "Mayflower Compact": {
+                "Philadelphia": 31000000,
+                "Denver": 48800000
+            },
+            "Revolutionary War": {
+                "Philadelphia": 0,
+                "Denver": 1000000
+            }
+        }
     }
 }
