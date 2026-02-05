@@ -1,5 +1,5 @@
+import chalk from 'chalk';
 import path from 'node:path';
-import { styleText } from 'node:util';
 import type { ItemsList } from './generate-cumulative-sales-list.js';
 
 const salesFile = Bun.file(path.join('lists', 'cumulative-sales.json'));
@@ -143,5 +143,5 @@ if (await salesFile.exists()) {
 
     await Bun.write(totalsFile, JSON.stringify(result, null, 4) + '\n');
 
-    console.log(styleText('green', 'Successfully updated American Innovation Dollar totals!'));
+    console.log(chalk.green('Successfully updated American Innovation Dollar totals!'));
 } else console.error('Cumulative sales data does not exist, generate that first!');

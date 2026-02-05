@@ -7,6 +7,9 @@
         "generate-cumulative-sales-list": "bun run scripts/generate-cumulative-sales-list.ts"
     },
     "prettier": "@eejit/prettier-config",
+    "dependencies": {
+        "chalk": "^5.6.2"
+    },
     "devDependencies": {
         "@eejit/eslint-config-typescript": "^16.0.1",
         "@eejit/prettier-config": "^3.6.2",

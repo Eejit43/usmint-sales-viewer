@@ -1,5 +1,5 @@
+import chalk from 'chalk';
 import path from 'node:path';
-import { styleText } from 'node:util';
 
 const mints = ['Philadelphia', 'Denver'] as const;
 
@@ -76,7 +76,7 @@ function parseMintage(mintage: string) {
 }
 
 for (const { id: programId, name: programName, years: programYears } of programs) {
-    console.log(styleText('blue', `Procressing the ${styleText('yellow', programName)} program`));
+    console.log(chalk.blue(`Procressing the ${chalk.yellow(programName)} program`));
 
     result[programName] = {};
 
@@ -84,10 +84,7 @@ for (const { id: programId, name: programName, years: programYears } of programs
 
     for (const [yearIndex, year] of programYears.entries()) {
         console.log(
-            styleText(
-                'blue',
-                `   Processing year of ${styleText('yellow', year.toString())} (${styleText('gray', `${yearIndex + 1}/${programYears.length}`)})`,
-            ),
+            chalk.blue(`   Processing year of ${chalk.yellow(year.toString())} (${chalk.gray(`${yearIndex + 1}/${programYears.length}`)})`),
         );
 
         result[programName][year] = {};
@@ -123,7 +120,7 @@ for (const { id: programId, name: programName, years: programYears } of programs
 
         let productionData: ProductionData;
         if (year < new Date().getFullYear() && (await savedReportFile.exists())) {
-            console.log(styleText('green', '      Using saved report file'));
+            console.log(chalk.green('      Using saved report file'));
             productionData = (await savedReportFile.json()) as ProductionData;
         } else {
             const dataUrl = new URL(
@@ -213,9 +210,8 @@ for (const { id: programId, name: programName, years: programYears } of programs
                     };
             } else
                 console.log(
-                    styleText(
-                        'red',
-                        `      Unknown and unparsable data structure at index ${styleText('gray', `${designIndex}/${productionData.length - 1}`)}`,
+                    chalk.red(
+                        `      Unknown and unparsable data structure at index ${chalk.gray(`${designIndex}/${productionData.length - 1}`)}`,
                     ),
                 );
 
@@ -227,7 +223,7 @@ for (const { id: programId, name: programName, years: programYears } of programs
     }
 
     if (Object.keys(result[programName]).length === 0) {
-        console.log(styleText('red', '   No data found'));
+        console.log(chalk.red('   No data found'));
 
         result[programName] = null;
     }
@@ -237,4 +233,4 @@ const listFile = path.join('lists', 'circulating-coins-production.json');
 
 await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');
 
-console.log(styleText('green', '\nSuccessfully updated circulating coins production data!'));
+console.log(chalk.green('\nSuccessfully updated circulating coins production data!'));
