@@ -857,6 +857,22 @@
                 "Half Dollar": 13600000,
                 "Native American Dollar": 2520000
             }
+        },
+        "2026": {
+            "Philadelphia": {
+                "Nickel": 70560000,
+                "Dime": 60000000,
+                "Quarter": 74000000,
+                "Half Dollar": 6300000,
+                "Native American Dollar": 0
+            },
+            "Denver": {
+                "Nickel": 93600000,
+                "Dime": 50000000,
+                "Quarter": 86400000,
+                "Half Dollar": 7500000,
+                "Native American Dollar": 140000
+            }
         }
     },
     "District of Columbia and US Territories Quarters": {
@@ -1074,6 +1090,28 @@
             "Revolutionary War": {
                 "Philadelphia": 0,
                 "Denver": 1000000
+            }
+        },
+        "2026": {
+            "Mayflower Compact": {
+                "Philadelphia": 73200000,
+                "Denver": 85600000
+            },
+            "Revolutionary War": {
+                "Philadelphia": 800000,
+                "Denver": 800000
+            },
+            "Declaration of Independence": {
+                "Philadelphia": 0,
+                "Denver": 0
+            },
+            "US Constitution": {
+                "Philadelphia": 0,
+                "Denver": 0
+            },
+            "Gettysburg Address": {
+                "Philadelphia": 0,
+                "Denver": 0
             }
         }
     }

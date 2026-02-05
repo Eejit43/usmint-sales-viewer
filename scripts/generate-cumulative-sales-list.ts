@@ -1,5 +1,5 @@
-import chalk from 'chalk';
 import path from 'node:path';
+import { styleText } from 'node:util';
 
 export type ItemsList = Record<string, { name: string; program: string; sales: number; firstSeen: string; latestData: string }>;
 
@@ -39,15 +39,17 @@ if (await Bun.file(cachedInvalidDatesLocation).exists()) {
 
 for (const [index, { monthName, date }] of dates.entries()) {
     console.log(
-        chalk.blue(
-            `Processing week of ${chalk.yellow(
+        styleText(
+            'blue',
+            `Processing week of ${styleText(
+                'yellow',
                 date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }),
-            )} (${chalk.gray(`${index + 1}/${dates.length}`)})`,
+            )} (${styleText('gray', `${index + 1}/${dates.length}`)})`,
         ),
     );
 
     if (knownDatesWithInvalidData.some((knownDate) => knownDate.date.getTime() === date.getTime())) {
-        console.log(chalk.gray('   Skipping known invalid data date'));
+        console.log(styleText('gray', '   Skipping known invalid data date'));
         continue;
     }
 
@@ -78,7 +80,7 @@ for (const [index, { monthName, date }] of dates.entries()) {
 
     let salesData: SalesData;
     if (await savedReportFile.exists()) {
-        console.log(chalk.green('   Using saved report file'));
+        console.log(styleText('green', '   Using saved report file'));
         salesData = (await savedReportFile.json()) as SalesData;
     } else {
         const dataUrl = new URL(
@@ -94,7 +96,7 @@ for (const [index, { monthName, date }] of dates.entries()) {
         try {
             salesData = (await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).json()) as SalesData;
         } catch {
-            console.log(chalk.red('   Failed to fetch data, skipping'));
+            console.log(styleText('red', '   Failed to fetch data, skipping'));
             continue;
         }
 
@@ -113,7 +115,8 @@ for (const [index, { monthName, date }] of dates.entries()) {
 
             if (dayDifference > 1) {
                 console.log(
-                    chalk.red(
+                    styleText(
+                        'red',
                         `   Report date (${reportDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}) differs from expected date by more than 1 day, skipping save`,
                     ),
                 );
@@ -172,18 +175,25 @@ const listFile = path.join('lists', 'cumulative-sales.json');
 
 await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');
 
-console.log(chalk.green('\nSuccessfully updated cumulative sales data!'));
+console.log(styleText('green', '\nSuccessfully updated cumulative sales data!'));
 
 if (knownDatesWithInvalidData.length > 1) {
-    console.log(chalk.yellow(`   The following ${knownDatesWithInvalidData.length} dates were previously marked as having invalid data:`));
-    console.log(chalk.gray(`      ${knownDatesWithInvalidData.map((date) => date.dateString).join(', ')}`));
+    console.log(
+        styleText('yellow', `   The following ${knownDatesWithInvalidData.length} dates were previously marked as having invalid data:`),
+    );
+    console.log(styleText('gray', `      ${knownDatesWithInvalidData.map((date) => date.dateString).join(', ')}`));
 }
 
 if (ignoredDatesWithInvalidData.length > 1) {
     console.log(
-        chalk.yellow(`   The following ${ignoredDatesWithInvalidData.length} dates were detected as having invalid data and were ignored:`),
+        styleText(
+            'yellow',
+            `   The following ${ignoredDatesWithInvalidData.length} dates were detected as having invalid data and were ignored:`,
+        ),
     );
-    console.log(chalk.gray(`      ${ignoredDatesWithInvalidData.map((date) => `${date.marked} (actual: ${date.actual})`).join(', ')}`));
+    console.log(
+        styleText('gray', `      ${ignoredDatesWithInvalidData.map((date) => `${date.marked} (actual: ${date.actual})`).join(', ')}`),
+    );
 
     const newDates = [...knownDatesWithInvalidData, ...ignoredDatesWithInvalidData]
         .sort((a, b) => a.date.getTime() - b.date.getTime()) // eslint-disable-line unicorn/no-array-sort

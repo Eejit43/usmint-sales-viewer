@@ -1,5 +1,5 @@
-import chalk from 'chalk';
 import path from 'node:path';
+import { styleText } from 'node:util';
 
 const mints = ['Philadelphia', 'Denver'] as const;
 
@@ -22,6 +22,10 @@ const alternativeDenominationNames: Record<string, string> = {
     'Kennedy': '50',
     'Native American': 'N.A. $1',
     'Presidential': 'Pres. $1',
+    'Semiquincentennial 5 Cents': '5',
+    'Semiquincentennial Dimes': '10',
+    'Semiquincentennial Quarter Program': '25',
+    'Semiquincentennial Half Dollars': '50',
     /* eslint-enable @typescript-eslint/naming-convention */
 };
 
@@ -72,14 +76,19 @@ function parseMintage(mintage: string) {
 }
 
 for (const { id: programId, name: programName, years: programYears } of programs) {
-    console.log(chalk.blue(`Procressing the ${chalk.yellow(programName)} program`));
+    console.log(styleText('blue', `Procressing the ${styleText('yellow', programName)} program`));
 
     result[programName] = {};
 
     const reportDirectory = path.join('saved-reports', 'circulating-coins-production', programName);
 
     for (const [yearIndex, year] of programYears.entries()) {
-        console.log(chalk.blue(`   Processing year of ${chalk.yellow(year)} (${chalk.gray(`${yearIndex + 1}/${programYears.length}`)})`));
+        console.log(
+            styleText(
+                'blue',
+                `   Processing year of ${styleText('yellow', year.toString())} (${styleText('gray', `${yearIndex + 1}/${programYears.length}`)})`,
+            ),
+        );
 
         result[programName][year] = {};
 
@@ -92,17 +101,29 @@ for (const { id: programId, name: programName, years: programYears } of programs
                   'President'?: string;
                   'AWQ Quarter'?: string;
                   'Semiquincentennial Quarter'?: string;
-                  'Denver': string;
-                  'Philadelphia': string;
-                  'Total': string;
+                  'Semi Q Quarters'?: string;
+                  'Denver'?: string;
+                  'Philadelphia'?: string;
+                  'Total'?: string;
+                  'Denver Coins (millions)'?: string;
+                  'Philadelphia Coins (millions)'?: string;
+                  'Total Coins (millions)'?: string;
               }[]
-            | { Denomination: string; Denver: string; Philadelphia: string; Total: string }[]
+            | {
+                  'Denomination': string;
+                  'Denver'?: string;
+                  'Philadelphia'?: string;
+                  'Total'?: string;
+                  'Denver Coins (millions)'?: string;
+                  'Philadelphia Coins (millions)'?: string;
+                  'Total Coins (millions)'?: string;
+              }[]
             | { ''?: string; 'Denomination/ Mint'?: string }[];
         /* eslint-enable @typescript-eslint/naming-convention */
 
         let productionData: ProductionData;
         if (year < new Date().getFullYear() && (await savedReportFile.exists())) {
-            console.log(chalk.green('      Using saved report file'));
+            console.log(styleText('green', '      Using saved report file'));
             productionData = (await savedReportFile.json()) as ProductionData;
         } else {
             const dataUrl = new URL(
@@ -123,7 +144,8 @@ for (const { id: programId, name: programName, years: programYears } of programs
                 'Design' in designData ||
                 'President' in designData ||
                 'AWQ Quarter' in designData ||
-                'Semiquincentennial Quarter' in designData
+                'Semiquincentennial Quarter' in designData ||
+                'Semi Q Quarters' in designData
             ) {
                 if (
                     designData.Design === 'Total' ||
@@ -133,7 +155,8 @@ for (const { id: programId, name: programName, years: programYears } of programs
                     designData.President === year.toString() ||
                     designData['AWQ Quarter'] === 'Total' ||
                     designData['AWQ Quarter'] === '' ||
-                    designData['Semiquincentennial Quarter'] === 'Total'
+                    designData['Semiquincentennial Quarter'] === 'Total' ||
+                    designData['Semi Q Quarters'] === 'Total'
                 )
                     continue;
 
@@ -142,12 +165,16 @@ for (const { id: programId, name: programName, years: programYears } of programs
                         ? designData.President!
                         : (designData.Design?.replaceAll('Ω', ',') ??
                           designData['AWQ Quarter']?.replace(/^\d{4} /, '') ??
-                          designData['Semiquincentennial Quarter']!);
+                          designData['Semiquincentennial Quarter'] ??
+                          designData['Semi Q Quarters']!);
 
                 result[programName][year][normalizedDesign] = {};
 
                 for (const mint of mints)
-                    if (designData[mint]) result[programName][year][normalizedDesign][mint] = parseMintage(designData[mint]);
+                    if (designData[mint] || designData[`${mint} Coins (millions)`])
+                        result[programName][year][normalizedDesign][mint] = parseMintage(
+                            designData[mint] ?? designData[`${mint} Coins (millions)`]!,
+                        );
 
                 if (Object.keys(result[programName][year][normalizedDesign]).length === 0)
                     result[programName][year][normalizedDesign] = null;
@@ -164,7 +191,9 @@ for (const { id: programId, name: programName, years: programYears } of programs
                 for (const mint of mints) {
                     if (!(mint in result[programName][year])) result[programName][year][mint] = {};
 
-                    result[programName][year][mint]![parsedDenomination] = parseMintage(designData[mint]);
+                    result[programName][year][mint]![parsedDenomination] = parseMintage(
+                        designData[mint] ?? designData[`${mint} Coins (millions)`]!,
+                    );
                 }
             } else if ('' in designData || 'Denomination/ Mint' in designData) {
                 const mint = designData[''] ?? designData['Denomination/ Mint']!;
@@ -184,8 +213,9 @@ for (const { id: programId, name: programName, years: programYears } of programs
                     };
             } else
                 console.log(
-                    chalk.red(
-                        `      Unknown and unparsable data structure at index ${chalk.gray(`${designIndex}/${productionData.length - 1}`)}`,
+                    styleText(
+                        'red',
+                        `      Unknown and unparsable data structure at index ${styleText('gray', `${designIndex}/${productionData.length - 1}`)}`,
                     ),
                 );
 
@@ -197,7 +227,7 @@ for (const { id: programId, name: programName, years: programYears } of programs
     }
 
     if (Object.keys(result[programName]).length === 0) {
-        console.log(chalk.red('   No data found'));
+        console.log(styleText('red', '   No data found'));
 
         result[programName] = null;
     }
@@ -207,4 +237,4 @@ const listFile = path.join('lists', 'circulating-coins-production.json');
 
 await Bun.write(listFile, JSON.stringify(result, null, 4) + '\n');
 
-console.log(chalk.green('\nSuccessfully updated circulating coins production data!'));
+console.log(styleText('green', '\nSuccessfully updated circulating coins production data!'));
