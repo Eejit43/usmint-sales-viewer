@@ -210,11 +210,11 @@
         },
         "Mississippi": {
             "Philadelphia": {
-                "total": 470325,
+                "total": 471725,
                 "soldOut": false
             },
             "Denver": {
-                "total": 443300,
+                "total": 445300,
                 "soldOut": false
             }
         }
@@ -222,11 +222,11 @@
     "2024": {
         "Illinois": {
             "Philadelphia": {
-                "total": 509675,
+                "total": 511475,
                 "soldOut": false
             },
             "Denver": {
-                "total": 468300,
+                "total": 470200,
                 "soldOut": false
             }
         },
@@ -242,11 +242,11 @@
         },
         "Maine": {
             "Philadelphia": {
-                "total": 515925,
+                "total": 517825,
                 "soldOut": false
             },
             "Denver": {
-                "total": 425300,
+                "total": 426600,
                 "soldOut": false
             }
         },
@@ -256,7 +256,7 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 463075,
+                "total": 467075,
                 "soldOut": false
             }
         }
@@ -268,7 +268,7 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 421700,
+                "total": 425400,
                 "soldOut": false
             }
         },
@@ -306,11 +306,21 @@
     "2026": {
         "Iowa": {
             "Philadelphia": {
-                "total": 518525,
+                "total": 518625,
                 "soldOut": false
             },
             "Denver": {
-                "total": 470000,
+                "total": 470225,
+                "soldOut": false
+            }
+        },
+        "Wisconsin": {
+            "Philadelphia": {
+                "total": 365950,
+                "soldOut": false
+            },
+            "Denver": {
+                "total": 346875,
                 "soldOut": false
             }
         }
