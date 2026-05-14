@@ -1,14 +1,17 @@
 import chalk from 'chalk';
+import { Impit } from 'impit';
 import path from 'node:path';
 
 export type ItemsList = Record<string, { name: string; program: string; sales: number; firstSeen: string; latestData: string }>;
 
-const tokenResponse = await fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
+const impit = new Impit({ browser: 'chrome' });
 
-const cookies = tokenResponse.headers.getSetCookie();
+const tokenResponse = await impit.fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
+
+const [cookie] = tokenResponse.headers.getSetCookie();
 
 const htmlContent = await (
-    await fetch('https://www.usmint.gov/about/production-sales-figures/cumulative-sales', { headers: { cookie: cookies } })
+    await impit.fetch('https://www.usmint.gov/about/production-sales-figures/cumulative-sales', { headers: { cookie } })
 ).text();
 
 const yearData = (await JSON.parse(
@@ -92,7 +95,7 @@ for (const [index, { monthName, date }] of dates.entries()) {
         );
 
         try {
-            salesData = (await (await fetch(dataUrl.toString(), { headers: { cookie: cookies } })).json()) as SalesData;
+            salesData = (await (await impit.fetch(dataUrl.toString(), { headers: { cookie } })).json()) as SalesData;
         } catch {
             console.log(chalk.red('   Failed to fetch data, skipping'));
             continue;

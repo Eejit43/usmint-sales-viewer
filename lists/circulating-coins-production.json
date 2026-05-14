@@ -860,18 +860,18 @@
         },
         "2026": {
             "Philadelphia": {
-                "Nickel": 131040000,
-                "Dime": 125000000,
-                "Quarter": 175600000,
-                "Half Dollar": 11300000,
-                "Native American Dollar": 1680000
+                "Nickel": 299000000,
+                "Dime": 272000000,
+                "Quarter": 396800000,
+                "Half Dollar": 30200000,
+                "Native American Dollar": 4600000
             },
             "Denver": {
-                "Nickel": 184800000,
-                "Dime": 135000000,
-                "Quarter": 191000000,
-                "Half Dollar": 18100000,
-                "Native American Dollar": 140000
+                "Nickel": 402700000,
+                "Dime": 270000000,
+                "Quarter": 418400000,
+                "Half Dollar": 39800000,
+                "Native American Dollar": 2700000
             }
         }
     },
@@ -1094,24 +1094,24 @@
         },
         "2026": {
             "Mayflower Compact": {
-                "Philadelphia": 114200000,
-                "Denver": 120600000
+                "Philadelphia": 228400000,
+                "Denver": 241200000
             },
             "Revolutionary War": {
-                "Philadelphia": 61400000,
-                "Denver": 69000000
+                "Philadelphia": 161400000,
+                "Denver": 170400000
             },
             "Declaration of Independence": {
-                "Philadelphia": 0,
-                "Denver": 1400000
+                "Philadelphia": 7000000,
+                "Denver": 4000000
             },
             "US Constitution": {
                 "Philadelphia": 0,
-                "Denver": 0
+                "Denver": 1400000
             },
             "Gettysburg Address": {
                 "Philadelphia": 0,
-                "Denver": 0
+                "Denver": 1400000
             }
         }
     }
