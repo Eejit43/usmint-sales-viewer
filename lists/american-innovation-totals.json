@@ -210,11 +210,11 @@
         },
         "Mississippi": {
             "Philadelphia": {
-                "total": 475125,
+                "total": 476425,
                 "soldOut": false
             },
             "Denver": {
-                "total": 449400,
+                "total": 450400,
                 "soldOut": false
             }
         }
@@ -222,11 +222,11 @@
     "2024": {
         "Illinois": {
             "Philadelphia": {
-                "total": 516275,
+                "total": 519775,
                 "soldOut": false
             },
             "Denver": {
-                "total": 475700,
+                "total": 477400,
                 "soldOut": false
             }
         },
@@ -242,11 +242,11 @@
         },
         "Maine": {
             "Philadelphia": {
-                "total": 521825,
+                "total": 522725,
                 "soldOut": false
             },
             "Denver": {
-                "total": 429600,
+                "total": 430900,
                 "soldOut": false
             }
         },
@@ -268,7 +268,7 @@
                 "soldOut": false
             },
             "Denver": {
-                "total": 433600,
+                "total": 438000,
                 "soldOut": false
             }
         },
@@ -306,31 +306,31 @@
     "2026": {
         "Iowa": {
             "Philadelphia": {
-                "total": 520325,
+                "total": 520825,
                 "soldOut": false
             },
             "Denver": {
-                "total": 472525,
+                "total": 472625,
                 "soldOut": false
             }
         },
         "Wisconsin": {
             "Philadelphia": {
-                "total": 518850,
+                "total": 519875,
                 "soldOut": false
             },
             "Denver": {
-                "total": 472375,
+                "total": 473900,
                 "soldOut": false
             }
         },
         "California": {
             "Philadelphia": {
-                "total": 616575,
+                "total": 613750,
                 "soldOut": false
             },
             "Denver": {
-                "total": 568450,
+                "total": 569675,
                 "soldOut": false
             }
         }

@@ -30,7 +30,7 @@ const alternativeDenominationNames: Record<string, string> = {
     /* eslint-enable @typescript-eslint/naming-convention */
 };
 
-const impit = new Impit({ browser: 'chrome' });
+const impit = new Impit({ browser: 'firefox' });
 
 const tokenResponse = await impit.fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
 

@@ -4,7 +4,7 @@ import path from 'node:path';
 
 export type ItemsList = Record<string, { name: string; program: string; sales: number; firstSeen: string; latestData: string }>;
 
-const impit = new Impit({ browser: 'chrome' });
+const impit = new Impit({ browser: 'firefox' });
 
 const tokenResponse = await impit.fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
 
