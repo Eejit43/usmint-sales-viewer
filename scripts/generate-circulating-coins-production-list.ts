@@ -23,10 +23,10 @@ const alternativeDenominationNames: Record<string, string> = {
     'Kennedy': '50',
     'Native American': 'N.A. $1',
     'Presidential': 'Pres. $1',
-    'Semiquincentennial 5 Cents': '5',
-    'Semiquincentennial Dimes': '10',
-    'Semiquincentennial Quarter Program': '25',
-    'Semiquincentennial Half Dollars': '50',
+    'Semi Q 5 Cents': '5',
+    'Semi Q Dimes': '10',
+    'Semi Q Quarter Program': '25',
+    'Semi Q Half Dollars': '50',
     /* eslint-enable @typescript-eslint/naming-convention */
 };
 
