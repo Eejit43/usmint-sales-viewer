@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import { Impit } from 'impit';
 import path from 'node:path';
 
 const mints = ['Philadelphia', 'Denver'] as const;
@@ -30,18 +29,14 @@ const alternativeDenominationNames: Record<string, string> = {
     /* eslint-enable @typescript-eslint/naming-convention */
 };
 
-const impit = new Impit({ browser: 'firefox' });
+await using view = new Bun.WebView({ dataStore: { directory: './browser-profile' } });
 
-const tokenResponse = await impit.fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
+await view.navigate('https://www.usmint.gov/about/production-sales-figures/circulating-coins-production');
 
-const [cookie] = tokenResponse.headers.getSetCookie();
-
-const htmlContent = await (
-    await impit.fetch('https://www.usmint.gov/about/production-sales-figures/circulating-coins-production', { headers: { cookie } })
-).text();
+const htmlContent = await view.evaluate<string>('document.documentElement.outerHTML');
 
 const programData = (await JSON.parse(
-    /data-tabletype="circulating" data-dropdownitems="(.*?)"/.exec(htmlContent)![1].replaceAll('&#34;', '"'),
+    /data-tabletype="circulating" data-dropdownitems="(.*?)"/.exec(htmlContent)![1].replaceAll(/&#34;|&quot;/g, '"'),
 )) as Record<string, string[]>;
 
 const programs = Object.entries(programData).map(([program, years]) => ({
@@ -132,7 +127,7 @@ for (const { id: programId, name: programName, years: programYears } of programs
             dataUrl.searchParams.set('firstDropdown', programId);
             dataUrl.searchParams.set('secondDropdown', year.toString());
 
-            const processedData = (await (await impit.fetch(dataUrl.toString(), { headers: { cookie } })).json()) as ProductionData;
+            const processedData = await view.evaluate<ProductionData>(`fetch("${dataUrl.toString()}").then((response) => response.json())`);
 
             productionData = processedData;
 

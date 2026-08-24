@@ -1,21 +1,16 @@
 import chalk from 'chalk';
-import { Impit } from 'impit';
 import path from 'node:path';
 
 export type ItemsList = Record<string, { name: string; program: string; sales: number; firstSeen: string; latestData: string }>;
 
-const impit = new Impit({ browser: 'firefox' });
+await using view = new Bun.WebView({ dataStore: { directory: './browser-profile' } });
 
-const tokenResponse = await impit.fetch('https://www.usmint.gov/libs/granite/csrf/token.json');
+await view.navigate('https://www.usmint.gov/about/production-sales-figures/cumulative-sales');
 
-const [cookie] = tokenResponse.headers.getSetCookie();
-
-const htmlContent = await (
-    await impit.fetch('https://www.usmint.gov/about/production-sales-figures/cumulative-sales', { headers: { cookie } })
-).text();
+const htmlContent = await view.evaluate<string>('document.documentElement.outerHTML');
 
 const yearData = (await JSON.parse(
-    /data-tabletype="cumulative" data-dropdownitems="(.*?)"/.exec(htmlContent)![1].replaceAll('&#34;', '"'),
+    /data-tabletype="cumulative" data-dropdownitems="(.*?)"/.exec(htmlContent)![1].replaceAll(/&#34;|&quot;/g, '"'),
 )) as Record<string, Record<string, string[]>>;
 
 const dates = Object.entries(yearData)
@@ -95,7 +90,7 @@ for (const [index, { monthName, date }] of dates.entries()) {
         );
 
         try {
-            salesData = (await (await impit.fetch(dataUrl.toString(), { headers: { cookie } })).json()) as SalesData;
+            salesData = await view.evaluate<SalesData>(`fetch("${dataUrl.toString()}").then((response) => response.json())`);
         } catch {
             console.log(chalk.red('   Failed to fetch data, skipping'));
             continue;

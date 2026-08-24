@@ -860,18 +860,20 @@
         },
         "2026": {
             "Philadelphia": {
-                "Nickel": 240000000,
-                "Dime": 212000000,
-                "Quarter": 281600000,
-                "Half Dollar": 25900000,
-                "Native American Dollar": 3600000
+                "Semiquincentennial 5 Cents": 292800000,
+                "Semiquincentennial Dimes": 327500000,
+                "Quarter": 283600000,
+                "Semiquincentennial Half Dollars": 32500000,
+                "Native American Dollar": 3900000,
+                "Semiquincentennial President Donald J. Trump 2026 $1 Coin": 9000000
             },
             "Denver": {
-                "Nickel": 276700000,
-                "Dime": 240000000,
-                "Quarter": 310400000,
-                "Half Dollar": 36400000,
-                "Native American Dollar": 3200000
+                "Semiquincentennial 5 Cents": 340100000,
+                "Semiquincentennial Dimes": 361000000,
+                "Quarter": 371200000,
+                "Semiquincentennial Half Dollars": 42800000,
+                "Native American Dollar": 3400000,
+                "Semiquincentennial President Donald J. Trump 2026 $1 Coin": 0
             }
         }
     },
@@ -1103,11 +1105,11 @@
             },
             "Declaration of Independence": {
                 "Philadelphia": 63000000,
-                "Denver": 84800000
+                "Denver": 126600000
             },
             "U.S. Constitution": {
-                "Philadelphia": 1600000,
-                "Denver": 1400000
+                "Philadelphia": 3600000,
+                "Denver": 20400000
             },
             "Gettysburg Address": {
                 "Philadelphia": 1400000,
