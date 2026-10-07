@@ -100,7 +100,7 @@ if (await salesFile.exists()) {
         }
 
         const [, year, amount, stateAbbreviation, mintMark] = [
-            .../(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG|)(?: - ([A-Z]{2}))? \((P|D)\)/.exec(item.name)!,
+            .../(\d{4}) AI \$1 (25|100)-COIN (?:ROLL|BAG)?(?: - ([A-Z]{2}))? \((P|D)\)/.exec(item.name)!,
         ];
 
         const mint = mints[mintMark];
@@ -127,15 +127,15 @@ if (await salesFile.exists()) {
 
     for (const data of Object.values(result))
         if ('latestSales' in Object.values(data)[0])
-            for (const [, saleInfo] of Object.entries(data)) {
+            for (const saleInfo of Object.values(data)) {
                 if ((saleInfo as TotalInfo).latestSales!.every((week) => week !== latestSaleDataDateString))
                     (saleInfo as TotalInfo).soldOut = true;
 
                 delete (saleInfo as TotalInfo).latestSales;
             }
         else
-            for (const [, stateData] of Object.entries(data))
-                for (const [, saleInfo] of Object.entries(stateData as MintMarkIndexedTotals)) {
+            for (const stateData of Object.values(data))
+                for (const saleInfo of Object.values(stateData as MintMarkIndexedTotals)) {
                     if (saleInfo.latestSales!.every((week) => week !== latestSaleDataDateString)) saleInfo.soldOut = true;
 
                     delete saleInfo.latestSales;

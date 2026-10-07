@@ -58,7 +58,7 @@ for (const [index, { monthName, date }] of dates.entries()) {
         | {
               'Program Name'?: string;
               ''?: string; // Program Name error value
-              '﻿Program Name'?: string; // Program Name error value
+              '\u{FEFF}Program Name'?: string; // Program Name error value
               'Item': string;
               'Item Description': string;
               'Adj. Net Demand'?: string;
@@ -90,7 +90,7 @@ for (const [index, { monthName, date }] of dates.entries()) {
         );
 
         try {
-            salesData = await view.evaluate<SalesData>(`fetch("${dataUrl.toString()}").then((response) => response.json())`);
+            salesData = await view.evaluate<SalesData>(`fetch("${dataUrl.href}").then((response) => response.json())`);
         } catch {
             console.log(chalk.red('   Failed to fetch data, skipping'));
             continue;
@@ -133,7 +133,7 @@ for (const [index, { monthName, date }] of dates.entries()) {
             id = item.Item;
             name = item['Item Description'];
             sales = item['Adj. Net Demand'] ?? item['Adj Net Demand']!;
-            program = item['Program Name'] ?? item[''] ?? item['﻿Program Name']!;
+            program = item['Program Name'] ?? item[''] ?? item['\u{FEFF}Program Name']!;
         } else {
             id = item['Program Item'];
             name = item.Product;
@@ -146,11 +146,11 @@ for (const [index, { monthName, date }] of dates.entries()) {
             .replaceAll('–', '-')
             .replaceAll(/[^\w $&()+./Š-]/g, '')
             .replaceAll(/ {2,}/g, ' ');
+        if (!parsedName) continue;
+
         const parsedSales = Number.parseInt(sales.replaceAll('Ω', ''));
         const parsedProgram = program.replaceAll('&amp;', '&');
         const latestData = date.toLocaleDateString();
-
-        if (!parsedName) continue;
 
         if (id in result) {
             result[id].sales = parsedSales;

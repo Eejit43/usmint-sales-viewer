@@ -127,7 +127,7 @@ for (const { id: programId, name: programName, years: programYears } of programs
             dataUrl.searchParams.set('firstDropdown', programId);
             dataUrl.searchParams.set('secondDropdown', year.toString());
 
-            const processedData = await view.evaluate<ProductionData>(`fetch("${dataUrl.toString()}").then((response) => response.json())`);
+            const processedData = await view.evaluate<ProductionData>(`fetch("${dataUrl.href}").then((response) => response.json())`);
 
             productionData = processedData;
 
@@ -220,6 +220,7 @@ for (const { id: programId, name: programName, years: programYears } of programs
             result[programName][year] = null;
     }
 
+    // eslint-disable-next-line unicorn/prefer-continue
     if (Object.keys(result[programName]).length === 0) {
         console.log(chalk.red('   No data found'));
 
