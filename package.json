@@ -2,6 +2,7 @@
     "name": "usmint-sales-viewer",
     "type": "module",
     "scripts": {
+        "generate-all": "bun run generate-circulating-coins-production-list && bun run generate-cumulative-sales-list && bun run generate-american-innovation-totals",
         "generate-american-innovation-totals": "bun run scripts/generate-american-innovation-totals.ts",
         "generate-circulating-coins-production-list": "bun run scripts/generate-circulating-coins-production-list.ts",
         "generate-cumulative-sales-list": "bun run scripts/generate-cumulative-sales-list.ts"
